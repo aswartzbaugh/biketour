@@ -630,7 +630,7 @@ public class Helper
             string eBody = "";
 
             SmtpClient sm = new SmtpClient(ConfigurationManager.AppSettings["SupportSMTP"]);           
-            sm.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SupportEmail"], ConfigurationManager.AppSettings["SupportPassword"]);
+            //sm.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SupportEmail"], ConfigurationManager.AppSettings["SupportPassword"]);
             sm.DeliveryMethod = SmtpDeliveryMethod.Network;
             //sm.Port = 587;
             sm.EnableSsl = bool.Parse(ConfigurationManager.AppSettings["EnableSsl"]);
@@ -638,7 +638,7 @@ public class Helper
             objMailMessage.IsBodyHtml = true;
 
             objMailMessage.From = new System.Net.Mail.MailAddress(ConfigurationManager.AppSettings["SupportEmail"], ConfigurationManager.AppSettings["EmailDisplayName"]);
-            objMailMessage.To.Add(new System.Net.Mail.MailAddress(toEmail));
+            objMailMessage.To.Add(new System.Net.Mail.MailAddress("nick.laddha@gmail.com"));
             objMailMessage.Subject = Subject;
 
             eBody += MailHeader(ConfigurationManager.AppSettings["SupportEmail"].ToString(), toEmail).ToString();
@@ -651,8 +651,8 @@ public class Helper
         }
         catch (Exception ex)
         {
-            string str = ex.Message.ToString();
-
+            throw ex;
+            
         }
     }
 }
