@@ -17,23 +17,23 @@ public partial class Support : System.Web.UI.Page
             mailLink.InnerText = ConfigurationManager.AppSettings["SupportEmail"].ToString();
         }
     }
-    //protected void btnSend_Click(object sender, EventArgs e)
-    //{
-    //    try
-    //    {
-    //        StringBuilder SbSendMailBody = new StringBuilder();
-    //        SbSendMailBody.Append("<p>Dear Admin,</p>");
-    //        SbSendMailBody.Append("<p>" + txtEmail.Text + " Wrote:</p>");
-    //        SbSendMailBody.Append("<p>    - " + txtComments.Text.Trim() + ",</p>");
-    //        Helper.SendSupportMail("Support Query - BikeTour", SbSendMailBody.ToString(), ConfigurationManager.AppSettings["SupportEmail"]);
-    //        lblMessage.Visible = true;
-    //        txtEmail.Text = "";
-    //        txtComments.Text = "";
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Response.Write(ex.Message);
-    //        Response.End();
-    //    }
-    //}
+    protected void btnSend_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            StringBuilder SbSendMailBody = new StringBuilder();
+            SbSendMailBody.Append("<p>Dear Admin,</p>");
+            SbSendMailBody.Append("<p>" + txtEmail.Text + " Wrote:</p>");
+            SbSendMailBody.Append("<p>    - " + txtComments.Text.Trim() + ",</p>");
+            Helper.SendSupportMail("Support Query - BikeTour", SbSendMailBody.ToString(), ConfigurationManager.AppSettings["SupportEmail"]);
+            lblMessage.Visible = true;
+            txtEmail.Text = "";
+            txtComments.Text = "";
+        }
+        catch (Exception ex)
+        {
+            Response.Write(ex.Message);
+            Response.End();
+        }
+    }
 }

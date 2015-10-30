@@ -59,42 +59,7 @@ public class Helper
     }
 
 
-    public static void SMSSend(string message, string MobileNo)
-    {
-        try
-        {
-            //string UserID = "";
-            //string Password = "";
-            //WebClient Client = new WebClient();
-            //string baseurl = "http://india.timessms.com/http-api/receiverall.asp?username=" + UserID + "&password=" + Password + "&sender=CUBCAB&cdmasender=Test&to=" + MobileNo + "&message=" + message + "&gateway=high";
-            //Stream data = Client.OpenRead(baseurl);
-            //StreamReader reader = new StreamReader(data);
-            //string s = reader.ReadToEnd();
-            //data.Close();
-            //reader.Close();
-
-            //User ID: nick.laddha@gmail.com
-            //Password: M4U9R7Y1A9I
-            //string strUrl = "http://api.mVaayoo.com/mvaayooapi/MessageCompose?user=.@.com:&senderID=TEST SMS&receipientno=918087300215&msgtxt=This is a test from mVaayoo API&state=4";
-
-            //Summary MainCode is from here
-
-            string strUrl = "http://api.mVaayoo.com/mvaayooapi/MessageCompose?user=.@.com:&senderID=TEST SMS&receipientno=91" + MobileNo + "&msgtxt=" + message + "&state=4";
-            WebRequest request = HttpWebRequest.Create(strUrl);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream s = (Stream)response.GetResponseStream();
-            StreamReader readStream = new StreamReader(s);
-            string dataString = readStream.ReadToEnd();
-            response.Close();
-            s.Close();
-            readStream.Close();
-
-        }
-        catch (Exception ex)
-        {
-
-        }
-    }
+  
     public static bool checkNotif(int rowscount)
     {
 
@@ -630,7 +595,7 @@ public class Helper
             string eBody = "";
 
             SmtpClient sm = new SmtpClient(ConfigurationManager.AppSettings["SupportSMTP"]);           
-            //sm.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SupportEmail"], ConfigurationManager.AppSettings["SupportPassword"]);
+            sm.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SupportEmail"], ConfigurationManager.AppSettings["SupportPassword"]);
             sm.DeliveryMethod = SmtpDeliveryMethod.Network;
             //sm.Port = 587;
             sm.EnableSsl = bool.Parse(ConfigurationManager.AppSettings["EnableSsl"]);
