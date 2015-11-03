@@ -25,7 +25,7 @@ public partial class Support : System.Web.UI.Page
             SbSendMailBody.Append("<p>Dear Admin,</p>");
             SbSendMailBody.Append("<p>" + txtEmail.Text + " Wrote:</p>");
             SbSendMailBody.Append("<p>    - " + txtComments.Text.Trim() + ",</p>");
-            Helper.SendSupportMail("Support Query - BikeTour", SbSendMailBody.ToString(), ConfigurationManager.AppSettings["SupportEmail"]);
+            Helper.SendSupportMail("Support Query - BikeTour", SbSendMailBody.ToString(), ConfigurationManager.AppSettings["SupportEmail"], txtEmail.Text);
             lblMessage.Visible = true;
             txtEmail.Text = "";
             txtComments.Text = "";

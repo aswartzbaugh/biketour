@@ -41,6 +41,28 @@
                 <asp:Label ID="lblh2n" runat="server" meta:ResourceKey="lblh2n"></asp:Label></h2>
             <a id="mailLink" runat="server"></a>
             <br />
+            <br />
+            <p class="lightcol">
+            <asp:Label ID="lblp3" runat="server" meta:ResourceKey="lblp3"></asp:Label></p>
+        <asp:TextBox ID="txtEmail" runat="server" CssClass="textbox"></asp:TextBox><span
+            class="error">*</span>
+        <asp:RequiredFieldValidator ID="rfvtxtEmail" runat="server" ControlToValidate="txtEmail"
+            Display="Dynamic" meta:ResourceKey="rfvtxtEmail" CssClass="error" ValidationGroup="Submit">
+        </asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail"
+             meta:ResourceKey="revEmail" CssClass="error" Display="Dynamic" ValidationExpression="^[\w-\.]{1,}\@([\da-zA-Z-]{1,}\.){1,}[\da-zA-Z-]{2,3}$"
+            ValidationGroup="Submit" ForeColor="#FF3300">
+        </asp:RegularExpressionValidator>
+
+        <p class="lightcol">
+            <asp:Label ID="lblp4" runat="server" meta:ResourceKey="lblp4"></asp:Label></p>
+        <asp:TextBox ID="txtComments" runat="server" TextMode="MultiLine" CssClass="multiline"></asp:TextBox><span
+            class="error">*</span><br />
+        <asp:RequiredFieldValidator ID="rfvtxtComment" runat="server" ControlToValidate="txtComments"
+            Display="Dynamic" meta:ResourceKey="rfvtxtComment" CssClass="error" ValidationGroup="Submit"></asp:RequiredFieldValidator>
+        <asp:Button ID="btnSend" runat="server" meta:ResourceKey="btnSend" OnClick="btnSend_Click"
+            ValidationGroup="Submit" /> <br />
+        <asp:Label ID="lblMessage" runat="server" Text="" meta:ResourceKey="lblMessage" Visible="false"></asp:Label>
         </div>
     </div>
 </asp:Content>

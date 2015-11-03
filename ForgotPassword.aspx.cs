@@ -50,7 +50,7 @@ public partial class ForgotPassword : System.Web.UI.Page
                     emailBody = emailBody.Replace("@Password", newPassword);
 
                     //Helper.SendMail(subject, emailBody, "284manali@gmail.com");
-                    Helper.SendMail(subject, emailBody, email);
+                    Helper.SendSupportMail(subject, emailBody, email, "no-reply@tourdeeurope.eu");
 
                     pnlMessage.Visible = true;
                     pnlRequest.Visible = false;

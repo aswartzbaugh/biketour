@@ -515,7 +515,7 @@ public class Helper
             
 
             sb1.Append("<div style=\"float:left; width:154px;\">");
-            sb1.Append("<img src='http://biketour.testyourprojects.com/_images/NewImages/logo_adfc.png' />");
+            sb1.Append("<img src='http://tourdeeurope.eu/_images/NewImages/logo_adfc.png' />");
             sb1.Append("</div>");
             sb1.Append("<div style=\"clear:both;\">");
             sb1.Append("</div>");
@@ -555,58 +555,27 @@ public class Helper
     }
 
 
-    public static void SendMail(string Subject, string EmailBody, string toEmail)
+    public static void SendSupportMail(string Subject, string EmailBody, string toEmail, string replyToEmail)
     {
         try
         {
-            string path = "";
-            string eBody = "";
-
-            SmtpClient sm = new SmtpClient(ConfigurationManager.AppSettings["Smtp"]);
-            sm.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"], ConfigurationManager.AppSettings["Password"]);
-            sm.DeliveryMethod = SmtpDeliveryMethod.Network;
-            sm.EnableSsl = bool.Parse(ConfigurationManager.AppSettings["EnableSsl"]);
-            MailMessage objMailMessage = new MailMessage();
-            objMailMessage.IsBodyHtml = true;
-            objMailMessage.From = new System.Net.Mail.MailAddress(ConfigurationManager.AppSettings["Email"], ConfigurationManager.AppSettings["EmailDisplayName"]);
-            objMailMessage.To.Add(new System.Net.Mail.MailAddress(toEmail));
-            objMailMessage.Subject = Subject;
-
-            eBody += MailHeader(ConfigurationManager.AppSettings["Email"].ToString(), toEmail).ToString();
-            eBody += EmailBody;
-            eBody += MailFooter().ToString();
-
-            objMailMessage.Body = eBody;
-            sm.Send(objMailMessage);
-
-        }
-        catch (Exception ex)
-        {
-            string str= ex.Message.ToString(); 
-                          
-        }
-    }
-
-    public static void SendSupportMail(string Subject, string EmailBody, string toEmail)
-    {
-        try
-        {
-            string path = "";
             string eBody = "";
 
             SmtpClient sm = new SmtpClient(ConfigurationManager.AppSettings["SupportSMTP"]);           
-            sm.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SupportEmail"], ConfigurationManager.AppSettings["SupportPassword"]);
+            sm.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SupportSMTPUsername"], ConfigurationManager.AppSettings["SupportPassword"]);
             sm.DeliveryMethod = SmtpDeliveryMethod.Network;
-            //sm.Port = 587;
+            sm.Port = 587;
             sm.EnableSsl = bool.Parse(ConfigurationManager.AppSettings["EnableSsl"]);
             MailMessage objMailMessage = new MailMessage();
             objMailMessage.IsBodyHtml = true;
 
             objMailMessage.From = new System.Net.Mail.MailAddress(ConfigurationManager.AppSettings["SupportEmail"], ConfigurationManager.AppSettings["EmailDisplayName"]);
-            objMailMessage.To.Add(new System.Net.Mail.MailAddress("nick.laddha@gmail.com"));
+            objMailMessage.To.Add(new System.Net.Mail.MailAddress(toEmail));
+            MailAddressCollection replyToLst = objMailMessage.ReplyToList;
+            replyToLst.Add(new MailAddress(replyToEmail));
             objMailMessage.Subject = Subject;
 
-            eBody += MailHeader(ConfigurationManager.AppSettings["SupportEmail"].ToString(), toEmail).ToString();
+            eBody += MailHeader(ConfigurationManager.AppSettings["SupportEmail"].ToString(), replyToEmail).ToString();
             eBody += EmailBody;
             eBody += MailFooter().ToString();
 

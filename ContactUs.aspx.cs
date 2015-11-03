@@ -24,7 +24,7 @@ public partial class ContactUs : System.Web.UI.Page
             SbSendMailBody.Append("<p>Dear Admin,</p>");
             SbSendMailBody.Append("<p>" + txtEmail.Text + " Wrote:</p>");
             SbSendMailBody.Append("<p>    - " + txtComments.Text.Trim() + ",</p>");
-            Helper.SendMail("Contact Us Enquiry - BikeTour", SbSendMailBody.ToString(), ConfigurationManager.AppSettings["AdminEmail"]);
+            Helper.SendSupportMail("Contact Us Enquiry - BikeTour", SbSendMailBody.ToString(), ConfigurationManager.AppSettings["AdminEmail"], txtEmail.Text);
             lblMessage.Visible = true;
             txtEmail.Text = "";
             txtComments.Text = "";
