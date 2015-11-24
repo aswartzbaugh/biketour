@@ -85,7 +85,7 @@
                             inner join SchoolClassMaster scm on sp.ClassId = scm.ClassId       
                             inner join CityMaster CM on CM.CityId=FromCityId    
                             inner join SchoolMaster sm on sm.SchoolId = scm.SchoolId               
-                            where sp.IsActive = 1 and SP.StatusId=3 and SP.ClassId=@ClassId">
+                            where sp.IsActive = 1 and SP.StatusId=3 and SP.ClassId=@ClassId and scm.IsActive = 1">
                         <SelectParameters>
                             <asp:ControlParameter ControlID="ddlClass" Name="ClassId" PropertyName="SelectedValue" />
                         </SelectParameters>

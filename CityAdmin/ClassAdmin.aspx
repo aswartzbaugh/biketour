@@ -4,38 +4,7 @@
 
 <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("[id$=btnDelete]").hide();
-            $("#ContentPlaceHolder1_ddl_Class_sl #caption").text(' wählen');
-            $("#ContentPlaceHolder1_ddl_Class_sl #ContentPlaceHolder1_ddl_Class_dv #checks span:first-child label").text(' Wählen Sie alle');
-        });
-        function Confirm(obj) {
-            var Ok = confirm('Wollen Sie löschen?');
-            if (Ok) {
-                $("[id$=hdn_ClassAdminId]").val(obj);
-                $("[id$=btnDelete]").trigger("click");
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-        function ConfirmDeleteClass(obj) {
-            debugger;
-            var Ok = confirm('Wollen Sie löschen?');
-            if (Ok) {
-                $("[id$=hdnSchoolId]").val(obj);
-                $("[id$=btnClassDelete]").trigger("click");
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-    </script>
-
+  
     <style type="text/css">
         /*###################################   Custom Dropdown Style  #####################################*/
         #ContentPlaceHolder1_ddl_Class_sl {
@@ -247,7 +216,7 @@
                                             </HeaderTemplate>
                                             <ItemTemplate>
                                                 <asp:Button ID="btnDeleteClass" runat="server" Text="" meta:ResourceKey="ToolTipDelete" CssClass="grddel" CommandArgument='<%# Eval("SchoolId") + "|" + Eval("ClassIds") %>'
-                                                     OnClientClick='<%# Eval("SchoolId", "ConfirmDeleteClass({0})") %>'/>
+                                                     OnClientClick='<%# Eval("SchoolId", "ConfirmDeleteClass({0}); return false;") %>'/>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -370,7 +339,7 @@
                     <asp:GridView ID="grd_ClassAdminList" runat="server" AutoGenerateColumns="False"
                         EmptyDataText="No Records!" DataKeyNames="ClassAdminId" DataSourceID="sds_ClassAdminList"
                         OnRowDataBound="grd_ClassAdminList_RowDataBound" AllowPaging="True" OnPageIndexChanging="grd_ClassAdminList_PageIndexChanging"
-                        Width="100%" onrowcommand="grd_ClassAdminList_RowCommand" 
+                        Width="100%"
                         onsorting="grd_ClassAdminList_Sorting" AllowSorting="true">
                         <Columns>
                             <asp:TemplateField HeaderText="Name">
@@ -453,8 +422,8 @@
                                     <asp:Label ID="lblgrdDelete" runat="server" meta:ResourceKey="lblgrdDelete"></asp:Label>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Button ID="btn_Delete" runat="server" Text="" meta:ResourceKey="ToolTipDelete" CssClass="grddel"
-                                        OnClientClick='<%# Eval("ClassAdminId", "Confirm({0})") %>' />
+                                    <asp:Button ID="btn_Delete" po runat="server" Text="" meta:ResourceKey="ToolTipDelete" CssClass="grddel"
+                                        OnClientClick='<%# Eval("ClassAdminId", "Confirm({0}); return false;") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -478,4 +447,36 @@
                 OnClick="btnClassDelete_Click" Style="display: none;" />
         </div>
     </div>
+
+      <script type="text/javascript">
+          $(document).ready(function () {
+              $("[id$=btnDelete]").hide();
+              $("#ContentPlaceHolder1_ddl_Class_sl #caption").text(' wählen');
+              $("#ContentPlaceHolder1_ddl_Class_sl #ContentPlaceHolder1_ddl_Class_dv #checks span:first-child label").text(' Wählen Sie alle');
+          });
+          function Confirm(obj) {
+              var Ok = confirm('Wollen Sie löschen?');
+              if (Ok) {
+                  $("[id$=hdn_ClassAdminId]").val(obj);
+                  $("[id$=btnDelete]").trigger("click");
+                  return false;
+              }
+              else {
+                  return false;
+              }
+          }
+
+          function ConfirmDeleteClass(obj) {
+              debugger;
+              var Ok = confirm('Wollen Sie löschen?');
+              if (Ok) {
+                  $("[id$=hdnSchoolId]").val(obj);
+                  $("[id$=btnClassDelete]").trigger("click");
+                  return false;
+              }
+              else {
+                  return false;
+              }
+          }
+    </script>
 </asp:Content>

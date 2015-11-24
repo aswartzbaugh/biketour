@@ -53,7 +53,8 @@
                                     select distinct scm.class as ClassName, scm.classid from  ClassAdminClasses cac inner join SchoolClassMaster scm
                                       on cac.ClassId = scm.ClassId
                                      where  ClassAdminId = @ClassAdminId
-                                      and cac.SchoolId = @SchoolId">
+                                      and cac.SchoolId = @SchoolId
+                                        and scm.IsActive = 1">
                                 <SelectParameters>
                                     <asp:SessionParameter DefaultValue="" Name="ClassAdminId" SessionField="UserId" />
                                     <asp:ControlParameter ControlID="ddlSchool" Name="schoolid" PropertyName="SelectedValue" />

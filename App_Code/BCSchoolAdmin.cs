@@ -117,7 +117,7 @@ public class BCSchoolAdmin
         int result = 0;
         try
         {
-            result = DataAccessLayer.ExecuteNonQuery("delete from SchoolclassMaster where classId= " + ClassId);
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("ClassId" , ClassId) },"SP_DELETECLASS");
         }
         catch (Exception ex)
         {

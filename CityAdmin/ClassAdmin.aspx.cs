@@ -23,6 +23,9 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.Cache.SetExpires(DateTime.Now.AddDays(-1));
+
         if(Session["UserId"] == null )
             Response.Redirect(System.Web.Security.FormsAuthentication.LoginUrl.ToString() + "?ReturnUrl=" + Request.RawUrl.ToString());
 
@@ -233,8 +236,6 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
 
     protected void btnDelete_Click(object sender, EventArgs e)
     {
-        if (Page.IsValid)
-        {
             try
             {
                 objSchoolAdmin.DeleteClassAdmin(Convert.ToInt32(hdn_ClassAdminId.Value));
@@ -246,9 +247,9 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
             }
             catch (Exception ex)
             {
-                //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+                Helper.Log(ex.Message, "Class Admin Delete");
             }
-        }
+        
     }
 
     private int _SaveUpdateMapping(int classAdminId)

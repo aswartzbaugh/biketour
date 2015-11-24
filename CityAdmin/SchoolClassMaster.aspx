@@ -211,7 +211,7 @@
                                         <asp:Label ID="lblgrdDelete" runat="server" meta:ResourceKey="lblgrdDelete"></asp:Label>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <input type="button" id="but1" class="grddel" onclick="Confirm('<%# Eval("ClassId") %>    ')"
+                                        <input type="button" id="but1" class="grddel" onclick='<%# Eval("ClassId", "Confirm({0}); return false;") %>'
                                             title="löschen" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
