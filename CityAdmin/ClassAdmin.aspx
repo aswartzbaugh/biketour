@@ -153,9 +153,7 @@
                                 
 </cc1:ExtendedRequiredFieldValidator>
                             <asp:SqlDataSource ID="sds_Class" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
-                                SelectCommand=" select classid, Class from SchoolClassMaster where SchoolId=@SchoolId and
-                                 classid NOT IN(select distinct classid from ClassAdminClasses where IsActive = 1)
-                                 and IsActive=1 ">
+                                SelectCommand=" select classid, Class from SchoolClassMaster where SchoolId=@SchoolId and IsActive=1">
                              <SelectParameters>
                                     <asp:ControlParameter ControlID="ddlSchool" DefaultValue="" Name="schoolid" 
                                         PropertyName="SelectedValue" />

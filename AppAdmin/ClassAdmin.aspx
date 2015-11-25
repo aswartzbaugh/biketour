@@ -344,7 +344,7 @@
                             DataTextField="ClassName" DataValueField="MappingId">
                         </asp:CheckBoxList>
                         <asp:SqlDataSource ID="sdsClassAdminClasses" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
-                            SelectCommand="select CAC.MappingId, ' '+CM.Class as ClassName from ClassAdminClasses CAC
+                            SelectCommand="select CAC.MappingId, ' ' + CM.Class as ClassName from ClassAdminClasses CAC
                             LEFT OUTER JOIN SchoolClassMaster CM ON CAC.ClassId=CM.ClassId
                             where CAC.ClassAdminId=@ClassAdminId and CAC.SchoolId=@SchoolId and CAC.IsActive=1">
                             <SelectParameters>
