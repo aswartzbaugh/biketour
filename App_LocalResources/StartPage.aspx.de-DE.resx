@@ -153,4 +153,7 @@
   <data name="lblTotalDistance.Text" xml:space="preserve">
     <value>Distanz :</value>
   </data>
+  <data name="lblFAQ.Text" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
 </root>

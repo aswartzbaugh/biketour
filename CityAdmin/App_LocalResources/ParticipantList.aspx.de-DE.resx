@@ -153,4 +153,7 @@
   <data name="RecordsUpdated" xml:space="preserve">
     <value>Schülerdaten aktualisiert.</value>
   </data>
+  <data name="lbtngrdUsername.Text" xml:space="preserve">
+    <value>Nutzername</value>
+  </data>
 </root>

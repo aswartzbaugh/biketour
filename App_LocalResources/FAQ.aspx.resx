@@ -117,43 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblcity.Text" xml:space="preserve">
-    <value>Teilnehmende Stadt</value>
-  </data>
-  <data name="lblLoginHome.Text" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="lblmsg.Text" xml:space="preserve">
-    <value>Es gibt keine Bestenliste für diese Stadt</value>
-  </data>
-  <data name="lblAboutUs.Text" xml:space="preserve">
-    <value>About Us</value>
-  </data>
-  <data name="lblCityList.Text" xml:space="preserve">
-    <value>City :</value>
-  </data>
-  <data name="lblClass.Text" xml:space="preserve">
-    <value>Class :</value>
-  </data>
-  <data name="lblContactus.Text" xml:space="preserve">
-    <value>Contact Us</value>
-  </data>
-  <data name="lblForum.Text" xml:space="preserve">
-    <value>Forum</value>
-  </data>
-  <data name="lblNoRecord.Text" xml:space="preserve">
-    <value>Please select a city to check its leading scorers!</value>
-  </data>
-  <data name="lblSchool.Text" xml:space="preserve">
-    <value>School :</value>
-  </data>
-  <data name="lblScoreList.Text" xml:space="preserve">
-    <value>Score :</value>
-  </data>
-  <data name="lblTotalDistance.Text" xml:space="preserve">
-    <value>Distance :</value>
-  </data>
-  <data name="lblFAQ.Text" xml:space="preserve">
+  <data name="lblHead.Text" xml:space="preserve">
     <value>FAQ</value>
   </data>
 </root>

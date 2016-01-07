@@ -195,6 +195,8 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
                 grdStudentDetails.DataBind();
 
                 ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+
+                Response.Redirect("~/ClassAdmin/StudentDetails.aspx");
             }
             else if (result == 0)
             {

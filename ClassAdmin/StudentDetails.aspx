@@ -185,14 +185,12 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style="display:none">
                         <td>
                             <asp:Label ID="lblEmail" runat="server" meta:ResourceKey="lblEmail" CssClass="Glblbl"></asp:Label>
                         </td>
                         <td>
                             <asp:TextBox ID="txtEmail" runat="server" CssClass="gltxt" ></asp:TextBox><span class="error">*</span>
-                            <asp:RequiredFieldValidator ID="rfvEmail" runat="server"
-                                ControlToValidate="txtEmail" meta:ResourceKey="rfvEmail" ValidationGroup="Submit" CssClass="error" Display="Dynamic"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="rev_Email" runat="server" ControlToValidate="txtEmail"
                                 CssClass="error" Display="Dynamic" meta:ResourceKey="rev_Email"
                                 ValidationExpression="^[\w-\.]{1,}\@([\da-zA-Z-]{1,}\.){1,}[\da-zA-Z-]{2,3}$" ValidationGroup="Submit">

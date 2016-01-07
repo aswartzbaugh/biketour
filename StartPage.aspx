@@ -152,6 +152,10 @@
                                                     <a href="ContactUs.aspx" class="contact">
                                                         <asp:Label ID="lblContactus" runat="server" meta:resourceKey="lblContactus"></asp:Label></a>
                                                 </td>
+                                                 <td>
+                                                    <a href="FAQ.aspx" class="faq">
+                                                        <asp:Label ID="lblFAQ" runat="server" meta:resourceKey="lblFAQ"></asp:Label></a>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>

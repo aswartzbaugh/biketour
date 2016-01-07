@@ -111,6 +111,15 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
+                                         <asp:LinkButton ID="lbtngrdUsername" runat="server" meta:ResourceKey="lbtngrdUsername"
+                                            CommandName="Sort" ></asp:LinkButton>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID = "lblUserName" runat="server" Text='<%# Eval("UserName") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
                                         <asp:Label ID="lblgrdConfirmed" runat="server" meta:ResourceKey="lblgrdConfirmed"></asp:Label>
                                     </HeaderTemplate>
                                     <ItemTemplate>

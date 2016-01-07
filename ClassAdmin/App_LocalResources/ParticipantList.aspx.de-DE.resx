@@ -156,4 +156,7 @@
   <data name="lblUploadBlocked.Text" xml:space="preserve">
     <value>Datenupload blocken</value>
   </data>
+  <data name="lbtngrdUsername.Text" xml:space="preserve">
+    <value>Nutzername</value>
+  </data>
 </root>
