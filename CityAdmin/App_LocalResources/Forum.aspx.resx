@@ -183,4 +183,10 @@
   <data name="lblRankBelowText.Text" xml:space="preserve">
     <value>One Class Below</value>
   </data>
+  <data name="btn_DeleteAllBlogs.Text" xml:space="preserve">
+    <value>Delete all blogs</value>
+  </data>
+  <data name="BlogDeleted" xml:space="preserve">
+    <value>Blog deleted</value>
+  </data>
 </root>

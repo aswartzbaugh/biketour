@@ -13,12 +13,12 @@ public class BCAppAdmin
     DataTable _dt = new DataTable();
     DataSet _ds = new DataSet();
 
-	public BCAppAdmin()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+    public BCAppAdmin()
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+    }
 
     private int _cityId;
 
@@ -250,7 +250,7 @@ public class BCAppAdmin
     }
     public int DeleteParticipatingCity(int CityId)
     {
-        int res =0;
+        int res = 0;
         try
         {
             res = DataAccessLayer.ExecuteNonQuery("Update ParticipatingCityMaster set IsActive=0 where CityId=" + CityId + " ");
@@ -379,7 +379,7 @@ public class BCAppAdmin
     {
         try
         {
-            _dt = DataAccessLayer.ReturnDataTable("select cityid,Cityname,CityImage,IsParticipatingCity = (case IsParticipatingCity when 1 then 'yes' else 'No' end) from  CityMaster where IsActive = 1 and CityName LIKE '%'+(CASE '" + (objAppAdmin.CityName == "" ? "0" : objAppAdmin.CityName) + "' WHEN '0' THEN Cityname ELSE '" + objAppAdmin.CityName + "' END)+'%' and IsParticipatingCity = '" 
+            _dt = DataAccessLayer.ReturnDataTable("select cityid,Cityname,CityImage,IsParticipatingCity = (case IsParticipatingCity when 1 then 'yes' else 'No' end) from  CityMaster where IsActive = 1 and CityName LIKE '%'+(CASE '" + (objAppAdmin.CityName == "" ? "0" : objAppAdmin.CityName) + "' WHEN '0' THEN Cityname ELSE '" + objAppAdmin.CityName + "' END)+'%' and IsParticipatingCity = '"
                 + objAppAdmin.IsParticipating + "' order by Cityname");
         }
         catch { }
@@ -510,7 +510,7 @@ public class BCAppAdmin
     {
         try
         {
-            _dt = DataAccessLayer.ReturnDataTable("Select * from QuizTests where CityId=" + CityId +" and IsActive=1");
+            _dt = DataAccessLayer.ReturnDataTable("Select * from QuizTests where CityId=" + CityId + " and IsActive=1");
         }
         catch (Exception ex)
         {
@@ -532,5 +532,55 @@ public class BCAppAdmin
 
 
     #endregion
+
+
+
+    //Waseem:: Delete city logically
+    public int DeleteCity(int CityId, int UserId)
+    {
+        int result = 0;
+        try
+        {
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("@CityId", CityId), new SqlParameter("@UserId", UserId) }, "SP_SET_CITY_DELETE");
+        }
+        catch (Exception ex)
+        {
+        }
+
+        return result;
+    }
+
+    //Waseem:: Delete City admin
+    public int DeleteCityAdmin(int CityAdminId, int UserId)
+    {
+        int result = 0;
+        try
+        {
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("@CityAdminId", CityAdminId), new SqlParameter("@UserId", UserId) }, "SP_SET_DELETE_CITYADMIN");
+        }
+        catch (Exception ex)
+        {
+        }
+
+        return result;
+    }
+
+    //Waseem:: Transfer Responsibility to Default City admin
+    public int TansferResponsibilityToDefaultCityAdmin(int oldCityAdminId)
+    {
+        return DataAccessLayer.ExecuteNonQuery("insert into CityAdminCities (CityAdminId, CityId, IsActive, IsDelete) (Select (select CityAdminId from CityAdminMaster where FirstName='City' and LastName='Administrator'), CityId, 1, 0 from CityAdminCities Where CityAdminId =" + oldCityAdminId + "and IsActive=0 and IsDelete=1)");
+    }
+
+    //Waseem:: Transfer Responsibility to set class admin
+    public int TansferResponsibilityClass(int oldClassAdminId, int newCHlassAdminId)
+    {
+        return DataAccessLayer.ExecuteNonQuery("INSERT INTO ClassAdminClasses (ClassAdminId, SchoolId, ClassId, IsActive, IsDelete) (SELECT " + newCHlassAdminId + ", SchoolId, ClassId, 1, 0 FROM ClassAdminClasses WHERE ClassAdminId=" + oldClassAdminId + "and IsActive=0 and IsDelete=1)");
+    }
+
+    //Waseem:: Transfer Responsibility to Default class admin
+    public int TansferResponsibilityToDefaultClassAdmin(int oldClassAdminId)
+    {
+        return DataAccessLayer.ExecuteNonQuery("INSERT INTO ClassAdminClasses (ClassAdminId, SchoolId, ClassId, IsActive, IsDelete) (SELECT (select ClassAdminId from ClassAdminMaster where FirstName='Class' and LastName ='Admin'), SchoolId, ClassId, 1, 0 FROM ClassAdminClasses WHERE ClassAdminId=" + oldClassAdminId + "and IsActive=0 and IsDelete=1)");
+    }
 
 }

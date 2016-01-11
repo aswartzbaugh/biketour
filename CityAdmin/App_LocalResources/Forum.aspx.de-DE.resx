@@ -183,4 +183,10 @@
   <data name="lblRankBelowText.Text" xml:space="preserve">
     <value>Eine Platzierung schlechter</value>
   </data>
+  <data name="btn_DeleteAllBlogs.Text" xml:space="preserve">
+    <value>Alle Blogeinträge löschen</value>
+  </data>
+  <data name="BlogDeleted" xml:space="preserve">
+    <value>Blog gelöscht</value>
+  </data>
 </root>

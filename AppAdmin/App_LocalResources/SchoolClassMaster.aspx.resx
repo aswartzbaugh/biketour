@@ -204,4 +204,16 @@
   <data name="btnEdit.ToolTip" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="btnDeleteClass.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="btnDeleteClass.ToolTip" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="lbldeleteClass.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ClassDelete" xml:space="preserve">
+    <value>Class deleted</value>
+  </data>
 </root>
