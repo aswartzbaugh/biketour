@@ -73,8 +73,8 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
             ddlClass.SelectedValue = classId.ToString();
             ddlSchool.SelectedValue = schoolId.ToString();
         }
-        catch(Exception ex)
-        { 
+        catch (Exception ex)
+        {
         }
         //ddlSchool.DataBind();
         //ddlClass.DataBind();
@@ -138,7 +138,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         {
             Session["SchoolId"] = ddlSchool.SelectedValue;
             Session["ClassId"] = ddlClass.SelectedValue;
-            _BindGrid(); 
+            _BindGrid();
         }
     }
     protected void grd_ParticipantsList_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -149,7 +149,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
             _BindGrid();
         }
         catch (Exception)
-        {}
+        { }
     }
 
     private void _BindGrid()
@@ -159,7 +159,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         else
             objCityAdmin.ClassId = Convert.ToInt32(ddlClass.SelectedValue);
         objCityAdmin.ClassAdminId = 0;
-        DataTable dt = objCityAdmin.GetClassParticipantsList(objCityAdmin);        
+        DataTable dt = objCityAdmin.GetClassParticipantsList(objCityAdmin);
         if (dt == null || dt.Rows.Count == 0)
         {
             dt = _CreateEmptyTable();
@@ -171,8 +171,12 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
             this.ViewState["SortOrder"] = "ASC";
         }
         dv.Sort = this.ViewState["SortExp"] + " " + this.ViewState["SortOrder"];
-       
-        grd_ParticipantsList.DataSource = dv; 
+
+        if (dv.Count > 0)
+            btnDeleteAllStudents.Visible = true;
+        else
+            btnDeleteAllStudents.Visible = false;
+        grd_ParticipantsList.DataSource = dv;
         grd_ParticipantsList.DataBind();
         grd_ParticipantsList.PageIndex = 0;
     }
@@ -255,6 +259,59 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         {
             int StudentID = Convert.ToInt32(((Button)sender).CommandArgument.ToString());
             Response.Redirect("StudentDetails.aspx?StudentId=" + StudentID.ToString());
+        }
+        catch (Exception ex)
+        {
+            //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+        }
+    }
+
+    protected void btnDeleteStudent_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int StudentID = Convert.ToInt32(hdnDeleteId.Value);//Convert.ToInt32(((Button)sender).CommandArgument.ToString());
+            objCityAdmin.DeleteStudent(StudentID, 0, Convert.ToInt32(Session["UserId"]));
+            string msg = (string)GetLocalResourceObject("StudentDeleted");
+            string popupScript = "alert('" + msg + "');";
+            ClientScript.RegisterStartupScript(this.GetType(), "script", popupScript, true);
+            _BindGrid();
+        }
+        catch (Exception ex)
+        {
+            //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+        }
+    }
+    protected void btnDeleteAllStudents_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (ddlClass.SelectedValue != "0")
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "script", "ConfirmAll();", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+        }
+
+    }
+
+    protected void btnDeleteAll_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (ddlClass.SelectedValue != "0")
+            {
+                int ClassId = Convert.ToInt32(ddlClass.SelectedValue);
+                objCityAdmin.DeleteStudent(0, ClassId, Convert.ToInt32(Session["UserId"]));
+                _BindGrid();
+
+                string msg = (string)GetLocalResourceObject("StudentDeleted");
+                string popupScript = "alert('" + msg + "');";
+                ClientScript.RegisterStartupScript(this.GetType(), "script", popupScript, true);
+            }
         }
         catch (Exception ex)
         {

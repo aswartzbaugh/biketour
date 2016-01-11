@@ -2,13 +2,36 @@
     EnableEventValidation="false" MasterPageFile="~/SiteMaster/AdminMaster.master"
     AutoEventWireup="true" CodeFile="ParticipantList.aspx.cs" Inherits="ClassAdmin_ParticipantList" %>
 
-<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+     
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
+      <script type="text/javascript">
+          $(document).ready(function () { $("[id$=btnDeleteStudent]").hide(); });
+          function Confirm(obj) {
+              var Ok = confirm('Wollen Sie löschen?');
+              if (Ok) {
+                  $("[id$=hdnDeleteId]").val(obj);
+                  $("[id$=btnDeleteStudent]").trigger("click");
+                  return true;
+              }
+              else {
+                  return false;
+              }
+          }
+
+          function successDelete()
+          {
+              alert('Deleted Successfully!');
+          }
+
+
+    </script>
     <div class="frmBox_2">
         <table width="70%">
             <tr>
@@ -65,15 +88,13 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                </td>
+                <td></td>
                 <td>
                     <asp:RequiredFieldValidator ID="rfvSchool" runat="server" meta:ResourceKey="rfvSchool"
                         InitialValue="0" ControlToValidate="ddlSchool" ValidationGroup="SubmitClass"
                         CssClass="error" Display="Dynamic"></asp:RequiredFieldValidator>
                 </td>
-                <td>
-                </td>
+                <td></td>
                 <td>
                     <asp:RequiredFieldValidator ID="rfvClass" runat="server" meta:ResourceKey="rfvClass"
                         InitialValue="0" ControlToValidate="ddlClass" ValidationGroup="SubmitClass" CssClass="error"
@@ -84,19 +105,19 @@
     </div>
     <div class="container">
         <h5>
-        <asp:Label ID="lblParticipantList" runat="server" meta:ResourceKey="lblParticipantList"></asp:Label>
+            <asp:Label ID="lblParticipantList" runat="server" meta:ResourceKey="lblParticipantList"></asp:Label>
         </h5>
         <div class="AdminContWrap">
             <div class="GridWrap">
                 <asp:UpdatePanel ID="Up_grd_ParticipantsList" runat="server">
                     <ContentTemplate>
                         <asp:GridView ID="grd_ParticipantsList" runat="server" Width="100%" AutoGenerateColumns="False"
-                             OnRowCreated="grd_ParticipantsList_RowCreated"
-                            EmptyDataText="Kein Eintrag vorhanden!" AllowPaging="True" 
-                            OnPageIndexChanging="grd_ParticipantsList_PageIndexChanging" 
-                            onrowcommand="grd_ParticipantsList_RowCommand" 
-                            onrowdatabound="grd_ParticipantsList_RowDataBound" 
-                            onsorting="grd_ParticipantsList_Sorting">
+                            OnRowCreated="grd_ParticipantsList_RowCreated"
+                            EmptyDataText="Kein Eintrag vorhanden!" AllowPaging="True"
+                            OnPageIndexChanging="grd_ParticipantsList_PageIndexChanging"
+                            OnRowCommand="grd_ParticipantsList_RowCommand"
+                            OnRowDataBound="grd_ParticipantsList_RowDataBound"
+                            OnSorting="grd_ParticipantsList_Sorting">
                             <Columns>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
@@ -109,15 +130,16 @@
                                             Text='<%# Eval("STUDENTNAME") %>' ToolTip="" meta:ResourceKey="lnkEdit"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField>
-                                    <HeaderTemplate>
-                                         <asp:LinkButton ID="lbtngrdUsername" runat="server" meta:ResourceKey="lbtngrdUsername"
-                                            CommandName="Sort" ></asp:LinkButton>
-                                    </HeaderTemplate>
+                               <%-- <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:Label ID = "lblUserName" runat="server" Text='<%# Eval("UserName") %>'></asp:Label>
+                                        <asp:Label ID="lblgrdUserName" runat="server" Text='<%#Eval("LoginName") %>'></asp:Label>
                                     </ItemTemplate>
-                                </asp:TemplateField>
+                                    <HeaderTemplate>
+                                        <asp:LinkButton ID="lbtngrdUserName" runat="server" meta:ResourceKey="lbtngrdLoginName" CommandName="Sort"
+                                            CommandArgument="LoginName"></asp:LinkButton>
+                                        <asp:PlaceHolder ID="placeholderLoginName" runat="server"></asp:PlaceHolder>
+                                    </HeaderTemplate>
+                                </asp:TemplateField>--%>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
                                         <asp:Label ID="lblgrdConfirmed" runat="server" meta:ResourceKey="lblgrdConfirmed"></asp:Label>
@@ -137,7 +159,7 @@
                                             Enabled="true" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                 <asp:TemplateField>
+                                <asp:TemplateField>
                                     <HeaderTemplate>
                                         <asp:Label ID="lblUploadBlocked" runat="server" meta:ResourceKey="lblUploadBlocked"></asp:Label>
                                     </HeaderTemplate>
@@ -162,13 +184,26 @@
                                         <asp:Label ID="lblEditDetails" runat="server" meta:ResourceKey="lblEditDetails"></asp:Label>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Button ID="btnEditStudDetails" runat="server" Text="" ToolTip="bearbeiten" CssClass="grdedit" 
-                                            onclick="btnEditStudDetails_Click" CommandArgument='<%# Eval("StudentId") %>' />
+                                        <asp:Button ID="btnEditStudDetails" runat="server" Text="" ToolTip="bearbeiten" CssClass="grdedit"
+                                            OnClick="btnEditStudDetails_Click" CommandArgument='<%# Eval("StudentId") %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
+                               <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        <asp:Label ID="lblDeleteStudent" runat="server" meta:ResourceKey="btnDeleteStudent"></asp:Label>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                           <input id="btDelete" type="button" class="grddel" title="löschen" onclick="Confirm('<%# Eval("StudentId") %>    ')" />
+                        
+                       
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
+                                 <asp:Button ID="btnDeleteStudent" runat="server" Text="" ToolTip="löschen" CssClass="hide" 
+                                         onclick="btnDeleteStudent_Click"    CommandArgument='<%# Eval("StudentId") %>' Visible="False" />         
+                       
                         <%--<asp:SqlDataSource ID="sds_ParticipantsList" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
                             SelectCommand="SP_GET_ClassParticipantsList" SelectCommandType="StoredProcedure">
                             <SelectParameters>
@@ -179,13 +214,14 @@
                             </SelectParameters>
                         </asp:SqlDataSource>--%>
                     </ContentTemplate>
+                   
                 </asp:UpdatePanel>
             </div>
             <div id="div_ButtonList" runat="server">
                 <asp:Button ID="btn_Save" runat="server" meta:ResourceKey="btn_Save" OnClick="btn_Save_Click" />
             </div>
             <div class="clear"></div>
-
+                  <asp:HiddenField ID="hdnDeleteId" runat="server" />
         </div>
     </div>
 </asp:Content>

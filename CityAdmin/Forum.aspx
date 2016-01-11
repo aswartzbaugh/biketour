@@ -59,6 +59,22 @@
             });
         });
 
+
+        function ConfirmAll() {
+            var Ok = confirm('Wollen Sie löschen?');
+            if (Ok) {
+                $("[id$=btnDeleteAll]").trigger("click");
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        function successDelete()
+        {
+            alert('Deleted Successfully!');
+        }
     </script>
     <style type="text/css">
         #GoogleMap_Div {
@@ -66,7 +82,7 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1" runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
     <asp:UpdatePanel ID="Up_hidden" runat="server">
@@ -140,6 +156,11 @@
                             </Triggers>
                         </asp:UpdatePanel>
                     </td>
+                    <td>  <div id="div_ButtonList" runat="server">
+                         <asp:Button ID="btnDeleteAll" runat="server"   Text="" ToolTip="löschen" CssClass="hide" Style="display: none;" OnClick="btnDeleteAll_Click"  />        
+        
+                <asp:Button ID="btnDeleteAllBlogs" runat="server"  meta:ResourceKey="btn_DeleteAllBlogs" OnClick="btnDeleteAllBlogs_Click" Visible="False"    />
+            </div></td>
                 </tr>
             </table>
         </div>
@@ -478,4 +499,4 @@
         </div>
     </div>
     </div>
-</asp:Content>
+</asp:content>

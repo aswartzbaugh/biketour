@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Culture="de-DE" UICulture="de-DE" Language="C#" MasterPageFile="~/SiteMaster/AdminMaster.master" AutoEventWireup="true" CodeFile="TransferResponsibility.aspx.cs" Inherits="AppAdmin_TransferResponsibility" %>
+﻿<%@ Page Title="" Culture="de-DE" UICulture="de-DE" Language="C#" 
+    MasterPageFile="~/SiteMaster/AdminMaster.master" AutoEventWireup="true" 
+    CodeFile="TransferResponsibilityClass.aspx.cs" Inherits="AppAdmin_TransferResponsibility" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -17,20 +19,20 @@
                                 <td>
                                     <asp:Label ID="lbl_AdminList" runat="server" meta:ResourceKey="lbl_AdminList"></asp:Label></td>
                                 <td>
-                                    <asp:DropDownList ID="ddl_CityAdmins" runat="server"
-                                        DataSourceID="sds_CityAdmins" DataTextField="UserName"
-                                        DataValueField="CityAdminId">
+                                    <asp:DropDownList ID="ddl_ClassAdmins" runat="server"
+                                        DataSourceID="sds_ClassAdmins" DataTextField="UserName"
+                                        DataValueField="ClassAdminId">
                                     </asp:DropDownList><span class="error">*</span>
                                     <asp:RequiredFieldValidator ID="rfv_Admin" runat="server" 
-                                        Display="Dynamic" ControlToValidate="ddl_CityAdmins" InitialValue="0" ValidationGroup="Save"
+                                        Display="Dynamic" ControlToValidate="ddl_ClassAdmins" InitialValue="0" ValidationGroup="Save"
                                         CssClass="error" meta:ResourceKey="rfv_Admin"></asp:RequiredFieldValidator>
 
-                                    <asp:SqlDataSource ID="sds_CityAdmins" runat="server"
+                                    <asp:SqlDataSource ID="sds_ClassAdmins" runat="server"
                                         ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
-                                        SelectCommand="Select '0' as CityAdminId, 'Select Admin' as UserName UNION ALL SELECT [CityAdminId], FirstName +' '+ LastName as UserName 
-                                FROM [CityAdminMaster] where IsActive=1 and CityAdminId!=@CityAdminId ">
+                                        SelectCommand="Select '0' as ClassAdminId, 'Select Admin' as UserName UNION ALL SELECT [ClassAdminId], FirstName +' '+ LastName as UserName 
+FROM [ClassAdminMaster] where IsActive=1 and ClassAdminId!=@ClassAdminId ">
                                         <SelectParameters>
-                                            <asp:QueryStringParameter DefaultValue="0" Name="CityAdminId" QueryStringField="oldAdmin" />
+                                            <asp:QueryStringParameter DefaultValue="0" Name="ClassAdminId" QueryStringField="oldAdmin" />
                                         </SelectParameters>
                                     </asp:SqlDataSource>
                                 </td>
@@ -139,7 +141,7 @@
 
                  <h2 align="center"><b>OR</b></h2>
                 <div class="frmBox" >
-                       <asp:Button ID="btnSetDefault" runat="server" meta:ResourceKey="btn_SaveDefault" OnClick="btnSetDefault_Click" Width="160px"/>
+                       <asp:Button ID="btnSetDefault" runat="server"  meta:ResourceKey="btn_SaveDefault" OnClick="btnSetDefault_Click" Width="160px"/>
                 </div>
             </asp:Panel>
         </div>

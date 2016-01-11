@@ -20,7 +20,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
         {
             try
             {
-              
+
                 pnlAddNew.Visible = false;
                 pnlGrid.Visible = true;
                 //_DisplayCity();
@@ -29,9 +29,9 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
                 _Bind();
             }
             catch (Exception)
-            {}
+            { }
         }
-      
+
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
@@ -64,7 +64,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
 
         }
         catch (Exception)
-        {}
+        { }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
@@ -77,7 +77,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
             Helper.ClearInputs(this.Controls);
         }
         catch (Exception)
-        {}
+        { }
     }
 
     private int _SaveUpdate()
@@ -91,7 +91,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
         {
             try
             {
-                objCityAdmin.DeleteSchool(Convert.ToInt32(hdnSchoolId.Value));
+                objCityAdmin.DeleteSchool(Convert.ToInt32(hdnSchoolId.Value), Convert.ToInt32(Session["UserId"]));
 
                 string popupScript = "alert('" + (string)GetLocalResourceObject("MsgSchoolDeleted") + "');";//School deleted successfully.
                 ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
@@ -148,7 +148,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
             btnSave.Text = (string)GetLocalResourceObject("Save"); //"Save";
         }
         catch (Exception)
-        {}
+        { }
     }
 
     //private void _DisplayCity()
@@ -170,7 +170,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
             _Bind();
         }
         catch (Exception)
-        {}
+        { }
     }
 
     protected void btn_Search_Click(object sender, EventArgs e)
@@ -180,7 +180,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
             _Bind();
         }
         catch (Exception)
-        {}
+        { }
     }
     protected void grdScools_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
@@ -190,7 +190,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
             _Bind();
         }
         catch (Exception)
-        {}
+        { }
     }
     protected void grdScools_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -314,4 +314,21 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
         return dt;
     }
 
+    protected void btnDeleteSchool_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int SchoolId = Convert.ToInt32(hdnSchoolId.Value);
+            //Convert.ToInt32(((Button)sender).CommandArgument.ToString());
+            string msg = (string)GetLocalResourceObject("SchoolDeleted");
+            string popupScript = "alert('" + msg + "');";
+            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+            objCityAdmin.DeleteSchool(SchoolId, Convert.ToInt32(Session["UserId"]));
+            _Bind();
+        }
+        catch (Exception ex)
+        {
+            //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+        }
+    }
 }

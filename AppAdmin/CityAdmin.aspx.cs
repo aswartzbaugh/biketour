@@ -71,7 +71,7 @@ public partial class AppAdmin_CityAdmin : System.Web.UI.Page
         tr_password.Visible = true;
         tr_Conpassword.Visible = true;
     }
-    
+
     protected void btn_Save_Click(object sender, EventArgs e)
     {
 
@@ -85,7 +85,7 @@ public partial class AppAdmin_CityAdmin : System.Web.UI.Page
                 ce.Value = "Speichern";
             else
                 ce.Value = "Aktualisiert";
-            
+
             Response.Cookies.Add(ce);
 
             Helper.ClearInputs(this.Controls);
@@ -104,7 +104,7 @@ public partial class AppAdmin_CityAdmin : System.Web.UI.Page
             ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
             txtEmail.Focus();
         }
-        
+
     }
 
     private int _SaveMapping(int CityAdminId)
@@ -131,7 +131,7 @@ public partial class AppAdmin_CityAdmin : System.Web.UI.Page
         objUser.Address = txtAddress.Text;
         objUser.Email = txtEmail.Text;
         objUser.Password = txtPassword.Text;
-       // objUser.CityId = Convert.ToInt16(ddl_City.SelectedValue);
+        // objUser.CityId = Convert.ToInt16(ddl_City.SelectedValue);
         objUser.CityId = 0;
 
         return objAppAdmin.InsertUpdateCityAdmin(objUser);
@@ -160,7 +160,7 @@ public partial class AppAdmin_CityAdmin : System.Web.UI.Page
 
                 hdn_CityAdminId.Value = ((Button)sender).CommandArgument.ToString();
                 ddcb_City.DataBind();
-            
+
                 DataTable dtCityAdmin = objAppAdmin.GetCityAdminInfo(Convert.ToInt32(hdn_CityAdminId.Value));
                 if (dtCityAdmin.Rows.Count > 0)
                 {
@@ -195,7 +195,7 @@ public partial class AppAdmin_CityAdmin : System.Web.UI.Page
                     btn_Save.Text = "Aktualisiert";
                     rfvConfirmPassword.Enabled = false;
                     rfvPassword.Enabled = false;
-                   
+
                 }
             }
             catch (Exception ex)
@@ -362,4 +362,24 @@ public partial class AppAdmin_CityAdmin : System.Web.UI.Page
     }
 
 
+    protected void btnDeleteCityAdmin_Click(object sender, EventArgs e)
+    {
+        if (Page.IsValid)
+        {
+            try
+            {
+                //objAppAdmin.DeleteCityAdmin(Convert.ToInt32(hdn_CityAdminId.Value), Convert.ToInt32(Session["UserId"]));
+
+                string popupScript = "alert('City admin deleted successfully.');";
+                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                grd_CityAdminList.DataBind();
+                Response.Redirect("TransferResponsibility.aspx?oldAdmin=" + hdn_CityAdminId.Value.ToString() + "");
+            }
+            catch (Exception ex)
+            {
+
+                Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+            }
+        }
+    }
 }

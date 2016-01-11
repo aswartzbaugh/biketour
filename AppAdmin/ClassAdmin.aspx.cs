@@ -78,19 +78,19 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Helper.Log(ex.Message, "Add Class");        
+            Helper.Log(ex.Message, "Add Class");
         }
     }
 
     protected void btn_Save_Click(object sender, EventArgs e)
     {
-       // bool Notselected = false;
+        // bool Notselected = false;
         try
         {
             if (grdClasses.Rows.Count > 0)
             {
                 _SaveclassAdmin();
-               
+
             }
             else
             {
@@ -157,8 +157,8 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
             return objSchoolAdmin.InsertUpdateClassAdmin(objUser);
         }
         catch (Exception)
-        {  
-           return objSchoolAdmin.InsertUpdateClassAdmin(objUser);
+        {
+            return objSchoolAdmin.InsertUpdateClassAdmin(objUser);
         }
     }
 
@@ -181,7 +181,7 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
         {
             Helper.Log(ex.Message, "Cancel Class Admn Save ");
         }
-       
+
     }
 
     protected void btnEdit_Click(object sender, EventArgs e)
@@ -224,7 +224,7 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
                     ddl_Class.Enabled = true;
                     rfvConfirmPassword.Enabled = false;
                     rfvPassword.Enabled = false;
-                   
+
 
                 }
             }
@@ -241,12 +241,13 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
         {
             try
             {
-                //objSchoolAdmin.DeleteClassAdmin(Convert.ToInt32(hdn_ClassAdminId.Value));
-                //string popupScript = "alert('Class admin deleted successfully.');";
-                //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                //grd_ClassAdminList.DataBind();
+              //  objSchoolAdmin.DeleteClassAdmin(Convert.ToInt32(hdn_ClassAdminId.Value), Convert.ToInt32(Session["UserId"]));
 
-                Response.Redirect("TransferResponsibility.aspx?oldAdmin=" + hdn_ClassAdminId.Value.ToString() + "");
+                string popupScript = "alert('Class admin deleted successfully.');";
+                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                grd_ClassAdminList.DataBind();
+
+                Response.Redirect("TransferResponsibilityClass.aspx?oldAdmin=" + hdn_ClassAdminId.Value.ToString() + "");
             }
             catch (Exception ex)
             {
@@ -265,7 +266,7 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
             {
                 int schoolId = Convert.ToInt32(grdClasses.DataKeys[lRow.RowIndex]["SchoolId"].ToString());
                 string classIdList = grdClasses.DataKeys[lRow.RowIndex]["ClassIds"].ToString();
-                objSchoolAdmin.SaveClassAdminMapping(Convert.ToInt32(classAdminId), schoolId, classIdList);
+                objSchoolAdmin.InsertClassAdminCLasses(Convert.ToInt32(classAdminId), schoolId, Convert.ToInt32(classIdList));
             }
 
             return result;
@@ -297,67 +298,65 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
             dt.Columns.AddRange(new DataColumn[]{new DataColumn("SchoolId"), 
                                     new DataColumn("School"),new DataColumn("Classes"), new DataColumn("ClassIds")});
             if (dtClasses != null && dtClasses.Rows.Count > 0)
-            //{
+                //{
                 dt = dtClasses;
 
-                string classes = "", classIds = "";
-                if (ddl_Class.Items.Count > 0)
+            string classes = "", classIds = "";
+            if (ddl_Class.Items.Count > 0)
+            {
+                foreach (ListItem item in ddl_Class.Items)
                 {
-                    foreach (ListItem item in ddl_Class.Items)
+                    if (item.Selected)
                     {
-                        if (item.Selected)
+                        if (classes == "" && classIds == "")
                         {
-                            if (classes == "" && classIds == "")
-                            {
-                                classes = item.Text.Trim();
-                                classIds = item.Value.Trim();
-                            }
-                            else
-                            {
-                                classes = item.Text.Trim() + "," + classes;
-                                classIds = item.Value.Trim() + "," + classIds;
-                            }
+                            classes = item.Text.Trim();
+                            classIds = item.Value.Trim();
                         }
-
+                        else
+                        {
+                            classes = item.Text.Trim() + "," + classes;
+                            classIds = item.Value.Trim() + "," + classIds;
+                        }
                     }
 
+                }
 
-                    DataRow lRow = null;
 
-                    if (btnAddClass.Text == "Add" || btnAddClass.Text == "Hinzufügen")
-                    {
-                        lRow = dt.NewRow();
-                        lRow["SchoolId"] = ddlSchool.SelectedValue;
-                        lRow["School"] = ddlSchool.SelectedItem.Text;
-                        lRow["Classes"] = classes;
-                        lRow["ClassIds"] = classIds;
-                        dt.Rows.Add(lRow);
-                    }
-                    else
-                    {
-                        lRow = dtClasses.Select("SchoolId=" + ddlSchool.SelectedValue)[0];
-                        lRow["SchoolId"] = ddlSchool.SelectedValue;
-                        lRow["School"] = ddlSchool.SelectedItem.Text;
-                        lRow["Classes"] = classes;
-                        lRow["ClassIds"] = classIds;
-                    }
+                DataRow lRow = null;
 
-                    dt.AcceptChanges();
-                    this.dtClasses = dt;
-                    grdClasses.DataSource = dtClasses;
-                    grdClasses.DataBind();
-                    ddlSchool.SelectedIndex = 0;
-                    ddl_Class.DataBind();
-                    ddlSchool.Enabled = true;
-                    btnAddClass.Text = (string)GetLocalResourceObject("Add"); //"Add";
+                if (btnAddClass.Text == "Add" || btnAddClass.Text == "Hinzufügen")
+                {
+                    lRow = dt.NewRow();
+                    lRow["SchoolId"] = ddlSchool.SelectedValue;
+                    lRow["School"] = ddlSchool.SelectedItem.Text;
+                    lRow["Classes"] = classes;
+                    lRow["ClassIds"] = classIds;
+                    dt.Rows.Add(lRow);
                 }
                 else
                 {
-                    string popupScript = "alert('" + (string)GetLocalResourceObject("MsgNoClass") + "');";//No Class Present in School
-                    ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                    lRow = dtClasses.Select("SchoolId=" + ddlSchool.SelectedValue)[0];
+                    lRow["SchoolId"] = ddlSchool.SelectedValue;
+                    lRow["School"] = ddlSchool.SelectedItem.Text;
+                    lRow["Classes"] = classes;
+                    lRow["ClassIds"] = classIds;
                 }
 
-               
+                dt.AcceptChanges();
+                this.dtClasses = dt;
+                grdClasses.DataSource = dtClasses;
+                grdClasses.DataBind();
+                ddlSchool.SelectedIndex = 0;
+                ddl_Class.DataBind();
+                ddlSchool.Enabled = true;
+                btnAddClass.Text = (string)GetLocalResourceObject("Add"); //"Add";
+            }
+            else
+            {
+                string popupScript = "alert('" + (string)GetLocalResourceObject("MsgNoClass") + "');";//No Class Present in School
+                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+            }
         }
         catch (Exception ex)
         {
@@ -368,7 +367,7 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
     protected void btnDeleteClass_Click(object sender, EventArgs e)
     {
 
-        
+
     }
 
     protected void btnEditClass_Click(object sender, EventArgs e)
@@ -470,7 +469,7 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
             }
         }
         catch (Exception)
-        {}
+        { }
     }
 
     protected void btn_Search_Click(object sender, EventArgs e)
@@ -545,7 +544,7 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
             _Bind();
         }
         catch (Exception)
-        {}
+        { }
 
     }
     protected void grdClasses_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -556,7 +555,7 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
             grdClasses.DataBind();
         }
         catch (Exception)
-        {}
+        { }
     }
     protected void grd_ClassAdminList_Sorting(object sender, GridViewSortEventArgs e)
     {

@@ -204,4 +204,7 @@
   <data name="lblUpdateStud.Text" xml:space="preserve">
     <value>Update Student Information</value>
   </data>
+  <data name="lblDeleteStudent.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>

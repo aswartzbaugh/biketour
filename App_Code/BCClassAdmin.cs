@@ -147,4 +147,19 @@ public class BCClassAdmin
 
         return _dt;
     }
+
+    //Waseem:: Delete Students
+    public int DeleteStudent(int StudentId, int ClassId, int UserId)
+    {
+        int result = 0;
+        try
+        {
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("@StudentId", StudentId), 
+                new SqlParameter("@ClassId", ClassId), 
+                new SqlParameter("@UserId", UserId) }, "SP_SET_DELETE_STUDENT");
+        }
+        catch { }
+
+        return result;
+    }
 }

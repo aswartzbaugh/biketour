@@ -57,12 +57,12 @@ public class BCSchoolAdmin
         set { _cityName = value; }
     }
 
-	public BCSchoolAdmin()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+    public BCSchoolAdmin()
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+    }
 
     #region Class  :: Add/Update/Delete
     public int InsertUpdateClass(int classId, int schoolId, string className, string ClassYear)
@@ -86,7 +86,8 @@ public class BCSchoolAdmin
         return result;
     }
 
-    public DataTable GetClassInfo(int classid){
+    public DataTable GetClassInfo(int classid)
+    {
         try
         {
             _dt = DataAccessLayer.ReturnDataTable("select SM.School, SM.SchoolId, SCM.Class, SCM.ClassYear, SCM.ClassId, SM.CityId from SchoolClassMaster SCM inner join SchoolMaster SM on SCM.SchoolId = SM.SchoolId where sCm.IsActive = 1  and SCM.ClassId=" + classid + " ");
@@ -117,7 +118,7 @@ public class BCSchoolAdmin
         int result = 0;
         try
         {
-            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("ClassId" , ClassId) },"SP_DELETECLASS");
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("ClassId", ClassId) }, "SP_DELETECLASS");
         }
         catch (Exception ex)
         {
@@ -126,7 +127,7 @@ public class BCSchoolAdmin
         return result;
     }
 
-   
+
     #endregion
 
     #region Class Admin   :: Add/Update/Delete
@@ -211,7 +212,7 @@ public class BCSchoolAdmin
     {
         try
         {
-            _dt = DataAccessLayer.ReturnDataTable("select SM.School,SM.SchoolId, CM.CityName,SCM.Class,SCM.ClassYear, SCM.ClassId from SchoolClassMaster SCM inner join SchoolMaster SM on SCM.SchoolId = SM.SchoolId left join CityMaster CM on SM.CityId=CM.CityId where sCm.IsActive = 1 and SM.CityId=(case '"+ (objSchoolAdmin.CityName == 0 ? 0 : objSchoolAdmin.CityName) +"' when 0 then SM.CityId else '"+ objSchoolAdmin.CityName +"' end) and SM.School like (CASE '"+ (objSchoolAdmin.SchoolName == "" ? "0" : objSchoolAdmin.SchoolName) +"' WHEN ' ' THEN SM.School ELSE '"+ objSchoolAdmin.SchoolName +"' END)+'%' order by School Asc ");
+            _dt = DataAccessLayer.ReturnDataTable("select SM.School,SM.SchoolId, CM.CityName,SCM.Class,SCM.ClassYear, SCM.ClassId from SchoolClassMaster SCM inner join SchoolMaster SM on SCM.SchoolId = SM.SchoolId left join CityMaster CM on SM.CityId=CM.CityId where sCm.IsActive = 1 and SM.CityId=(case '" + (objSchoolAdmin.CityName == 0 ? 0 : objSchoolAdmin.CityName) + "' when 0 then SM.CityId else '" + objSchoolAdmin.CityName + "' end) and SM.School like (CASE '" + (objSchoolAdmin.SchoolName == "" ? "0" : objSchoolAdmin.SchoolName) + "' WHEN ' ' THEN SM.School ELSE '" + objSchoolAdmin.SchoolName + "' END)+'%' order by School Asc ");
         }
         catch { }
         return _dt;
@@ -222,7 +223,7 @@ public class BCSchoolAdmin
         int result = 0;
         try
         {
-           result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] {new SqlParameter("@classAdminId", ClassAdminId) }, "SP_DELETE_CLASSADMIN");
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("@classAdminId", ClassAdminId) }, "SP_DELETE_CLASSADMIN");
         }
         catch (Exception ex)
         {
@@ -255,7 +256,7 @@ public class BCSchoolAdmin
     {
         try
         {
-            _dt = DataAccessLayer.ReturnDataTable("SELECT [SchoolId], [School] FROM [SchoolMaster] WHERE ([IsActive] = 1) and  " + 
+            _dt = DataAccessLayer.ReturnDataTable("SELECT [SchoolId], [School] FROM [SchoolMaster] WHERE ([IsActive] = 1) and  " +
                 "SchoolId =(select SchoolId from SchoolAdminMaster where SchoolAdminId = " + HttpContext.Current.Session["UserId"] + ")");
 
         }
@@ -275,4 +276,50 @@ public class BCSchoolAdmin
     {
         return DataAccessLayer.ExecuteNonQuery("delete from ClassAdminClasses where SchoolId=" + schoolId + " and ClassAdminId = " + classAdminId + " and MappingId=" + MappingId + "");
     }
+
+
+
+    public int DeleteClass(int ClassId, int UserId)
+    {
+        int result = 0;
+        try
+        {
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("@ClassId", ClassId), new SqlParameter("@UserId", UserId) }, "SP_SET_DELETE_CLASS");
+        }
+        catch (Exception ex)
+        {
+        }
+
+        return result;
+    }
+
+    //Waseem :: Delete Class Admin
+    public int DeleteClassAdmin(int classAdminId, int UserId)
+    {
+        int result = 0;
+        try
+        {
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("@ClassAdminId", classAdminId), new SqlParameter("@UserId", UserId) }, "SP_SET_DELETE_CLASS_ADMIN");
+        }
+        catch (Exception ex)
+        {
+        }
+
+        return result;
+    }
+
+    public int InsertClassAdminCLasses(int ClassAdminId, int SchoolId, int ClassId)
+    {
+        try
+        {
+            return DataAccessLayer.ExecuteNonQuery("insert into ClassAdminClasses (ClassAdminId, SchoolId, ClassId, IsActive, IsDelete) values (" + ClassAdminId + "," + SchoolId + "," + ClassId + ",1,0)");
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+
+    }
+
 }

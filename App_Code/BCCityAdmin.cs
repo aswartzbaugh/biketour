@@ -195,12 +195,16 @@ public class BCCityAdmin
         return _dt;
     }
 
-    public int DeleteSchool(int schoolId)
+    public int DeleteSchool(int schoolId, int userId)
     {
         int result = 0;
         try
         {
-            result = DataAccessLayer.ExecuteNonQuery("delete from SchoolMaster where schoolId= " + schoolId);
+            //Waseem:: Commented the below to not to allow any physical delete from the database
+          //  result = DataAccessLayer.ExecuteNonQuery("delete from SchoolMaster where schoolId= " + schoolId);
+
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[]{new SqlParameter("@SchoolId", schoolId), 
+                new SqlParameter("@UserId",userId)}, "SP_SET_DELETE_SCHOOL");
         }
         catch (Exception ex)
         {
@@ -295,4 +299,20 @@ public class BCCityAdmin
 
     #endregion
 
+
+    //Waseem:: Delete Students
+    public int DeleteStudent(int StudentId, int ClassId, int UserId)
+    {
+        int result = 0;
+        try
+        {
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { new SqlParameter("@StudentId", StudentId), 
+                new SqlParameter("@ClassId", ClassId), new SqlParameter("@UserId", UserId) }, "SP_SET_DELETE_STUDENT");
+        }
+        catch { }
+
+        return result;
+    }
+
+   
 }

@@ -23,6 +23,7 @@
             }, function () {
                 $(this).find(".Submenu").slideUp(100);
             });
+            
         })
     </script>
     <script type="text/javascript">

@@ -153,7 +153,13 @@
   <data name="RecordsUpdated" xml:space="preserve">
     <value>Students Records Updated successfully!</value>
   </data>
-  <data name="lbtngrdUsername.Text" xml:space="preserve">
-    <value>Username</value>
+  <data name="btnDeleteAllStudents.Text" xml:space="preserve">
+    <value>Delete all students</value>
+  </data>
+  <data name="btnDeleteStudent.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="StudentDeleted" xml:space="preserve">
+    <value>Student deleted</value>
   </data>
 </root>

@@ -6,12 +6,13 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script type="text/javascript">
-        $(document).ready(function () { $("[id$=btnDelete]").hide(); });
+        $(document).ready(function () { $("[id$=btnDeleteCityAdmin]").hide();
+            $("[id$=btnDelete]").hide();});
         function Confirm(obj) {
             var Ok = confirm('Wollen Sie löschen?');
             if (Ok) {
                 $("[id$=hdn_CityAdminId]").val(obj);
-                $("[id$=btnDelete]").trigger("click");
+                $("[id$=btnDeleteCityAdmin]").trigger("click");
                 return true;
             }
             else {
@@ -26,7 +27,7 @@
         }
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1" runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
     <div class="container">
@@ -272,8 +273,18 @@
                                         CommandArgument='<%# Eval("CityAdminId") %>' OnClick="btnEdit_Click" />
                                 </ItemTemplate>
                             </asp:TemplateField>
+
+                              <asp:TemplateField HeaderStyle-Width="50px"><HeaderTemplate>
+                                    <asp:Label ID="lblCityAdminDelete" runat="server" meta:ResourceKey="lblCityAdminDelete"></asp:Label>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                 <input type="button" id="but1" class="grddel" onclick="Confirm('<%# Eval("CityAdminId") %>    ')"
+                                        title="Delete" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
+                    
                 </div>
                 <asp:SqlDataSource ID="sds_CityAdminList" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
                     SelectCommand="SP_GET_ALLCITY_ADMINS" SelectCommandType="StoredProcedure">
@@ -285,8 +296,12 @@
                     </SelectParameters>
                 </asp:SqlDataSource>
             </asp:Panel>
+
+             <asp:Button ID="btnDeleteCityAdmin" runat="server" Text="" CssClass="hide"  meta:ResourceKey="btn_DeleteCityAdmin"
+                                        CommandArgument='<%# Eval("CityID") %>' OnClick="btnDeleteCityAdmin_Click" />
+
             <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="hide" OnClick="btnDelete_Click"
                 Style="display: none;" />
         </div>
     </div>
-</asp:Content>
+</asp:content>

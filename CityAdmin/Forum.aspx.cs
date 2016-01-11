@@ -23,30 +23,30 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
                 Response.Redirect(System.Web.Security.FormsAuthentication.LoginUrl.ToString() + "?ReturnUrl=" + Request.RawUrl.ToString());
 
             if (!IsPostBack)
-          {
-              if (Session["SchoolId"] != null && Session["ClassId"] != null)   //Application["SchoolId"] != null && Application["ClassId"] != null)
-              {
-                  ddlSchool.SelectedValue = Session["SchoolId"].ToString();
-                  ddlSchool.DataTextField = "School";
-                  ddlSchool.DataValueField = "SchoolId";
-                  ddlSchool.DataBind();
-                  ddlClass.SelectedValue = Session["ClassId"].ToString();
-                  ddlClass.DataTextField = "Class";
-                  ddlClass.DataValueField = "ClassId";
-                  ddlClass.DataBind();
-                  ddlClass_SelectedIndexChanged(sender, e);
-                  //ddlClass.DataBind();
-              }
-              else
-              {
-                  divForumBlog.Visible = false;
-              }
-             // ddlSchool.DataBind();
-          }
-          //  this.MaintainScrollPositionOnPostBack = true;
+            {
+                if (Session["SchoolId"] != null && Session["ClassId"] != null)   //Application["SchoolId"] != null && Application["ClassId"] != null)
+                {
+                    ddlSchool.SelectedValue = Session["SchoolId"].ToString();
+                    ddlSchool.DataTextField = "School";
+                    ddlSchool.DataValueField = "SchoolId";
+                    ddlSchool.DataBind();
+                    ddlClass.SelectedValue = Session["ClassId"].ToString();
+                    ddlClass.DataTextField = "Class";
+                    ddlClass.DataValueField = "ClassId";
+                    ddlClass.DataBind();
+                    ddlClass_SelectedIndexChanged(sender, e);
+                    //ddlClass.DataBind();
+                }
+                else
+                {
+                    divForumBlog.Visible = false;
+                }
+                // ddlSchool.DataBind();
+            }
+            //  this.MaintainScrollPositionOnPostBack = true;
         }
         catch (Exception)
-        {}
+        { }
     }
 
     protected void BlogRefreshTimer_Tick(object sender, EventArgs e)
@@ -58,7 +58,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "Temp", "ScrollPosition();", true);
         }
         catch (Exception)
-        {}
+        { }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             chkShowOnForum.Checked = false;
         }
         catch (Exception)
-        {}
+        { }
     }
 
     private void _BindData()
@@ -89,7 +89,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             int classId = Convert.ToInt32(ddlClass.SelectedValue);
             int CompleteLegs = objStudent.GetCompleteLegCount(classId);
 
-            DataSet ds = objStudent.GetCurrentStageInfo(Convert.ToInt32(Session["UserId"].ToString()), Convert.ToInt32(Session["UserRoleId"].ToString()),classId);
+            DataSet ds = objStudent.GetCurrentStageInfo(Convert.ToInt32(Session["UserId"].ToString()), Convert.ToInt32(Session["UserRoleId"].ToString()), classId);
             if ((ds != null && ds.Tables[0].Rows.Count > 0) || (CompleteLegs > 0))
             {
                 divForumBlog.Visible = true;
@@ -140,10 +140,10 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
 
                     lblDistanceCovered.Text = (Math.Round(sm2, 2).ToString() + " km " + (string)GetLocalResourceObject("From") + " " +
                         Math.Round(sm3, 2).ToString() + " km " + (string)GetLocalResourceObject("driven") + "").Replace(",", ".").ToString();
-                    
+
                     percentage = ((sm2 * 100) / sm3);
                     Remove();
-                   // _BindMap(ds.Tables[0].Rows[0]["StartCity"].ToString(), ds.Tables[0].Rows[0]["EndCity"].ToString(), percentage);
+                    // _BindMap(ds.Tables[0].Rows[0]["StartCity"].ToString(), ds.Tables[0].Rows[0]["EndCity"].ToString(), percentage);
                     _BindMap(ds.Tables[0].Rows[0]["StartCity"].ToString(), ds.Tables[0].Rows[0]["EndCity"].ToString(), percentage, Convert.ToDouble(ds.Tables[0].Rows[0]["FromCityLat"].ToString()), Convert.ToDouble(ds.Tables[0].Rows[0]["FromCityLong"].ToString()), Convert.ToDouble(ds.Tables[0].Rows[0]["ToCityLat"].ToString()), Convert.ToDouble(ds.Tables[0].Rows[0]["ToCityLong"].ToString()));
                 }
                 else
@@ -355,7 +355,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
         {
             GoogleMapForASPNet1.GoogleMapObject.Polylines.Clear();
             GooglePoint GP2 = new GooglePoint();
-           
+
             GoogleMapForASPNet1.GoogleMapObject.Points.Clear();
             string startCity = string.Empty;
             string endCity = string.Empty;
@@ -387,7 +387,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             }
         }
         catch (Exception ex)
-        {}
+        { }
     }
 
     protected void ddlSchool_SelectedIndexChanged(object sender, EventArgs e)
@@ -396,8 +396,8 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
         {
             pnlContent.Visible = false;
         }
-        catch (Exception )
-        {}
+        catch (Exception)
+        { }
     }
 
     private void _BindBlog()
@@ -412,6 +412,10 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             sdsForum.SelectParameters.Add("ClassId", ddlClass.SelectedValue);
             dlBlog.DataSourceID = "sdsForum";
             dlBlog.DataBind();
+            if (dlBlog.Items.Count == 0)
+                btnDeleteAll.Visible = false;
+            else
+                btnDeleteAll.Visible = true;
         }
         catch (Exception ex)
         {
@@ -431,19 +435,23 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
 
                     //string popupScript = "alert('Blog deleted successfully.');";
                     //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                    string msg = (string)GetLocalResourceObject("BlogDeleted");
+                    string popupScript = "alert('" + msg + "');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "script", popupScript, true);
                     _BindBlog();
 
                     ScriptManager.RegisterStartupScript(Page, this.GetType(), "Temp", "ScrollPosition();", true);
+                    
                 }
                 catch (Exception ex)
                 {
                     Helper.Log(ex.Message, "Delete Blog");
-                        //errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+                    //errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
                 }
             }
         }
         catch (Exception ex)
-        {}
+        { }
 
     }
     protected void dlBlog_EditCommand(object source, DataListCommandEventArgs e)
@@ -458,7 +466,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "Temp", "ScrollPosition();", true);
         }
         catch (Exception ex)
-        {}
+        { }
         //txtBlogTextEdit.Focus();
     }
     protected void dlBlog_CancelCommand(object source, DataListCommandEventArgs e)
@@ -488,7 +496,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "Temp", "ScrollPosition();", true);
         }
         catch (Exception)
-        {}
+        { }
     }
 
     protected void lbtnUpload_Click(object sender, EventArgs e)
@@ -498,8 +506,53 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             Response.Redirect("UploadGpx.aspx");
         }
         catch (Exception)
-        {}
+        { }
     }
 
-   
+
+    protected void btnDeleteAllBlogs_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (Page.IsValid)
+            {
+                try
+                {
+                    // objUser.DeleteAllBlog(Convert.ToInt32(ddlClass.SelectedValue));
+
+                    //string popupScript = "alert('Blog deleted successfully.');";
+                    //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                    // _BindBlog();
+                    ClientScript.RegisterStartupScript(this.GetType(), "script", "ConfirmAll();", true);
+                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "Temp", "ScrollPosition();", true);
+                }
+                catch (Exception ex)
+                {
+                    Helper.Log(ex.Message, "All Delete Blog");
+                    //errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+                }
+            }
+        }
+        catch (Exception ex)
+        { }
+    }
+    protected void btnDeleteAll_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (ddlClass.SelectedValue != "0")
+            {
+                 objUser.DeleteAllBlog(Convert.ToInt32(ddlClass.SelectedValue));
+                _BindBlog();
+                string msg = (string)GetLocalResourceObject("BlogDeleted");
+                string popupScript = "alert('" + msg + "');";
+                ClientScript.RegisterStartupScript(this.GetType(), "script", popupScript, true);
+            }
+        }
+        catch (Exception ex)
+        {
+            Helper.Log(ex.Message, "All Delete Blog");
+            //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+        }
+    }
 }

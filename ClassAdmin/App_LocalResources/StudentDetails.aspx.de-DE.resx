@@ -198,4 +198,7 @@
   <data name="lblUsername.Text" xml:space="preserve">
     <value>Nutzername</value>
   </data>
+  <data name="lblDeleteStudent.Text" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
 </root>

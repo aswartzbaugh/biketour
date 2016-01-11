@@ -198,4 +198,16 @@
   <data name="btnEdit.ToolTip" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="btnDeleteSchool.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="btnDeleteSchool.ToolTip" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="lbldeleteSchool.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="SchoolDeleted" xml:space="preserve">
+    <value>School deleted successfully</value>
+  </data>
 </root>

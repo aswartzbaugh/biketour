@@ -4,7 +4,37 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1" runat="Server">
+        <script type="text/javascript">
+            $(document).ready(function () { $("[id$=btnDeleteStudent]").hide(); });
+            function Confirm(obj) {
+                var Ok = confirm('Wollen Sie löschen?');
+                if (Ok) {
+                    $("[id$=hdnDeleteId]").val(obj);
+                    $("[id$=btnDeleteStudent]").trigger("click");
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+            function ConfirmAll() {
+                var Ok = confirm('Wollen Sie löschen?');
+                if (Ok) {
+                    $("[id$=btnDeleteAll]").trigger("click");
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+            function successDelete()
+            {
+                alert('Deleted Successfully!');
+            }
+    </script>
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <asp:HiddenField ID="hdn_ClassAdminId" runat="server" Value="0" />
@@ -63,8 +93,12 @@
                         </Triggers>
                     </asp:UpdatePanel>
                 </td>
+                <td> <div id="div1" runat="server">
+          <asp:Button ID="btnDeleteAll" runat="server"  OnClick="btnDeleteAll_Click" Text="" ToolTip="löschen" CssClass="hide" Style="display: none;"  />        
+                <asp:Button ID="btnDeleteAllStudents" runat="server" meta:ResourceKey="btnDeleteAllStudents"  OnClick="btnDeleteAllStudents_Click"  Visible="False"  />
+            </div></td>
             </tr>
-        </table>
+        </table>        
     </div>
     <div class="container">
         <h5>
@@ -86,19 +120,10 @@
                                 <asp:PlaceHolder ID="placeholderSTUDENTNAME" runat="server"></asp:PlaceHolder>
                             </HeaderTemplate>
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkEdit" runat="server" ForeColor="#0033CC" PostBackUrl='<%#"~/ClassAdmin/StudentDetails.aspx?StudentId="+ Eval("StudentId") %>'
+                                <asp:LinkButton ID="lnkEdit" runat="server" ForeColor="#0033CC" PostBackUrl='<%#"~/CityAdmin/StudentDetails.aspx?StudentId="+ Eval("StudentId") %>'
                                     Text='<%# Eval("STUDENTNAME") %>' ToolTip="Student details"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
-                         <asp:TemplateField>
-                                    <HeaderTemplate>
-                                         <asp:LinkButton ID="lbtngrdUsername" runat="server" meta:ResourceKey="lbtngrdUsername"
-                                            CommandName="Sort" ></asp:LinkButton>
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID = "lblUserName" runat="server" Text='<%# Eval("UserName") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
                         <asp:TemplateField HeaderText="Confirmed">
                             <HeaderTemplate>
                                 <asp:Label ID="lblgrdConfirmed" runat="server" meta:ResourceKey="lblgrdConfirmed"></asp:Label>
@@ -140,8 +165,21 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
+                          <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        <asp:Label ID="lblDeleteStudent" runat="server" meta:ResourceKey="btnDeleteStudent"></asp:Label>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                           <input id="btDelete" type="button" class="grddel" title="löschen" onclick="Confirm('<%# Eval("StudentId") %>    ')" />
+                        
+                       
+                                        
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+                <asp:Button ID="btnDeleteStudent" runat="server" Text="" ToolTip="löschen" CssClass="hide" Style="display: none;"
+                                    onclick="btnDeleteStudent_Click"    CommandArgument='<%# Eval("StudentId") %>' />
                 <asp:SqlDataSource ID="sdParticipants" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
                     SelectCommand="SP_GET_ClassParticipantsList" SelectCommandType="StoredProcedure">
                     <SelectParameters>
@@ -155,5 +193,6 @@
                 <asp:Button ID="btn_Save" runat="server" meta:ResourceKey="btn_Save" OnClick="btn_Save_Click" />
             </div>
         </div>
+         <asp:HiddenField ID="hdnDeleteId" runat="server" />
     </div>
-</asp:Content>
+</asp:content>

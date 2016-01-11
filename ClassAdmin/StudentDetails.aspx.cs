@@ -194,9 +194,7 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
 
                 grdStudentDetails.DataBind();
 
-               ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-
-               Response.Redirect("~/ClassAdmin/StudentDetails.aspx");
+                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
             }
             else if (result == 0)
             {
@@ -253,13 +251,26 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
 
     protected void grdStudentDetails_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
     {
-        
+
     }
     protected void grdStudentDetails_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         try
         {
             grdStudentDetails.PageIndex = e.NewPageIndex;
+            _BindGrid();
+        }
+        catch (Exception)
+        { }
+    }
+    protected void btnDeleteStudent_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int StudentUploadId = Convert.ToInt32(hdnDeleteId.Value);//Convert.ToInt32(((Button)sender).CommandArgument.ToString());
+            objStudent.DeleteStudentUpload(StudentUploadId);
+            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "successDelete();", true);
+            //grdStudentDetails.PageIndex = e.NewPageIndex;
             _BindGrid();
         }
         catch (Exception)

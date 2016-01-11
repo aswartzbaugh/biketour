@@ -222,4 +222,10 @@
   <data name="MsgSelectCity" xml:space="preserve">
     <value>Wähle eine Stadt aus.</value>
   </data>
+  <data name="btn_DeleteCityAdmin.Tooltip" xml:space="preserve">
+    <value>löschen</value>
+  </data>
+  <data name="lblCityAdminDelete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
 </root>

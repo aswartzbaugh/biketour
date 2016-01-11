@@ -475,11 +475,26 @@ public class BCStudent
         {
             throw ex;
         }
-        
+
+    }
+
+    public int DeleteStudentUpload(int StudentUploadId)
+    {
+        int result = 0;
+        try
+        {
+            result = DataAccessLayer.ExecuteStoredProcedure(new SqlParameter[] { 
+                new SqlParameter("@StudentUploadId", StudentUploadId)}, "SP_DELETE_STUDENT_UPLOADS");
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        return result;
     }
 
 
-    public DataTable GetGpxTractPoints(int StudentId,int roleid,int classid)
+    public DataTable GetGpxTractPoints(int StudentId, int roleid, int classid)
     {
         try
         {
@@ -570,7 +585,7 @@ public class BCStudent
             qry += " FromCityimage=(select CityImage From CityMaster where CityId=SP.FromCityId),";
             qry += " ToCityimage=(select CityImage From CityMaster where CityId=SP.ToCityId), ";
             qry += " FromCityLat=(select lat from CityMaster where CityId=SP.FromCityId), ";
-            qry += " FromCityLong=(select long from CityMaster where CityId=SP.FromCityId), "; 
+            qry += " FromCityLong=(select long from CityMaster where CityId=SP.FromCityId), ";
             qry += " ToCityLat=(select lat from CityMaster where CityId=SP.ToCityId),  ";
             qry += " ToCityLong=(select long from CityMaster where CityId=SP.ToCityId) ";
             qry += " from [StagePlan] SP where SP.StatusId=3 and SP.IsActive=1 ";

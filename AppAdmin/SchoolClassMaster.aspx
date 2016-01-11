@@ -12,7 +12,7 @@
             var Ok = confirm('Wollen Sie löschen?');
             if (Ok) {
                 $("[id$=hdnClassId]").val(obj);
-                $("[id$=btnDelete]").trigger("click");
+                $("[id$=btnDeleteClass]").trigger("click");
                 return true;
             }
             else {
@@ -210,6 +210,17 @@
                                         CssClass="grdedit" OnClick="btnEdit_Click" meta:ResourceKey="btnEdit"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
+
+                              <asp:TemplateField>
+                         <HeaderTemplate>
+                                <asp:Label ID="lblDeleteClass" runat="server" meta:ResourceKey="lbldeleteClass"></asp:Label>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                              <input type="button" id="but1" class="grddel" onclick="Confirm('<%# Eval("schoolid") %>    ')"
+                                        title="Delete" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
                             <%-- <asp:TemplateField HeaderText="Delete">
                             <ItemTemplate>
                                 <input type="button" id="but1" class="grddel" onclick="Confirm('<%# Eval("ClassId") %>')"
@@ -217,7 +228,10 @@
                             </ItemTemplate>
                         </asp:TemplateField>--%>
                         </Columns>
-                    </asp:GridView>
+                    </asp:GridView>  
+                      <asp:Button ID="btnDeleteClass" runat="server" CommandArgument='<%# Eval("schoolid") %>'
+                                    CssClass="hide"  OnClick="btnDeleteClass_Click" /> 
+
                     <asp:SqlDataSource ID="sdsGrid" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
                         SelectCommand="select SM.School,SM.SchoolId, CM.CityName,
                    SCM.Class,SCM.ClassYear, SCM.ClassId from SchoolClassMaster SCM 

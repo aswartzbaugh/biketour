@@ -23,8 +23,8 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
                 pnlGrid.Visible = true;
                 //_DisplaySchool();
                 //ddlCity.DataBind();
-              //  ddlSchool.DataBind();
-             //   ddlSchool.DataBind();
+                //  ddlSchool.DataBind();
+                //   ddlSchool.DataBind();
                 ddlCity.DataBind();
                 //_Bind();
                 ddlCity.Items.Insert(0, new ListItem("Stadt", "0"));
@@ -33,10 +33,10 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
                 ddl_SearchCity.Items.Insert(0, new ListItem("Stadt", "0"));
             }
             catch (Exception)
-            {}
+            { }
         }
-       
-       
+
+
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -69,10 +69,10 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
                 string popupScript = "alert('" + (string)GetLocalResourceObject("MsgAlreadyExist") + "');";//Class with same parameters already exists!
                 ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
             }
-            
+
         }
         catch (Exception)
-        {}
+        { }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
@@ -87,7 +87,7 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
             _Bind();
         }
         catch (Exception)
-        {}
+        { }
     }
 
     private int _SaveUpdate()
@@ -132,7 +132,7 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
                     ddlCity.SelectedValue = _dt.Rows[0]["CityId"].ToString();
                     ddlSchool.DataBind();
                     ddlSchool.SelectedValue = _dt.Rows[0]["SchoolId"].ToString();
-                   
+
                     txtClass.Text = _dt.Rows[0]["Class"].ToString();
                     txtClassYear.Text = _dt.Rows[0]["ClassYear"].ToString();
                     pnlAddNew.Visible = true;
@@ -162,7 +162,7 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
             btnSave.Text = (string)GetLocalResourceObject("Save"); //"Save";
         }
         catch (Exception)
-        {}
+        { }
     }
 
     //private void _DisplaySchool()
@@ -179,7 +179,7 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
     {
         try
         {
-          //  ddl_School.SelectedIndex = 0;
+            //  ddl_School.SelectedIndex = 0;
             txtschool.Text = "";
             ddl_SearchCity.SelectedValue = "0";
             //grdClass.DataBind();
@@ -197,7 +197,7 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
             _Bind();
         }
         catch (Exception)
-        {}
+        { }
     }
 
     protected void grdClass_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -209,7 +209,7 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
             _Bind();
         }
         catch (Exception)
-        {}
+        { }
     }
     protected void ddlCity_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -338,4 +338,21 @@ public partial class AppAdmin_SchoolClassMaster : System.Web.UI.Page
     }
 
 
+
+    protected void btnDeleteClass_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int SchoolClassId = Convert.ToInt32(hdnClassId.Value); //Convert.ToInt32(((Button)sender).CommandArgument.ToString());
+            objSchoolAdmin.DeleteClass(SchoolClassId, Convert.ToInt32(Session["UserId"]));
+            string msg = (string)GetLocalResourceObject("ClassDelete");
+            string popupScript = "alert('" + msg + "');";
+            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);            
+            _Bind();
+        }
+        catch (Exception ex)
+        {
+            //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+        }
+    }
 }

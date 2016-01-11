@@ -495,4 +495,27 @@ public partial class AppAdmin_ParticipatingCityAdmin : System.Web.UI.Page
         }
         catch { }
     }
+
+    protected void btnDeleteCity_Click(object sender, EventArgs e)
+    {
+
+
+        if (Page.IsValid)
+        {
+            try
+            {
+                int CityId = Convert.ToInt32(hdn_CityId.Value); // Convert.ToInt32(((Button)sender).CommandArgument.ToString());
+                objAdmin.DeleteCity(CityId, Convert.ToInt32(Session["UserId"]));
+
+                string popupScript = "alert('" + (string)GetLocalResourceObject("MsgDelete") + "');";//City deleted successfully.
+                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                //grd_CityList.DataBind();
+                _Bind();
+            }
+            catch (Exception ex)
+            {
+                //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+            }
+        }
+    }
 }

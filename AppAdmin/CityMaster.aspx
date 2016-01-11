@@ -11,7 +11,7 @@
             var Ok = confirm('Confirm Delete ?');
             if (Ok) {
                 $("[id$=hdn_CityId]").val(obj);
-                $("[id$=btnDelete]").trigger("click");
+                $("[id$=btnDeleteCity]").trigger("click");
                 return true;
             }
             else {
@@ -156,7 +156,7 @@
     </script>
 </asp:Content>
 <asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1" runat="Server">
- <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
  <asp:Label ID="lblMsgEnterCity" runat="server" meta:ResourceKey="lblMsgEnterCity" style="display:none;"></asp:Label>
    
@@ -392,8 +392,20 @@
                                         CommandArgument='<%# Eval("CityID") %>' OnClick="btnEdit_Click" />
                                 </ItemTemplate>
                             </asp:TemplateField>
+
+                              <asp:TemplateField HeaderStyle-Width="50px"><HeaderTemplate>
+                                    <asp:Label ID="lblCityDelete" runat="server" meta:ResourceKey="lblCityDelete"></asp:Label>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                 <input type="button" id="but1" class="grddel" onclick="Confirm('<%# Eval("CityID") %>    ')"
+                                        title="Delete" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
+
+                        <asp:Button ID="btnDeleteCity" runat="server" Text="" CssClass="hide" meta:ResourceKey="btn_DeleteCity"
+                                        CommandArgument='<%# Eval("CityID") %>' OnClick="btnDeleteCity_Click"  />
                     <asp:SqlDataSource ID="sds_CityList" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
                         SelectCommand="select cityid,
 			Cityname,CityImage,

@@ -8,7 +8,7 @@
             var Ok = confirm('Wollen Sie löschen?');
             if (Ok) {
                 $("[id$=hdnSchoolId]").val(obj);
-                $("[id$=btnDelete]").trigger("click");
+                $("[id$=btnDeleteSchool]").trigger("click");
                 return true;
             }
             else {
@@ -178,9 +178,21 @@
                                     CssClass="grdedit" OnClick="btnEdit_Click" meta:ResourceKey="btnEdit"/>
                             </ItemTemplate>
                         </asp:TemplateField>
-                      
+                        <asp:TemplateField>
+                         <HeaderTemplate>
+                                <asp:Label ID="lblDeleteSchool" runat="server" meta:ResourceKey="lbldeleteSchool"></asp:Label>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                  <input type="button" id="but1" class="grddel" onclick="Confirm('<%# Eval("schoolid") %>    ')"
+                                        title="Delete" />
+                                 
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+              <asp:Button ID="btnDeleteSchool" runat="server" CommandArgument='<%# Eval("schoolid") %>'
+                          CssClass="hide"  OnClick="btnDeleteSchool_Click"/>
+                
                 <asp:SqlDataSource ID="sdsGrid" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
                     SelectCommand="SP_GET_SCHOOL" SelectCommandType="StoredProcedure">
                     <SelectParameters>
@@ -196,7 +208,7 @@
                 </asp:SqlDataSource>
 
             </div>
-        </asp:Panel>
+        </asp:Panel> 
         </div>
     </div>
      </div>

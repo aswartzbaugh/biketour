@@ -496,11 +496,15 @@
                                     CommandArgument='<%# Eval("ClassAdminId") %>' OnClick="btnEdit_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                      <%--  <asp:TemplateField HeaderText="Delete" HeaderStyle-Width="50px">
-                            <ItemTemplate>
-                                <asp:Button ID="btn_Delete" runat="server" Text="" ToolTip="Delete" CssClass="grddel" OnClientClick='<%# Eval("ClassAdminId", "Confirm({0})") %>' />
-                            </ItemTemplate>
-                        </asp:TemplateField>--%>
+                           <asp:TemplateField HeaderStyle-Width="50px"><HeaderTemplate>
+                                    <asp:Label ID="lblClassAdminDelete" runat="server" meta:ResourceKey="lbl_ClassAdminDelete"></asp:Label>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                 <input type="button" id="but1" class="grddel" onclick="Confirm('<%# Eval("ClassAdminId") %>    ')"
+                                        title="Delete" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                     
                     </Columns>
                 </asp:GridView>
                 <asp:SqlDataSource ID="sds_ClassAdminList" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"

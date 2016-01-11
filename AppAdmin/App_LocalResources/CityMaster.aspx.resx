@@ -243,4 +243,10 @@
   <data name="IsParticipatingYes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="btn_DeleteCity.ToolTip" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="lblCityDelete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>

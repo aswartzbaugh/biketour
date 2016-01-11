@@ -167,7 +167,7 @@ where cac.CityAdminId = @CityAdminId and cac.IsActive = 1 ORDER BY CityName ">
                                         CssClass="grdedit" OnClick="btnEdit_Click" meta:ResourceKey="EditToolTip" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Delete" Visible="false">
+                            <asp:TemplateField HeaderText="Delete" Visible="true">
                                 <HeaderTemplate>
                                     <asp:Label ID="lblgrdDelete" runat="server" meta:ResourceKey="lblgrdDelete"></asp:Label>
                                 </HeaderTemplate>

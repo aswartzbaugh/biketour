@@ -26,11 +26,11 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
                 //ddl_City.DataBind();
                 //ddlCity.Items.Insert(0, new ListItem("Select City", "0"));
                 //ddl_City.Items.Insert(0, new ListItem("Select City", "0"));
-                _BindGrid(); 
+                _BindGrid();
 
             }
             catch (Exception)
-            {}
+            { }
         }
     }
     protected void btnSave_Click(object sender, EventArgs e)
@@ -41,7 +41,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
             if (result > 0)
             {
                 //Record saved successfully
-                
+
                 string msg = "";
                 if (hdnSchoolId.Value == "0")
                 {
@@ -73,7 +73,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
 
         }
         catch (Exception)
-        {}
+        { }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
@@ -87,7 +87,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
             Helper.RebindDropDown(ddl_City);
         }
         catch (Exception)
-        {}
+        { }
     }
 
     private int _SaveUpdate()
@@ -101,7 +101,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
         {
             try
             {
-                objCityAdmin.DeleteSchool(Convert.ToInt32(hdnSchoolId.Value));
+                objCityAdmin.DeleteSchool(Convert.ToInt32(hdnSchoolId.Value), Convert.ToInt32(Session["UserId"]));
 
                 string msg = (string)GetLocalResourceObject("SchoolDeleted");
                 string popupScript = "alert('" + msg + "');";
@@ -157,7 +157,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
             btnSave.Text = msg;
         }
         catch (Exception)
-        {}
+        { }
     }
 
     //private void _DisplayCity()
@@ -172,9 +172,9 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
 
     protected void btn_Cancel_Click(object sender, EventArgs e)
     {
-            ddl_City.SelectedIndex = 0;
-            txt_SearchSchoolName.Text = "";
-            _BindGrid();
+        ddl_City.SelectedIndex = 0;
+        txt_SearchSchoolName.Text = "";
+        _BindGrid();
     }
 
     protected void btn_Search_Click(object sender, EventArgs e)
@@ -189,7 +189,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
             _BindGrid();
         }
         catch (Exception)
-        {}
+        { }
     }
     protected void grdScools_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -226,7 +226,7 @@ public partial class AppAdmin_SchoolMaster : System.Web.UI.Page
     {
         DataTable dt = new DataTable();
         dt.Columns.Add("School");
-        dt.Columns.Add("city");        
+        dt.Columns.Add("city");
 
         DataRow lRow = dt.NewRow();
         dt.AcceptChanges();

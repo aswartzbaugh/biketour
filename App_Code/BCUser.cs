@@ -144,6 +144,11 @@ public class BCUser
         return DataAccessLayer.ExecuteNonQuery("delete from ForumBlog where BlogId = " + blogId);
     }
 
+    public int DeleteAllBlog(int ClassId)
+    {
+        return DataAccessLayer.ExecuteNonQuery("Update ForumBlog set IsActive=0 where ClassId= " + ClassId);
+    }
+
     public int UpdateBlog(int blogId, string blogText)
     {
         return DataAccessLayer.ExecuteNonQuery("update ForumBlog set BlogText = '" + blogText + "' where BlogId = " + blogId);

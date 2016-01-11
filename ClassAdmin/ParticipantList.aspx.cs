@@ -13,7 +13,6 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
     BCStudent objStudent = new BCStudent();
 
     protected void Page_Load(object sender, EventArgs e)
-    
     {
         if (Session["UserId"] == null)
             Response.Redirect(System.Web.Security.FormsAuthentication.LoginUrl.ToString() + "?ReturnUrl=" + Request.RawUrl.ToString());
@@ -58,7 +57,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
 
                 string popupScript = "alert('Einstellungen geändert!');";
                 //"alert('Aufzeichnungen aktualisiert!');";
-                
+
                 ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                 grd_ParticipantsList.Enabled = true;
             }
@@ -89,7 +88,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         return res;
     }
 
-    
+
 
     protected void grd_ParticipantsList_RowCreated(object sender, GridViewRowEventArgs e)
     {
@@ -132,7 +131,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
             _BindGrid();
         }
         catch (Exception)
-        {}
+        { }
     }
 
     protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -143,7 +142,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
             {
                 CheckBox chkConfirmed = rw.FindControl("chk_Confirmed") as CheckBox;
                 CheckBox chkActive = rw.FindControl("chk_Active") as CheckBox;
-                
+
                 if (!chkConfirmed.Checked)
                 {
                     chkActive.Checked = false;
@@ -174,6 +173,9 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
 
         grd_ParticipantsList.DataSource = dv;
         grd_ParticipantsList.DataBind();
+
+        if (dt.Rows.Count == 0)
+            btn_Save.Visible = false;
     }
 
     private DataTable _CreateEmptyTable()
@@ -187,7 +189,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         dt.Columns.Add("StudentId");
         dt.Columns.Add("isUploadBlock");
         dt.Columns.Add("Password");
-        
+
         DataRow lRow = dt.NewRow();
         dt.AcceptChanges();
         return dt;
@@ -264,4 +266,21 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
             //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
         }
     }
+
+    protected void btnDeleteStudent_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int StudentID = Convert.ToInt32(hdnDeleteId.Value);//Convert.ToInt32(((Button)sender).CommandArgument.ToString());            
+            objClass.DeleteStudent(StudentID, 0, Convert.ToInt32(Session["UserId"]));
+            ClientScript.RegisterStartupScript(this.GetType(), "script", "successDelete();", true);
+            //ClientScript.RegisterStartupScript(this.GetType(), "Popup", "successDelete();", true);
+            _BindGrid();
+        }
+        catch (Exception ex)
+        {
+            //Helper.errorLog(ex, Server.MapPath(@"~/ImpTemp/Log.txt"));
+        }
+    }
+
 }
