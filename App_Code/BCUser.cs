@@ -144,9 +144,15 @@ public class BCUser
         return DataAccessLayer.ExecuteNonQuery("delete from ForumBlog where BlogId = " + blogId);
     }
 
-    public int DeleteAllBlog(int ClassId)
+    //Waseem:: Delete Blog
+    public int DeleteBlog(int blogId, int UserId)
     {
-        return DataAccessLayer.ExecuteNonQuery("Update ForumBlog set IsActive=0 where ClassId= " + ClassId);
+        return DataAccessLayer.ExecuteNonQuery("Update ForumBlog set IsActive=0, IsDelete=1, DeleteDate=GetDate(), DeletedBy=" + UserId + " where BlogId=" + blogId);
+    }
+
+    public int DeleteAllBlog(int ClassId, int UserId)
+    {
+        return DataAccessLayer.ExecuteNonQuery("Update ForumBlog set IsActive=0, IsDelete=1, DeleteDate=GetDate(), DeletedBy="+ UserId+" where ClassId= " + ClassId);
     }
 
     public int UpdateBlog(int blogId, string blogText)

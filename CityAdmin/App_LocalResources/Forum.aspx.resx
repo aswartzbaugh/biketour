@@ -184,7 +184,7 @@
     <value>One Class Below</value>
   </data>
   <data name="btn_DeleteAllBlogs.Text" xml:space="preserve">
-    <value>Delete all blogs</value>
+    <value>Delete all blog posts this city?</value>
   </data>
   <data name="BlogDeleted" xml:space="preserve">
     <value>Blog deleted</value>

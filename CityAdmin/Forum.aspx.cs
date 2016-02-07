@@ -413,9 +413,10 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             dlBlog.DataSourceID = "sdsForum";
             dlBlog.DataBind();
             if (dlBlog.Items.Count == 0)
-                btnDeleteAll.Visible = false;
+
+                btnDeleteAllBlogs.Visible = false;
             else
-                btnDeleteAll.Visible = true;
+                btnDeleteAllBlogs.Visible = true;
         }
         catch (Exception ex)
         {
@@ -431,7 +432,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             {
                 try
                 {
-                    objUser.DeleteBlog(Convert.ToInt32(hdnBlogId.Value));
+                    objUser.DeleteBlog(Convert.ToInt32(hdnBlogId.Value), Convert.ToInt32(Session["UserId"]));
 
                     //string popupScript = "alert('Blog deleted successfully.');";
                     //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
@@ -441,7 +442,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
                     _BindBlog();
 
                     ScriptManager.RegisterStartupScript(Page, this.GetType(), "Temp", "ScrollPosition();", true);
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -518,7 +519,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
             {
                 try
                 {
-                    // objUser.DeleteAllBlog(Convert.ToInt32(ddlClass.SelectedValue));
+                    // objUser.DeleteAllBlog(Convert.ToInt32(ddlClass.SelectedValue), Convert.ToInt32(Session["UserId"]));
 
                     //string popupScript = "alert('Blog deleted successfully.');";
                     //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
@@ -536,13 +537,14 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
         catch (Exception ex)
         { }
     }
+
     protected void btnDeleteAll_Click(object sender, EventArgs e)
     {
         try
         {
             if (ddlClass.SelectedValue != "0")
             {
-                 objUser.DeleteAllBlog(Convert.ToInt32(ddlClass.SelectedValue));
+                objUser.DeleteAllBlog(Convert.ToInt32(ddlClass.SelectedValue), Convert.ToInt32(Session["UserId"]));
                 _BindBlog();
                 string msg = (string)GetLocalResourceObject("BlogDeleted");
                 string popupScript = "alert('" + msg + "');";

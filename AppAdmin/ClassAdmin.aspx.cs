@@ -241,7 +241,7 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
         {
             try
             {
-              //  objSchoolAdmin.DeleteClassAdmin(Convert.ToInt32(hdn_ClassAdminId.Value), Convert.ToInt32(Session["UserId"]));
+                objSchoolAdmin.DeleteClassAdmin(Convert.ToInt32(hdn_ClassAdminId.Value), Convert.ToInt32(Session["UserId"]));
 
                 string popupScript = "alert('Class admin deleted successfully.');";
                 ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);

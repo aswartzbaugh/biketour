@@ -154,7 +154,7 @@
     <value>Schülerdaten aktualisiert.</value>
   </data>
   <data name="btnDeleteAllStudents.Text" xml:space="preserve">
-    <value>Alle Schüler löschen</value>
+    <value>Alle Schüler dieser Stadt löschen?</value>
   </data>
   <data name="btnDeleteStudent.Text" xml:space="preserve">
     <value>Löschen</value>

@@ -39,7 +39,7 @@
     </asp:ScriptManager>
     <asp:HiddenField ID="hdn_ClassAdminId" runat="server" Value="0" />
     <div class="frmBox_2">
-        <table width="64%">
+        <table width="86%">
             <tr>
                 <td>
                     <asp:Label ID="lblSchool" runat="server" meta:ResourceKey="lblSchool"></asp:Label>
@@ -87,15 +87,24 @@
                             <asp:RequiredFieldValidator ID="rfvClass" runat="server" meta:ResourceKey="rfvClass"
                                 InitialValue="0" ControlToValidate="ddlClass" ValidationGroup="SubmitClass" CssClass="error"
                                 Display="Dynamic"></asp:RequiredFieldValidator>
+
+                          
                         </ContentTemplate>
                         <Triggers>
                             <asp:PostBackTrigger ControlID="ddlClass" />
                         </Triggers>
+                          
                     </asp:UpdatePanel>
                 </td>
-                <td> <div id="div1" runat="server">
-          <asp:Button ID="btnDeleteAll" runat="server"  OnClick="btnDeleteAll_Click" Text="" ToolTip="löschen" CssClass="hide" Style="display: none;"  />        
-                <asp:Button ID="btnDeleteAllStudents" runat="server" meta:ResourceKey="btnDeleteAllStudents"  OnClick="btnDeleteAllStudents_Click"  Visible="False"  />
+                <td>
+                    <div id="div1" runat="server">
+                        <asp:UpdatePanel runat="server">
+                            <ContentTemplate>
+                                <asp:Button ID="btnDeleteAll" runat="server"  OnClick="btnDeleteAll_Click" Text="" ToolTip="löschen" CssClass="hide" Style="display: none;"  />        
+                <asp:Button ID="btnDeleteAllStudents"  AutoPostBack="True" runat="server" meta:ResourceKey="btnDeleteAllStudents"  OnClick="btnDeleteAllStudents_Click"  Visible="False" Width="220px"  />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+          
             </div></td>
             </tr>
         </table>        

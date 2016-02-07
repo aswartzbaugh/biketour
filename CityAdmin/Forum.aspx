@@ -157,9 +157,9 @@
                         </asp:UpdatePanel>
                     </td>
                     <td>  <div id="div_ButtonList" runat="server">
-                         <asp:Button ID="btnDeleteAll" runat="server"   Text="" ToolTip="löschen" CssClass="hide" Style="display: none;" OnClick="btnDeleteAll_Click"  />        
+                         <asp:Button ID="btnDeleteAll" runat="server"   Text="" ToolTip="löschen" CssClass="hide" Style="display: none;" OnClick="btnDeleteAll_Click" />        
         
-                <asp:Button ID="btnDeleteAllBlogs" runat="server"  meta:ResourceKey="btn_DeleteAllBlogs" OnClick="btnDeleteAllBlogs_Click" Visible="False"    />
+                <asp:Button ID="btnDeleteAllBlogs" runat="server"  meta:ResourceKey="btn_DeleteAllBlogs" OnClick="btnDeleteAllBlogs_Click" Visible="False" Width="240px"    />
             </div></td>
                 </tr>
             </table>
