@@ -75,12 +75,13 @@
                                 SelectCommand="select 'Klasse' as ClassName, '0' as classid union all 
                                     select distinct scm.class as ClassName, scm.classid from  ClassAdminClasses cac inner join SchoolClassMaster scm
                                       on cac.ClassId = scm.ClassId
-                                     where  ClassAdminId = @ClassAdminId
-                                      and cac.SchoolId = @SchoolId
+                                     where 
+                                      ClassAdminId = @ClassAdminId and
+                                       cac.SchoolId = @SchoolId
                                         and scm.IsActive = 1">
                                 <SelectParameters>
-                                    <asp:SessionParameter DefaultValue="" Name="ClassAdminId" SessionField="UserId" />
-                                    <asp:ControlParameter ControlID="ddlSchool" Name="schoolid" PropertyName="SelectedValue" />
+                                    <asp:SessionParameter DefaultValue="" Name="ClassAdminId" SessionField="UserRoleId" />
+                                    <asp:ControlParameter ControlID="ddlSchool" Name="SchoolId" PropertyName="SelectedValue" />
                                 </SelectParameters>
                             </asp:SqlDataSource>
                         </ContentTemplate>
@@ -130,16 +131,16 @@
                                             Text='<%# Eval("STUDENTNAME") %>' ToolTip="" meta:ResourceKey="lnkEdit"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                               <%-- <asp:TemplateField>
+                                <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:Label ID="lblgrdUserName" runat="server" Text='<%#Eval("LoginName") %>'></asp:Label>
+                                        <asp:Label ID="lblgrdUserName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>
                                     </ItemTemplate>
                                     <HeaderTemplate>
                                         <asp:LinkButton ID="lbtngrdUserName" runat="server" meta:ResourceKey="lbtngrdLoginName" CommandName="Sort"
-                                            CommandArgument="LoginName"></asp:LinkButton>
+                                            CommandArgument="UserName"></asp:LinkButton>
                                         <asp:PlaceHolder ID="placeholderLoginName" runat="server"></asp:PlaceHolder>
                                     </HeaderTemplate>
-                                </asp:TemplateField>--%>
+                                </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
                                         <asp:Label ID="lblgrdConfirmed" runat="server" meta:ResourceKey="lblgrdConfirmed"></asp:Label>
@@ -150,7 +151,7 @@
                                         <asp:Label ID="lbl_StudentId" runat="server" Text='<%# Eval("StudentId") %>' Visible="false"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField>
+                                <asp:TemplateField Visible="false">
                                     <HeaderTemplate>
                                         <asp:Label ID="lblgrdActive" runat="server" meta:ResourceKey="lblgrdActive"></asp:Label>
                                     </HeaderTemplate>

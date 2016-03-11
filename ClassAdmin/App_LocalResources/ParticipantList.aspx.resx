@@ -159,4 +159,7 @@
   <data name="btnDeleteStudent.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="lbtngrdLoginName.Text" xml:space="preserve">
+    <value>User Name</value>
+  </data>
 </root>

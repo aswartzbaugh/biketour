@@ -19,10 +19,12 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         {
             if (Session["SchoolId"] != null && Session["ClassId"] != null)   //Application["SchoolId"] != null && Application["ClassId"] != null)
             {
+                
                 ddlSchool.SelectedValue = Session["SchoolId"].ToString();
                 ddlSchool.DataTextField = "School";
                 ddlSchool.DataValueField = "SchoolId";
                 ddlSchool.DataBind();
+                
                 ddlClass.SelectedValue = Session["ClassId"].ToString();
                 ddlClass.DataTextField = "Class";
                 ddlClass.DataValueField = "classid";
@@ -41,16 +43,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         {
             if (grd_ParticipantsList.Rows.Count > 0)
             {
-
-                //for (int i = 0; i < grd_ParticipantsList.Rows.Count; i++)
-                //{
-                //    CheckBox chkConfirmed = grd_ParticipantsList.FindControl("chk_Confirmed") as CheckBox;
-                //    CheckBox chkActive = grd_ParticipantsList.FindControl("chk_Active") as CheckBox;
-                //    Label lblStudentId = grd_ParticipantsList.FindControl("lbl_StudentId") as Label;
-                //    int confirmed = Convert.ToInt32(chkConfirmed.Checked);
-                //    int active = Convert.ToInt32(chkActive.Checked);
-                //    int res = SaveGridData(Convert.ToInt32(lblStudentId.Text), confirmed, active);
-                //}
+               
                 foreach (GridViewRow rw in grd_ParticipantsList.Rows)
                 {
                     CheckBox chkConfirmed = rw.FindControl("chk_Confirmed") as CheckBox;
@@ -62,12 +55,12 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
                 }
 
                 string popupScript = "alert('" + (string)GetLocalResourceObject("RecordsUpdated") + "');";
-                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), popupScript, true);
             }
             else
             {
                 string popupScript = "alert('" + (string)GetLocalResourceObject("NoRecords") + "');";
-                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), popupScript, true);
             }
 
             ddlClass.SelectedValue = classId.ToString();
@@ -90,10 +83,11 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
                 CheckBox chkConfirmed = rw.FindControl("chk_Confirmed") as CheckBox;
                 CheckBox chkActive = rw.FindControl("chk_Active") as CheckBox;
 
-                if (!chkConfirmed.Checked)
-                {
-                    chkActive.Checked = false;
-                }
+                chkActive.Checked = chkConfirmed.Checked;
+                //if (!chkConfirmed.Checked)
+                //{
+                //    chkActive.Checked = false;
+                //}
             }
         }
         catch { }
@@ -274,7 +268,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
             objCityAdmin.DeleteStudent(StudentID, 0, Convert.ToInt32(Session["UserId"]));
             string msg = (string)GetLocalResourceObject("StudentDeleted");
             string popupScript = "alert('" + msg + "');";
-            ClientScript.RegisterStartupScript(this.GetType(), "script", popupScript, true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), popupScript, true);
             _BindGrid();
         }
         catch (Exception ex)
@@ -288,7 +282,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         {
             if (ddlClass.SelectedValue != "0")
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "script", "ConfirmAll();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ConfirmAll();", true);
             }
         }
         catch (Exception ex)
@@ -306,11 +300,12 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
             {
                 int ClassId = Convert.ToInt32(ddlClass.SelectedValue);
                 objCityAdmin.DeleteStudent(0, ClassId, Convert.ToInt32(Session["UserId"]));
-                _BindGrid();
-
+                
                 string msg = (string)GetLocalResourceObject("StudentDeleted");
                 string popupScript = "alert('" + msg + "');";
-                ClientScript.RegisterStartupScript(this.GetType(), "script", popupScript, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), popupScript, true);
+
+                _BindGrid();
             }
         }
         catch (Exception ex)

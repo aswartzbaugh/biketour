@@ -26,7 +26,21 @@
                alert('Deleted Successfully!');
            }
 
+           function ConfirmAll(message) {
 
+               var Ok = confirm(message);
+               if (Ok) {
+                   $("[id$=btnDeleteSelectedFiles]").trigger("click");
+                   return true;
+               }
+               else {
+                   return false;
+               }
+           }
+
+           function successFileDelete(message) {
+               alert(message);
+           }
     </script>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -36,9 +50,14 @@
         <h5>
             <asp:Label ID="lblStudentDetails" runat="server" meta:ResourceKey="lblStudentDetails"></asp:Label>
         </h5>
+        <asp:Button ID="btnDeleteFile" runat="server" meta:ResourceKey="btnDeleteFile" 
+                                CssClass="linkbtn right" ValidationGroup="Submit" onclick="btnDeleteFile_Click" />
+
         <asp:HyperLink ID="hlnkBack" runat="server" CssClass="linkbtn right" NavigateUrl="ParticipantList.aspx"
             meta:ResourceKey="hlnkBack"></asp:HyperLink>
 
+            <asp:Button ID="btnDeleteSelectedFiles"  AutoPostBack="True" runat="server" 
+                                onclick="btnDeleteSelectedFiles_Click"  CssClass="hide" Style="display: none;"  />
         <div class="clear">
         </div>
         <div class="GridWrap">
@@ -98,7 +117,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <%--<asp:BoundField DataField="Time" HeaderText="Time" SortExpression="Time" />--%>
-                    <asp:TemplateField HeaderText="InValid">
+                    <asp:TemplateField HeaderText="Valid">
                         <HeaderTemplate>
                             <asp:Label ID="lblgrdInValid" runat="server" meta:ResourceKey="lblgrdInValid"></asp:Label>
                         </HeaderTemplate>
@@ -112,10 +131,17 @@
                             <asp:Label ID="lblDeleteStudent" runat="server" meta:ResourceKey="lblDeleteStudent"></asp:Label>
                         </HeaderTemplate>
                         <ItemTemplate>
-                             <input id="btDelete" type="button" class="grddel" title="löschen" onclick="Confirm('<%# Eval("StudentUploadId") %>    ')" />
-                        
+                             <input id="btDelete" type="button" class="grddel" title="löschen" onclick="Confirm('<%# Eval("StudentUploadId") %>    ')" />                        
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Delete">
+                            <HeaderTemplate>
+                                <asp:Label ID="lblgrdDelete" runat="server" meta:ResourceKey="lblgrdDelete"></asp:Label>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chk_Delete" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>                        
                 </Columns>
             </asp:GridView>
             <div class="clear"></div>

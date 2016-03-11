@@ -124,7 +124,7 @@
     <value>Uploaded File</value>
   </data>
   <data name="lblgrdInValid.Text" xml:space="preserve">
-    <value>InValid</value>
+    <value>Valid</value>
   </data>
   <data name="lblgrdKilometer.Text" xml:space="preserve">
     <value>Kilometer</value>
@@ -206,5 +206,20 @@
   </data>
   <data name="lblDeleteStudent.Text" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="btnDeleteFile.Text" xml:space="preserve">
+    <value>Delete GPX File(s)</value>
+  </data>
+  <data name="DeleteFile.ConfirmMessage" xml:space="preserve">
+    <value>The selected files will be delete permanetely and that there is no backup. Do you want to continue?</value>
+  </data>
+  <data name="DeleteFile.SuccessMessage" xml:space="preserve">
+    <value>Selected files are deleted successfully.</value>
+  </data>
+  <data name="DeleteFile.ErrorMessage" xml:space="preserve">
+    <value>Unable to find selected files.</value>
+  </data>
+  <data name="lblgrdDelete.Text" xml:space="preserve">
+    <value>Select</value>
   </data>
 </root>

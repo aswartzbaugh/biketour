@@ -124,7 +124,7 @@
     <value>Hochgeladene Datei</value>
   </data>
   <data name="lblgrdInValid.Text" xml:space="preserve">
-    <value>Ungültig</value>
+    <value>Gültig</value>
   </data>
   <data name="lblgrdKilometer.Text" xml:space="preserve">
     <value>Kilometer</value>
@@ -200,5 +200,20 @@
   </data>
   <data name="lblDeleteStudent.Text" xml:space="preserve">
     <value>Löschen</value>
+  </data>
+  <data name="btnDeleteFile.Text" xml:space="preserve">
+    <value>Löschen GPX -Datei (en )</value>
+  </data>
+  <data name="DeleteFile.ConfirmMessage" xml:space="preserve">
+    <value>Die ausgewählten Dateien werden gelöscht permanetely und dass es keine Sicherung. Möchtest du fortfahren?</value>
+  </data>
+  <data name="DeleteFile.SuccessMessage" xml:space="preserve">
+    <value>Die ausgewählten Dateien werden erfolgreich gelöscht.</value>
+  </data>
+  <data name="DeleteFile.ErrorMessage" xml:space="preserve">
+    <value>Können Sie ausgewählte Dateien zu finden.</value>
+  </data>
+  <data name="lblgrdDelete.Text" xml:space="preserve">
+    <value>Wählen</value>
   </data>
 </root>

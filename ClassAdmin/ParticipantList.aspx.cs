@@ -22,19 +22,26 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
             if (Session["SchoolId"] != null && Session["ClassId"] != null)   //Application["SchoolId"] != null && Application["ClassId"] != null)
             {
 
-                ddlSchool.SelectedValue = Session["SchoolId"].ToString();
+               // FillSchool();
+
                 ddlSchool.DataTextField = "School";
                 ddlSchool.DataValueField = "SchoolId";
+                
                 ddlSchool.DataBind();
-                ddlClass.SelectedValue = Session["ClassId"].ToString();
+                ddlSchool.SelectedValue = Session["SchoolId"].ToString();
+
+                //FillClass();
                 ddlClass.DataTextField = "ClassName";
                 ddlClass.DataValueField = "classid";
                 ddlClass.DataBind();
+                ddlClass.SelectedValue = Session["ClassId"].ToString();
+
                 ddlClass_SelectedIndexChanged(sender, e);
             }
         }
     }
 
+   
     protected void btn_Save_Click(object sender, EventArgs e)
     {
         int schoolId = Convert.ToInt32(ddlSchool.SelectedValue);
@@ -58,13 +65,13 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
                 string popupScript = "alert('Einstellungen geändert!');";
                 //"alert('Aufzeichnungen aktualisiert!');";
 
-                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), popupScript, true);
                 grd_ParticipantsList.Enabled = true;
             }
             else
             {
                 string popupScript = "alert('Kein Eintrag!');";
-                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), popupScript, true);
             }
 
             ddlClass.SelectedValue = classId.ToString();
@@ -143,10 +150,11 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
                 CheckBox chkConfirmed = rw.FindControl("chk_Confirmed") as CheckBox;
                 CheckBox chkActive = rw.FindControl("chk_Active") as CheckBox;
 
-                if (!chkConfirmed.Checked)
-                {
-                    chkActive.Checked = false;
-                }
+                chkActive.Checked = chkConfirmed.Checked;
+                //if (!chkConfirmed.Checked)
+                //{
+                //    chkActive.Checked = false;
+                //}
             }
         }
         catch { }
@@ -189,7 +197,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         dt.Columns.Add("StudentId");
         dt.Columns.Add("isUploadBlock");
         dt.Columns.Add("Password");
-
+        dt.Columns.Add("UserName");
         DataRow lRow = dt.NewRow();
         dt.AcceptChanges();
         return dt;
@@ -273,7 +281,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
         {
             int StudentID = Convert.ToInt32(hdnDeleteId.Value);//Convert.ToInt32(((Button)sender).CommandArgument.ToString());            
             objClass.DeleteStudent(StudentID, 0, Convert.ToInt32(Session["UserId"]));
-            ClientScript.RegisterStartupScript(this.GetType(), "script", "successDelete();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "successDelete();", true);
             //ClientScript.RegisterStartupScript(this.GetType(), "Popup", "successDelete();", true);
             _BindGrid();
         }

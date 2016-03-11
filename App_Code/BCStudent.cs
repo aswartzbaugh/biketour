@@ -22,6 +22,41 @@ public class BCStudent
         //
     }
 
+    public void UpdateFileDeleteFlag(int schoolId, int classId, int studentId, string fileName, int deletedById)
+    {
+        string sqlScript = "SELECT StagePlanId, Kilometer FROM StudentUpload"+
+              " WHERE FileName = '" + fileName + "'" +
+            " AND ClassId = " + classId +
+            " AND StudentId = " + studentId;
+
+        _dt = DataAccessLayer.ReturnDataTable(sqlScript);
+
+        if (_dt != null && _dt.Rows != null &&
+            _dt.Rows.Count > 0)
+        {
+            int CompletedStageId = Convert.ToInt32(_dt.Rows[0]["StagePlanId"]);
+            int Kilometer = Convert.ToInt32(_dt.Rows[0]["Kilometer"]);
+
+            sqlScript = "UPDATE StagePlan " +
+                " SET Distance_Covered = Distance_Covered - " + Kilometer +
+              " WHERE StagePlanId = " + CompletedStageId;
+
+            DataAccessLayer.ExecuteNonQuery(sqlScript);
+
+            sqlScript = "UPDATE StudentUpload SET  " +
+           " ISDeleted = 1 ," +
+           " DeleteDate = '" + System.DateTime.Now + "'," +
+           " DeletedBy = " + deletedById +
+           " WHERE FileName = '" + fileName + "'" +
+           " AND ClassId = " + classId +
+           " AND StudentId = " + studentId;
+
+            DataAccessLayer.ExecuteNonQuery(sqlScript);
+        }
+
+       
+    }
+
     #region Student   :: Insert
     public int InsertStudent(DOLUser objUser)
     {

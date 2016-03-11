@@ -162,4 +162,7 @@
   <data name="StudentDeleted" xml:space="preserve">
     <value>Student deleted</value>
   </data>
+  <data name="lbtngrdLoginName.Text" xml:space="preserve">
+    <value>User Name</value>
+  </data>
 </root>

@@ -53,7 +53,7 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
                 }
                 else
                 {
-                    Response.Redirect("ParticipantList.aspx");
+                    Response.Redirect("ParticipantList.aspx",false);
                 }
 
                 _BindGrid();
@@ -151,6 +151,10 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
         }
 
         dv.Sort = this.ViewState["SortExp"] + " " + this.ViewState["SortOrder"];
+        if (dv.Count > 0)
+            btnDeleteFile.Visible = true;
+        else
+            btnDeleteFile.Visible = false;
 
         grdStudentDetails.DataSource = dv;
         grdStudentDetails.DataBind();
@@ -167,7 +171,7 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
         dt.Columns.Add("time");
         dt.Columns.Add("Uploadeddate");
         dt.Columns.Add("IsNoVisible");
-
+        
         DataRow lRow = dt.NewRow();
         dt.AcceptChanges();
         return dt;
@@ -194,19 +198,20 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
 
                 grdStudentDetails.DataBind();
 
-                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), popupScript, true);
 
-                Response.Redirect("~/ClassAdmin/StudentDetails.aspx");
+                Response.Redirect("~/CityAdmin/ParticipantList.aspx", false);
+                //Response.Redirect("~/ClassAdmin/StudentDetails.aspx");
             }
             else if (result == 0)
             {
                 //Record already exists
                 string popupScript = "alert('Schüler bereits vorhanden');";
-                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), popupScript, true);
                 txtEmail.Focus();
             }
-
-            _BindGrid();
+            
+            //_BindGrid();
         }
         catch { }
     }
@@ -265,5 +270,54 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
         }
         catch (Exception)
         { }
+    }
+    protected void btnDeleteFile_Click(object sender, EventArgs e)
+    {
+        string popupScript = "'" + (string)GetLocalResourceObject("DeleteFile.ConfirmMessage") + "'";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ConfirmAll("+popupScript+");", true);
+    }
+    protected void btnDeleteSelectedFiles_Click(object sender, EventArgs e)
+    {
+        List<String> selectedFiles = new List<string>();
+        int StudentId = 0;
+        
+        try
+        {
+            if (Request.QueryString["StudentId"] != null)
+            {
+                StudentId = Convert.ToInt32(Request.QueryString["StudentId"]);
+            }
+
+            objUser.SchoolId = Convert.ToInt16(hdn_SchoolID.Value);
+            objUser.ClassId = Convert.ToInt16(hdn_ClassID.Value);
+            
+            string folderPath = Server.MapPath("../GPXFiles/" + objUser.SchoolId + "/" + objUser.ClassId + "/" + StudentId);
+            string[] uploadedFiles =   System.IO.Directory.GetFiles(folderPath,"*.xml");
+            int deleteById = Convert.ToInt32(Session["LoginId"]);
+            foreach (GridViewRow rw in grdStudentDetails.Rows)
+            {
+                CheckBox chk_Delete = rw.FindControl("chk_Delete") as CheckBox;
+                Label lblFileName = rw.FindControl("lblFileName") as Label;
+                if (chk_Delete.Checked)
+                {
+                    //selectedFiles.Add(lblFileName.Text);
+                    if (System.IO.File.Exists(folderPath + "/" + lblFileName.Text))
+                    {
+                        System.IO.File.Delete(folderPath + "/" + lblFileName.Text);
+
+                        objStudent.UpdateFileDeleteFlag(objUser.SchoolId, objUser.ClassId, StudentId, lblFileName.Text, deleteById);
+                    }
+                }                
+            }
+            _BindGrid();
+            string popupScript = "'" + (string)GetLocalResourceObject("DeleteFile.SuccessMessage") + "'";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "successDelete(" + popupScript + ");", true);
+        }
+        catch 
+        {
+            string popupScript = "'" + (string)GetLocalResourceObject("DeleteFile.ErrorMessage") + "'";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "successDelete(" + popupScript + ");", true);
+
+        }                
     }
 }

@@ -7,6 +7,25 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+<script type="text/javascript">
+    
+    function ConfirmAll(message) {
+
+        var Ok = confirm(message);
+        if (Ok) {
+            $("[id$=btnDeleteSelectedFiles]").trigger("click");
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function successDelete(message) {
+        alert(message);
+    }
+    </script>
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
 
@@ -14,9 +33,14 @@
         <h5>
             <asp:Label ID="lblStudentDetails" runat="server" meta:ResourceKey="lblStudentDetails"></asp:Label>
         </h5>
+        <asp:Button ID="btnDeleteFile" runat="server" meta:ResourceKey="btnDeleteFile" 
+                                CssClass="linkbtn right" ValidationGroup="Submit" onclick="btnDeleteFile_Click" />
+
         <asp:HyperLink ID="hlnkBack" runat="server" CssClass="linkbtn right" NavigateUrl="ParticipantList.aspx"
             meta:ResourceKey="hlnkBack"></asp:HyperLink>
         
+        <asp:Button ID="btnDeleteSelectedFiles"  AutoPostBack="True" runat="server" 
+                                onclick="btnDeleteSelectedFiles_Click"  CssClass="hide" Style="display: none;"  />
         <div class="clear">
         </div>
         <div class="GridWrap" >
@@ -76,7 +100,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <%--<asp:BoundField DataField="Time" HeaderText="Time" SortExpression="Time" />--%>
-                    <asp:TemplateField HeaderText="InValid">
+                    <asp:TemplateField HeaderText="Valid">
                         <HeaderTemplate>
                             <asp:Label ID="lblgrdInValid" runat="server" meta:ResourceKey="lblgrdInValid"></asp:Label>
                         </HeaderTemplate>
@@ -84,7 +108,15 @@
                             <asp:Image ID="imgYes" runat="server" CssClass="grdValid" Visible='<%# bool.Parse(Eval("IsYesVisible").ToString()) %>' />
                             <asp:Image ID="imgNo" runat="server" CssClass="grdInValid" Visible='<%# bool.Parse(Eval("IsNoVisible").ToString()) %>' />
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>                    
+                     <asp:TemplateField HeaderText="Delete">
+                            <HeaderTemplate>
+                                <asp:Label ID="lblgrdDelete" runat="server" meta:ResourceKey="lblgrdDelete"></asp:Label>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chk_Delete" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                 </Columns>
             </asp:GridView>
             <div class="clear"></div>

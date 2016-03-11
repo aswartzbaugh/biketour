@@ -20,6 +20,7 @@
             }
 
             function ConfirmAll() {
+            
                 var Ok = confirm('Wollen Sie löschen?');
                 if (Ok) {
                     $("[id$=btnDeleteAll]").trigger("click");
@@ -101,7 +102,7 @@
                         <asp:UpdatePanel runat="server">
                             <ContentTemplate>
                                 <asp:Button ID="btnDeleteAll" runat="server"  OnClick="btnDeleteAll_Click" Text="" ToolTip="löschen" CssClass="hide" Style="display: none;"  />        
-                <asp:Button ID="btnDeleteAllStudents"  AutoPostBack="True" runat="server" meta:ResourceKey="btnDeleteAllStudents"  OnClick="btnDeleteAllStudents_Click"  Visible="False" Width="220px"  />
+                            <asp:Button ID="btnDeleteAllStudents"  AutoPostBack="True" runat="server" meta:ResourceKey="btnDeleteAllStudents"  OnClick="btnDeleteAllStudents_Click"  Visible="False" Width="220px"  />
                             </ContentTemplate>
                         </asp:UpdatePanel>
           
@@ -133,6 +134,16 @@
                                     Text='<%# Eval("STUDENTNAME") %>' ToolTip="Student details"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblgrdUserName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <HeaderTemplate>
+                                        <asp:LinkButton ID="lbtngrdUserName" runat="server" meta:ResourceKey="lbtngrdLoginName" CommandName="Sort"
+                                            CommandArgument="UserName"></asp:LinkButton>
+                                        <asp:PlaceHolder ID="placeholderLoginName" runat="server"></asp:PlaceHolder>
+                                    </HeaderTemplate>
+                                </asp:TemplateField>
                         <asp:TemplateField HeaderText="Confirmed">
                             <HeaderTemplate>
                                 <asp:Label ID="lblgrdConfirmed" runat="server" meta:ResourceKey="lblgrdConfirmed"></asp:Label>
@@ -143,7 +154,7 @@
                                 <asp:Label ID="lbl_StudentId" runat="server" Text='<%# Eval("StudentId") %>' Visible="false"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Active">
+                        <asp:TemplateField HeaderText="Active" Visible="false">
                             <HeaderTemplate>
                                 <asp:Label ID="lblgrdActive" runat="server" meta:ResourceKey="lblgrdActive"></asp:Label>
                             </HeaderTemplate>
