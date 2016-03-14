@@ -117,7 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblLoginHome.Text" xml:space="preserve">
-    <value>Login</value>
+  <data name="btn_Cancel.Text" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="btn_Save.Text" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="rfvCity.ErrorMessage" xml:space="preserve">
+    <value>Bitte wähle eine Stadt aus</value>
+  </data>
+  <data name="lblMarkInvalidFile.Text" xml:space="preserve">
+    <value>Markieren Sie alle Datei ungültig hochgeladen.</value>
+  </data>
+  <data name="lblSetCityDate.Text" xml:space="preserve">
+    <value>Anfangsdatum</value>
+  </data>
+  <data name="rfvtxt_DateError.ErrorMessage" xml:space="preserve">
+    <value>Startdatum ist obligatorisch.</value>
+  </data>
+  <data name="lblClass.Text" xml:space="preserve">
+    <value>Klasse</value>
+  </data>
+  <data name="Message.Success" xml:space="preserve">
+    <value>Parameter erfolgreich aktualisiert.</value>
+  </data>
+  <data name="Message.Confirm" xml:space="preserve">
+    <value>Wollen Sie wirklich wollen , um alle Dateien ungültig ?</value>
+  </data>
+  <data name="Message.Error" xml:space="preserve">
+    <value>Parameter können nicht aktualisiert werden.</value>
+  </data>
+  <data name="lblCityParamHead.Text" xml:space="preserve">
+    <value>Set -Stadt -Parameter</value>
   </data>
 </root>

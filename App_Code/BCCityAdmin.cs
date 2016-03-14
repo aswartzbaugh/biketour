@@ -314,5 +314,119 @@ public class BCCityAdmin
         return result;
     }
 
-   
+    #region Set parameters
+    public DataTable GetCityContent(int cityId)
+    {
+        string sqlScript = "SELECT [CityContentId]" +
+      ",[CityId]" +
+      ",[CityInfo]" +
+      ",[VideoURL]" +
+      ",[CityStartDate]" +
+      ",[IsAllFileInvalid]" +
+  "FROM [dbo].[CityContents]" +
+  " WHERE CityId = " + cityId + ")";
+        try
+        {
+            _dt = DataAccessLayer.ReturnDataTable(sqlScript);
+
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        return _dt;
+    }
+    public int UpdateCityContent(string startDate, bool isInvalid, int cityId)
+    {
+        DateTime temp = Convert.ToDateTime(startDate);
+        
+        int result = 0;
+        string sqlScript = "UPDATE CityContents SET" +        
+      " [CityStartDate] = '" + temp.Year + "-" + temp.Month + "-" + temp.Day + " 00:00:00.400'" +
+      ",[IsAllFileInvalid] = '" + isInvalid +
+        "' WHERE CityId = " + cityId;
+        try
+        {
+            result = DataAccessLayer.ExecuteNonQuery(sqlScript);
+           
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        return result;
+    }
+
+    public void DeleteUploadedFilesBeforeSetDate(int cityId, DateTime startDate)
+    {
+        string sqlScript = "SELECT SchoolClassMaster.SchoolId, StudentUpload.StudentId," +
+        " StudentUpload.StagePlanId, StudentUpload.FileName," +
+        " StudentUpload.StudentUploadId,StudentUpload.ClassId FROM " +
+        " StudentUpload INNER JOIN StagePlan ON StudentUpload.StagePlanId = StagePlan.StagePlanId AND   StagePlan.IsActive=1 " +
+        " INNER JOIN SchoolClassMaster ON SchoolClassMaster.ClassId = StudentUpload.ClassId INNER JOIN  SchoolMaster ON  " +
+        " SchoolClassMaster.SchoolId = SchoolMaster.SchoolId AND  SchoolMaster.Isactive = 1 AND " +
+        " SchoolClassMaster.IsActive = 1 AND  " +
+        " SchoolMaster.CityId = " + cityId +
+        " INNER JOIN CityAdminCities ON CityAdminCities.CityId = SchoolMaster.CityId AND CityAdminCities.CityAdminId = " + 
+        HttpContext.Current.Session["UserId"] + 
+        " WHERE StudentUpload.IsDeleted=0 " +
+        " AND StudentUpload.Uploadeddate <= '" + startDate.Year + "-" + startDate.Month + "-" + startDate.Day + " 00:00:00.400'";
+
+        int schoolId = 0;
+        int studentId = 0;
+        int stagePlanId = 0;
+        string fileName = string.Empty;
+        int studentUploadId=0;
+        int classId = 0;
+        string folderPath = string.Empty;
+        try
+        {
+            _dt = DataAccessLayer.ReturnDataTable(sqlScript);
+
+            if (_dt != null && _dt.Rows != null &&
+                _dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow item in _dt.Rows)
+                {
+                    schoolId = Convert.ToInt32(item["SchoolId"]);
+                    studentId = (item["StudentId"]!=null ? Convert.ToInt32(item["StudentId"]) : 0);
+
+                    stagePlanId = Convert.ToInt32(item["StagePlanId"]);
+                    fileName = Convert.ToString(item["FileName"]);
+
+                    studentUploadId = Convert.ToInt32(item["StudentUploadId"]);
+
+                    classId = Convert.ToInt32(item["ClassId"]);
+                    
+                    if (studentId > 0)
+                    {
+                        folderPath = HttpContext.Current.Server.MapPath("../GPXFiles/" + schoolId + "/" + classId + "/" + studentId);
+                    }
+                    else
+                    {
+                        folderPath = HttpContext.Current.Server.MapPath("../GPXFiles/" + schoolId + "/" + classId );
+                    }
+
+                    if (System.IO.File.Exists(folderPath + "/" + fileName))
+                    {
+                        System.IO.File.Delete(folderPath + "/" + fileName);
+                    }
+                    sqlScript = " DELETE FROM StudentUpload WHERE  StudentUploadId = " + studentUploadId + ";" +
+                        " UPDATE StagePlan SET Distance_Covered = 0 , Distance_Extra = 0 WHERE StagePlanId = " + stagePlanId;
+
+                    DataAccessLayer.ExecuteNonQuery(sqlScript);
+                    
+                }
+
+            }
+        }
+        catch
+        {
+
+        }
+
+
+    }
+    #endregion
 }

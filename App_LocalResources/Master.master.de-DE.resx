@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="chkMarkInvalidFile.Text" xml:space="preserve">
-    <value>Markieren Sie alle Datei ungültig hochgeladen .</value>
-  </data>
-  <data name="lblCityDateSetting.Text" xml:space="preserve">
-    <value>Set -Stadt -Parameter</value>
-  </data>
   <data name="lblLoginHome.Text" xml:space="preserve">
     <value>Anmelden</value>
-  </data>
-  <data name="lblSetCityDate.Text" xml:space="preserve">
-    <value>Anfangsdatum</value>
-  </data>
-  <data name="rfvtxt_Date.Error" xml:space="preserve">
-    <value>Startdatum ist obligatorisch.</value>
   </data>
 </root>
