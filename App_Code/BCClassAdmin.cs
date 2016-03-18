@@ -38,7 +38,7 @@ public class BCClassAdmin
     {
         return DataAccessLayer.ExecuteNonQuery("update stageplan set isactive = 0 where stageplanid=" + stagePlanId);
     }
-
+   
     public string GetCityIdFromClassId(string classId)
     {
         object result = DataAccessLayer.ExecuteScalar("select sm.CityId from SchoolClassMaster scm inner join SchoolMaster sm " +

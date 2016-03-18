@@ -312,7 +312,7 @@ public class BCSchoolAdmin
     {
         try
         {
-            return DataAccessLayer.ExecuteNonQuery("insert into ClassAdminClasses (ClassAdminId, SchoolId, ClassId, IsActive, IsDelete) values (" + ClassAdminId + "," + SchoolId + "," + ClassId + ",1,0)");
+            return DataAccessLayer.ExecuteNonQuery("insert into ClassAdminClasses (ClassAdminId, SchoolId, ClassId, IsActive) values (" + ClassAdminId + "," + SchoolId + "," + ClassId + ",1)");
         }
         catch (Exception)
         {

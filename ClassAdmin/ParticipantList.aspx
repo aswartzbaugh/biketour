@@ -80,7 +80,7 @@
                                        cac.SchoolId = @SchoolId
                                         and scm.IsActive = 1">
                                 <SelectParameters>
-                                    <asp:SessionParameter DefaultValue="" Name="ClassAdminId" SessionField="UserRoleId" />
+                                    <asp:SessionParameter DefaultValue="" Name="ClassAdminId" SessionField="UserId" />
                                     <asp:ControlParameter ControlID="ddlSchool" Name="SchoolId" PropertyName="SelectedValue" />
                                 </SelectParameters>
                             </asp:SqlDataSource>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Bike Tour - Set Date" Culture="en-US" UICulture="en-US" Language="C#" MasterPageFile="~/SiteMaster/AdminMaster.master"
+﻿<%@ Page Title="Bike Tour - Set Date" Culture="de-DE" UICulture="de-DE" Language="C#" MasterPageFile="~/SiteMaster/AdminMaster.master"
     AutoEventWireup="true" CodeFile="CityParameters.aspx.cs" Inherits="AppAdmin_CityParameters" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>

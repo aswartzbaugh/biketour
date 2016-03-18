@@ -417,6 +417,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
                 btnDeleteAllBlogs.Visible = false;
             else
                 btnDeleteAllBlogs.Visible = true;
+            UpdatePanelBlog.Update();
         }
         catch (Exception ex)
         {
@@ -438,7 +439,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
                     //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                     string msg = (string)GetLocalResourceObject("BlogDeleted");
                     string popupScript = "alert('" + msg + "');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "script", popupScript, true);
+                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "script", popupScript, true);
                     _BindBlog();
 
                     ScriptManager.RegisterStartupScript(Page, this.GetType(), "Temp", "ScrollPosition();", true);

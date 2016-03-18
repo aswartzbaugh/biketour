@@ -266,7 +266,9 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
             {
                 int schoolId = Convert.ToInt32(grdClasses.DataKeys[lRow.RowIndex]["SchoolId"].ToString());
                 string classIdList = grdClasses.DataKeys[lRow.RowIndex]["ClassIds"].ToString();
-                objSchoolAdmin.InsertClassAdminCLasses(Convert.ToInt32(classAdminId), schoolId, Convert.ToInt32(classIdList));
+
+                objSchoolAdmin.SaveClassAdminMapping(Convert.ToInt32(classAdminId), schoolId, classIdList);
+                //objSchoolAdmin.InsertClassAdminCLasses(Convert.ToInt32(classAdminId), schoolId, classIdList);
             }
 
             return result;
@@ -660,7 +662,7 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
         int resCount = 0;
         if (hdnSchoolId.Value != "") { SchoolId = Convert.ToInt32(hdnSchoolId.Value); }
         if (hdn_ClassAdminId.Value != "") { ClassAdminId = Convert.ToInt32(hdn_ClassAdminId.Value); }
-
+        
         foreach (ListItem item in chkListClasses.Items)
         {
             if (item.Selected)
@@ -691,6 +693,25 @@ public partial class ClassAdmin_ClassAdmin : System.Web.UI.Page
             Response.Cookies.Add(ce);
 
             Response.Redirect("ClassAdmin.aspx");
+        }
+        else
+        {
+            try
+            {
+                // delete from datatable
+                DataRow lRowSelect = dtClasses.Select("SchoolId=" + SchoolId)[0];
+                if (lRowSelect != null)
+                    lRowSelect.Delete();
+                grdClasses.DataSource = dtClasses;
+                grdClasses.DataBind();
+
+                //Delete from database
+                objSchoolAdmin.DeleteSchoolOfClassAdmin(ClassAdminId, SchoolId);
+            }
+            catch (Exception ex)
+            {
+                Helper.Log(ex.Message, "Delete Class ");
+            }
         }
     }
 }
