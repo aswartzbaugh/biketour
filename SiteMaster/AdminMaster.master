@@ -75,7 +75,7 @@
                                                 <li><a href="../AppAdmin/SchoolClassMaster.aspx"><asp:Label ID="lblClassMaster" runat="server" meta:ResourceKey="lblClassMaster" /></a></li>
                                                 <li><a href="../AppAdmin/ImageLinkMaster.aspx"><asp:Label ID="lblImageLinkMaster" runat="server" meta:ResourceKey="lblImageLinkMaster" /></a></li>
                                                 <li><a href="../AppAdmin/AddQuizMaster.aspx"><asp:Label ID="lblQuizTestMaster" runat="server" meta:ResourceKey="lblQuizTestMaster" /></a></li>
-                                                <li><a href="../AppAdmin/AboutUsMaster.aspx"><asp:Label ID="lblAboutUsMaster" runat="server" meta:ResourceKey="lblAboutUsMaster" /></a></li>
+                                                <li><a href="../AppAdmin/AboutUsMaster.aspx"><asp:Label ID="lblAboutUsMaster" runat="server" meta:ResourceKey="lblAboutUsMaster" /></a></li>                                                
                                             </ul>
                                         </li>
                                         <li><a href="../AppAdmin/ClassAdmin.aspx"><asp:Label ID="lblClassAdministrator" runat="server" meta:ResourceKey="lblClassAdministrator" /></a></li>
@@ -91,7 +91,7 @@
                                                 <li><a href="../CityAdmin/SchoolMaster.aspx"><asp:Label ID="lblSchoolMaster1" runat="server" meta:ResourceKey="lblSchoolMaster1" /></a></li>
                                                 <li><a href="../CityAdmin/SchoolClassMaster.aspx"><asp:Label ID="lblClassMaster1" runat="server" meta:ResourceKey="lblClassMaster1" /></a></li>
                                                 <li><a href="../CityAdmin/TestReport.aspx"><asp:Label ID="lblTestReport" runat="server" meta:ResourceKey="lblTestReport" /></a></li>
-
+                                                <li><a href="../CityAdmin/FAQ.aspx"><asp:Label ID="lblFAQMaster" runat="server" meta:ResourceKey="lblFAQMaster" /></a></li>
                                             </ul>
                                         </li>
                                         <li><a href="../CityAdmin/ParticipantList.aspx"><asp:Label ID="lblClassParticipantsList" runat="server" meta:ResourceKey="lblClassParticipantsList" /></a></li>

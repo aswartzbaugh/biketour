@@ -91,20 +91,21 @@ public partial class Student_UploadGpx : System.Web.UI.Page
     {
         if (Convert.ToInt32(ddlSchool.SelectedValue) > 0 && Convert.ToInt32(ddlClass.SelectedValue) > 0)
         {
-
+            BCCityAdmin cityContent = new BCCityAdmin();
+            DateTime cityStartDate = new DateTime();
             string FileName = fu_UploadGpx.PostedFile.FileName;
             string NewFile = "";
             string NewFileName = "";
             string FilePath = Server.MapPath("../GPXFiles/" + ddlSchool.SelectedValue.ToString() + "/" + ddlClass.SelectedValue.ToString() + "/0/").ToString();
             string extension = System.IO.Path.GetExtension(FileName).ToLower();
-
+            
             if ((extension == ".gpx") | (extension == ".GPX"))
-            {
+            {                                
                 if (IsFileUploaded(FilePath + FileName))
                 {
                     string popupScript = "alert('File already uploaded!');";
                     ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                }
+                }                
                 else
                 {
                     #region Save file on server for evaluation
@@ -114,14 +115,29 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                     {
                         System.IO.Directory.CreateDirectory(FilePath);
                     }
-                    fu_UploadGpx.SaveAs(FilePath + FileName.Replace(".gpx",".xml"));
+                    fu_UploadGpx.SaveAs(FilePath + FileName.Replace(".gpx", ".xml"));
+
+                    DataTable dt = cityContent.GetCityContent(0, Convert.ToInt32(ddlSchool.SelectedValue));
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        cityStartDate = Convert.ToDateTime(dt.Rows[0]["CityStartDate"]);
+                        XElement root = XElement.Load(FilePath + FileName.Replace(".gpx", ".xml"));
+                        var DateOfFile = DateTime.Parse(root.Elements().Skip(1).Take(1).Elements().Take(1).ToList()[0].Value);
+                        if (cityStartDate != new DateTime() &&
+                            DateOfFile <= cityStartDate)
+                        {
+                            string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileNotForPriorDate") + "');";
+                            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                            return;
+                        }
+                    }
                     try
                     {
                         string TimeStamp = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
                         DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ".xml";
 
                         NewFileName = Session["UserRoleId"].ToString() + "_" + Session["UserId"].ToString() + "_" + TimeStamp + "";
-                        File.Move(FilePath + FileName.Replace(".gpx",".xml"), FilePath + NewFileName); // Try to move
+                        File.Move(FilePath + FileName.Replace(".gpx", ".xml"), FilePath + NewFileName); // Try to move
                         NewFile = FilePath + NewFileName;
                     }
                     catch (IOException ex)
@@ -177,7 +193,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                             stagePlanId = Convert.ToInt32(_dtStage.Tables[0].Rows[0]["StagePlanId"]);
                             stageDistance = Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance"]);
                             distCovered = double.Parse(_dtStage.Tables[0].Rows[0]["Distance_Covered"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
-                                //Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance_Covered"]);
+                            //Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance_Covered"]);
                         }
                         #endregion
 

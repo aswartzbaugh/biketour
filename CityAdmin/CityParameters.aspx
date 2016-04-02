@@ -77,7 +77,7 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txt_Date" runat="server" ImageUrl="~/Calendar.png"></asp:TextBox><span class="error">*</span>
-                            <cc1:CalendarExtender ID="ceLoanTakenDate" runat="server" Format="yyyy-MM-dd HH:mm:ss" 
+                            <cc1:CalendarExtender ID="ceLoanTakenDate" runat="server" Format="yyyy-MM-dd" 
     PopupButtonID="txt_Date" TargetControlID="txt_Date">
 </cc1:CalendarExtender>
                             <asp:RequiredFieldValidator ID="rfvFirstName" runat="server"

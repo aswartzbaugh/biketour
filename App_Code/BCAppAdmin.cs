@@ -451,6 +451,41 @@ public class BCAppAdmin
         return _dt;
     }
 
+    public int InsertFAQ(string FAQQuestion,
+        string FAQAnswer, Int32 createdById)
+    {
+        return DataAccessLayer.ExecuteNonQuery("Insert FAQ (FAQQuestion, FAQAnswer, IsActive,CreatedById) Values ('" 
+            + FAQQuestion+ "','" + FAQAnswer + "' , 1 ," + createdById + " )");
+    }
+
+    public int UpdateFAQ(Int32 faqId,
+        string FAQQuestion,
+        string FAQAnswer)
+    {
+        return DataAccessLayer.ExecuteNonQuery("UPDATE FAQ SET " +
+            " FAQQuestion = '" + FAQQuestion + "' " +
+            ", FAQAnswer = '" + FAQAnswer + "' " +
+            " WHERE FAQId = " + faqId);
+    }
+    public DataTable GetFAQ()
+    {
+        try
+        {
+            _dt = DataAccessLayer.ReturnDataTable("Select * from FAQ WHERE IsActive=1");
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        return _dt;
+    }
+    public int DeleteFAQ(Int32 faqId)
+    {
+        return DataAccessLayer.ExecuteNonQuery("UPDATE FAQ SET " +
+            "Isactive = 0 " +
+            " WHERE FAQId = " + faqId);
+    }
+
     #region Add QuizTest
 
     public int InsertQuizTest(int QuizId, string QuizName, string QuizFile, int CityId)

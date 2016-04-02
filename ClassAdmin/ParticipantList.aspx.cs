@@ -57,7 +57,7 @@ public partial class ClassAdmin_ParticipantList : System.Web.UI.Page
                     CheckBox chkUploadBlock = rw.FindControl("chk_UploadBlocked") as CheckBox;
                     Label lblStudentId = rw.FindControl("lbl_StudentId") as Label;
                     int confirmed = Convert.ToInt32(chkConfirmed.Checked);
-                    int active = Convert.ToInt32(chkActive.Checked);
+                    int active = Convert.ToInt32(chkConfirmed.Checked);
                     int uploadBlock = Convert.ToInt32(chkUploadBlock.Checked);
                     int res = SaveGridData(Convert.ToInt32(lblStudentId.Text), confirmed, active, uploadBlock);
                 }

@@ -17,6 +17,7 @@ public partial class AppAdmin_CityParameters : System.Web.UI.Page
             Response.Redirect(System.Web.Security.FormsAuthentication.LoginUrl.ToString() + "?ReturnUrl=" + Request.RawUrl.ToString());
         if (!IsPostBack)
         {
+            ddlClass.SelectedIndex = 0;
             LoadCityParameter();
         }
         
@@ -26,7 +27,7 @@ public partial class AppAdmin_CityParameters : System.Web.UI.Page
     {
         if (!string.IsNullOrEmpty(ddlClass.SelectedValue))
         {
-            result = objCityAdmin.GetCityContent(Convert.ToInt32(ddlClass.SelectedValue));
+            result = objCityAdmin.GetCityContent(Convert.ToInt32(ddlClass.SelectedValue),0);
 
             if (result != null && result.Rows.Count > 0)
             {

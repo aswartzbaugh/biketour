@@ -18,7 +18,7 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-
+            
             try
             {
                 int StudentId = 0;

@@ -315,16 +315,35 @@ public class BCCityAdmin
     }
 
     #region Set parameters
-    public DataTable GetCityContent(int cityId)
+    public DataTable GetCityContent(int cityId ,int schoolId)
     {
-        string sqlScript = "SELECT [CityContentId]" +
-      ",[CityId]" +
-      ",[CityInfo]" +
-      ",[VideoURL]" +
-      ",[CityStartDate]" +
-      ",[IsAllFileInvalid]" +
-  "FROM [dbo].[CityContents]" +
-  " WHERE CityId = " + cityId + ")";
+        string sqlScript = string.Empty;
+
+        if (cityId > 0)
+        {
+            sqlScript = "SELECT [CityContentId]" +
+          ",[CityId]" +
+          ",[CityInfo]" +
+          ",[VideoURL]" +
+          ",[CityStartDate]" +
+          ",[IsAllFileInvalid]" +
+      "FROM [dbo].[CityContents]" +
+      " WHERE CityId = " + cityId;
+        }
+        else
+        {
+            sqlScript = "SELECT [CityContentId]" +
+         ",[CityId]" +
+         ",[CityInfo]" +
+         ",[VideoURL]" +
+         ",[CityStartDate]" +
+         ",[IsAllFileInvalid]" +
+     "FROM [dbo].[CityContents]" +
+     " WHERE CityId = ( " +
+     
+     " Select CityId FROM SchoolMaster WHERE SchoolId = "
+     + schoolId + ")";
+        }
         try
         {
             _dt = DataAccessLayer.ReturnDataTable(sqlScript);

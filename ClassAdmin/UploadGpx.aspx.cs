@@ -96,6 +96,8 @@ public partial class Student_UploadGpx : System.Web.UI.Page
         {
             if (Convert.ToInt32(ddlSchool.SelectedValue) > 0 && Convert.ToInt32(ddlClass.SelectedValue) > 0)
             {
+                BCCityAdmin cityContent = new BCCityAdmin();
+                DateTime cityStartDate = new DateTime();
                 string FileName = fu_UploadGpx.PostedFile.FileName;
                 string NewFile = "";
                 string NewFileName = "";
@@ -105,12 +107,12 @@ public partial class Student_UploadGpx : System.Web.UI.Page
 
 
                 if ((extension == ".gpx") | (extension == ".GPX"))
-                {
+                {                                      
                     if (IsFileUploaded(FilePath + FileName))
                     {
                         string popupScript = "alert('File already uploaded!');";
                         ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                    }
+                    }                    
                     else
                     {
                         #region Save file on server for evaluation
@@ -120,6 +122,20 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                             System.IO.Directory.CreateDirectory(FilePath);
                         }
                         fu_UploadGpx.SaveAs(FilePath + FileName.Replace(".gpx", ".xml"));
+                        DataTable dt = cityContent.GetCityContent(0, Convert.ToInt32(ddlSchool.SelectedValue));  
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            cityStartDate = Convert.ToDateTime(dt.Rows[0]["CityStartDate"]);
+                            XElement root = XElement.Load(FilePath + FileName.Replace(".gpx", ".xml"));
+                            var DateOfFile = DateTime.Parse(root.Elements().Skip(1).Take(1).Elements().Take(1).ToList()[0].Value);
+                            if (cityStartDate != new DateTime() &&
+                                DateOfFile <= cityStartDate)
+                            {
+                                string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileNotForPriorDate") + "');";
+                                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                                return;
+                            }
+                        }
                         try
                         {
                             string TimeStamp = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
@@ -145,8 +161,6 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                             var DateOfFile = DateTime.Parse(root.Elements().Skip(1).Take(1).Elements().Take(1).ToList()[0].Value);
 
                             //  DateTime fileDate = new DateTime();
-
-
 
                             if (DateOfFile < DateTime.Parse(ConfigurationManager.AppSettings["BatchStartDate"]))
                             {

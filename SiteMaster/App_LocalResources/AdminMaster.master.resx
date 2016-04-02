@@ -234,4 +234,7 @@
   <data name="lblCityDateSetting.Text" xml:space="preserve">
     <value>Set City Parameters</value>
   </data>
+  <data name="lblFAQMaster.Text" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
 </root>

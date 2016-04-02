@@ -159,7 +159,7 @@
                                 <asp:Label ID="lblgrdActive" runat="server" meta:ResourceKey="lblgrdActive"></asp:Label>
                             </HeaderTemplate>
                             <ItemTemplate>
-                                <asp:CheckBox ID="chk_Active" runat="server" Checked='<%# Eval("IsStatusActive") %>' />
+                                <asp:CheckBox ID="chk_Active" runat="server" Checked='<%# Eval("IsStatusConfirmed") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <%-- <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />--%>

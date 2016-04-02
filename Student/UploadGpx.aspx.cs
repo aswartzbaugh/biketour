@@ -83,6 +83,8 @@ public partial class Student_UploadGpx : System.Web.UI.Page
     {
         try
         {
+            BCCityAdmin cityContent = new BCCityAdmin();
+            DateTime cityStartDate = new DateTime();
             DataTable _dtTrkpts = new DataTable();
             string FileName = fu_UploadGpx.PostedFile.FileName;
             string NewFile = "";
@@ -93,12 +95,12 @@ public partial class Student_UploadGpx : System.Web.UI.Page
             string extension = System.IO.Path.GetExtension(FileName).ToLower();
 
             if ((extension == ".gpx") | (extension == ".GPX"))
-            {
+            {                
                 if (IsFileUploaded(FilePath + FileName))
                 {
                     string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileAlredyUploaded") + "');";//File already uploaded!
                     ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                }
+                }                
                 else
                 {
                     #region Save file on server for evaluation
@@ -109,6 +111,21 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                         System.IO.Directory.CreateDirectory(FilePath);
                     }
                     fu_UploadGpx.SaveAs(FilePath + FileName.Replace(".gpx", ".xml"));
+                    DataTable dt = cityContent.GetCityContent(Convert.ToInt32(studInfo.Rows[0]["CityId"]), 0);
+
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        cityStartDate = Convert.ToDateTime(dt.Rows[0]["CityStartDate"]);
+                        XElement root = XElement.Load(FilePath + FileName.Replace(".gpx", ".xml"));
+                        var DateOfFile = DateTime.Parse(root.Elements().Skip(1).Take(1).Elements().Take(1).ToList()[0].Value);
+                        if (cityStartDate != new DateTime() &&
+                            DateOfFile <= cityStartDate)
+                        {
+                            string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileNotForPriorDate") + "');";
+                            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                            return;
+                        }
+                    }
                     try
                     {
                         string TimeStamp = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
