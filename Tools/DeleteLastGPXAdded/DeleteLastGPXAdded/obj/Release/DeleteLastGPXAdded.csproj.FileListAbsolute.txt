@@ -1,0 +1,5 @@
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\bin\Release\DeleteLastGPXAdded.exe.config
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\bin\Release\DeleteLastGPXAdded.exe
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\bin\Release\DeleteLastGPXAdded.pdb
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\obj\Release\DeleteLastGPXAdded.exe
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\obj\Release\DeleteLastGPXAdded.pdb

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="NaviControlCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>NaviControlCenter track export</name>
+  </metadata>
+  <trk>
+    <name>2013/07/02 08:02:36</name>
+    <trkseg>
+      <trkpt lat="49.42743" lon="8.64278">
+        <ele>0</ele>
+        <time>2013-07-02T07:02:36Z</time>
+      </trkpt>
+      <trkpt lat="49.42749" lon="8.64284">
+        <ele>0</ele>
+        <time>2013-07-02T07:02:37Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

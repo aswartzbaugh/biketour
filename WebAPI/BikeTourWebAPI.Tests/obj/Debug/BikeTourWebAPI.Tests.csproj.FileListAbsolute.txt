@@ -1,0 +1,6 @@
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourWebAPI.Tests\bin\Debug\BikeTourWebAPI.Tests.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourWebAPI.Tests\bin\Debug\BikeTourWebAPI.Tests.pdb
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourWebAPI.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourWebAPI.Tests\obj\Debug\BikeTourWebAPI.Tests.csprojResolveAssemblyReference.cache
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourWebAPI.Tests\obj\Debug\BikeTourWebAPI.Tests.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourWebAPI.Tests\obj\Debug\BikeTourWebAPI.Tests.pdb

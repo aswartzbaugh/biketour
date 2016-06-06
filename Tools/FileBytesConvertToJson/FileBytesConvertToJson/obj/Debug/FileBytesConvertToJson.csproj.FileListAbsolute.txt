@@ -1,0 +1,8 @@
+D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\bin\Debug\FileBytesConvertToJson.exe.config
+D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\bin\Debug\FileBytesConvertToJson.exe
+D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\bin\Debug\FileBytesConvertToJson.pdb
+D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\bin\Debug\Newtonsoft.Json.dll
+D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\bin\Debug\Newtonsoft.Json.xml
+D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\obj\Debug\FileBytesConvertToJson.csprojResolveAssemblyReference.cache
+D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\obj\Debug\FileBytesConvertToJson.exe
+D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\obj\Debug\FileBytesConvertToJson.pdb

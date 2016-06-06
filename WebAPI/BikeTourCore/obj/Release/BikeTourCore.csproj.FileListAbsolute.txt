@@ -1,0 +1,5 @@
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\bin\Release\BikeTourCore.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\bin\Release\BikeTourCore.pdb
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\obj\Release\BikeTourCore.csprojResolveAssemblyReference.cache
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\obj\Release\BikeTourCore.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\obj\Release\BikeTourCore.pdb

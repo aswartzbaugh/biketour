@@ -1,0 +1,12 @@
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourDataAccessLayer.dll.config
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourDataAccessLayer.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourDataAccessLayer.pdb
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourCore.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\bin\Release\EntityFramework.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\bin\Release\EntityFramework.SqlServer.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourCore.pdb
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\bin\Release\EntityFramework.xml
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\bin\Release\EntityFramework.SqlServer.xml
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\obj\Release\BikeTourDataAccessLayer.csprojResolveAssemblyReference.cache
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\obj\Release\BikeTourDataAccessLayer.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourDataAccessLayer\obj\Release\BikeTourDataAccessLayer.pdb

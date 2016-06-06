@@ -1,0 +1,10 @@
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\bin\Release\BikeTourCore.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\bin\Release\BikeTourCore.pdb
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\obj\Release\BikeTourCore.dll
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\obj\Release\BikeTourCore.pdb
+D:\Projects\Nikhil\BikeTourWebAPI\BikeTourWebAPI\BikeTourCore\obj\Release\BikeTour.Core.csprojResolveAssemblyReference.cache
+D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourCore\bin\Release\BikeTourCore.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourCore\bin\Release\BikeTourCore.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourCore\obj\Release\BikeTour.Core.csprojResolveAssemblyReference.cache
+D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourCore\obj\Release\BikeTourCore.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourCore\obj\Release\BikeTourCore.pdb

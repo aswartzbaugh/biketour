@@ -1,0 +1,6 @@
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\bin\Debug\DeleteLastGPXAdded.exe.config
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\obj\Debug\DeleteLastGPXAdded.csprojResolveAssemblyReference.cache
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\bin\Debug\DeleteLastGPXAdded.exe
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\bin\Debug\DeleteLastGPXAdded.pdb
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\obj\Debug\DeleteLastGPXAdded.exe
+D:\Google Drive\TFS-Nik\BikeTour\DeleteLastGPXAdded\DeleteLastGPXAdded\obj\Debug\DeleteLastGPXAdded.pdb
