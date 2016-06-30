@@ -1,0 +1,26 @@
+.main-container p{
+	text-align:center;
+}
+.main-container .col-35{
+	display:none;
+}
+.main-container .main-right .col-65{
+	width:100%;
+}
+.supporter{
+	margin-top:0;
+}
+.login{
+	display:none;
+}
+.mobile-navigation{
+	right:0;
+}
+.flexslider .main-box{
+	padding-top:120px;
+}
+.flexslider .main-box *{
+}
+.box-layout-left{
+	padding:0 5%;
+}
