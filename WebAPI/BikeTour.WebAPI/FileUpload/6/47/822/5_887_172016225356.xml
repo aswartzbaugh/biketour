@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="NaviControlCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>NaviControlCenter track export</name>
+  </metadata>
+  <trk>
+    <name>2016/05/10 12:30:53</name>
+    <trkseg>
+      <trkpt lat="49.40657" lon="8.67822">
+        <ele>0</ele>
+        <time>2016-05-12T10:30:53Z</time>
+      </trkpt>
+      <trkpt lat="49.40657" lon="8.67822">
+        <ele>0</ele>
+        <time>2016-05-12T10:30:54Z</time>
+      </trkpt>
+      <trkpt lat="49.40621" lon="8.67813">
+        <ele>0</ele>
+        <time>2016-05-12T10:31:45Z</time>
+      </trkpt>
+      <trkpt lat="49.40614" lon="8.67754">
+        <ele>0</ele>
+        <time>2016-05-12T10:31:57Z</time>
+      </trkpt>
+      <trkpt lat="49.40632" lon="8.67703">
+        <ele>0</ele>
+        <time>2016-05-12T10:32:24Z</time>
+      </trkpt>
+      <trkpt lat="49.40673" lon="8.67713">
+        <ele>0</ele>
+        <time>2016-05-12T10:32:32Z</time>
+      </trkpt>
+      <trkpt lat="49.40708" lon="8.67698">
+        <ele>0</ele>
+        <time>2016-05-12T10:32:42Z</time>
+      </trkpt>
+      <trkpt lat="49.40755" lon="8.67693">
+        <ele>0</ele>
+        <time>2016-05-12T10:33:15Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

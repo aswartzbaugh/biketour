@@ -16,9 +16,17 @@ namespace Common
         /// <param name="errorMessage"></param>
         public static void WriteLog(ResponseBase response, string errorCode, string errorMessage)
         {
-            if (response.Error == null) response.Error = new List<ErrorMessage>();
+            if (response.Log == null) response.Log = new List<ErrorMessage>();
             ErrorMessage error = new ErrorMessage { Code = errorCode, Message = errorMessage };
-            response.Error.Add(error);
+            response.Log.Add(error);
         }
+
+        public static void WriteLog(ResponseBase response, string errorCode, string errorMessage, string fileName, bool status = false)
+        {
+            if (response.Log == null) response.Log = new List<ErrorMessage>();
+            ErrorMessage error = new ErrorMessage { Code = errorCode, Message = errorMessage, FileName = fileName, Status = status };
+            response.Log.Add(error);
+        }
+
     }
 }

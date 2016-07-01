@@ -22,3 +22,15 @@ D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourDataAccess
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourDataAccessLayer\obj\Debug\BikeTour.DataAccessLayer.csprojResolveAssemblyReference.cache
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourDataAccessLayer\obj\Debug\BikeTourDataAccessLayer.dll
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourDataAccessLayer\obj\Debug\BikeTourDataAccessLayer.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\bin\Debug\BikeTourDataAccessLayer.dll.config
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\bin\Debug\BikeTourDataAccessLayer.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\bin\Debug\BikeTourDataAccessLayer.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\bin\Debug\BikeTourCore.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\bin\Debug\EntityFramework.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\bin\Debug\BikeTourCore.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\bin\Debug\EntityFramework.xml
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\obj\Debug\BikeTour.DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\obj\Debug\BikeTourDataAccessLayer.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourDataAccessLayer\obj\Debug\BikeTourDataAccessLayer.pdb

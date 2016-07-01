@@ -9,6 +9,7 @@ namespace BikeTourCore.ServiceMessage
 {
     public class UploadResponseMessage: ResponseBase
     {
-        public List<UploadFileStatus> UploadFileStatus { get; set; }
+        //public List<ErrorMessage> Log { get; set; }
+      //  public UploadFileStatus uploadFileStatus { get; set; }
     }
 }

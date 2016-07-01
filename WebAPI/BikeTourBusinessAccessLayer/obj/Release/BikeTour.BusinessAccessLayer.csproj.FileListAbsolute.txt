@@ -20,3 +20,14 @@ D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourBusinessAc
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourBusinessAccessLayer\obj\Release\BikeTour.BusinessAccessLayer.csprojResolveAssemblyReference.cache
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourBusinessAccessLayer\obj\Release\BikeTourBusinessAccessLayer.dll
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourBusinessAccessLayer\obj\Release\BikeTourBusinessAccessLayer.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\bin\Release\BikeTourBusinessAccessLayer.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\bin\Release\BikeTourBusinessAccessLayer.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\bin\Release\BikeTourCore.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\bin\Release\BikeTourDataAccessLayer.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\bin\Release\EntityFramework.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\bin\Release\BikeTourCore.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\bin\Release\BikeTourDataAccessLayer.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\bin\Release\EntityFramework.xml
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\obj\Release\BikeTour.BusinessAccessLayer.csprojResolveAssemblyReference.cache
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\obj\Release\BikeTourBusinessAccessLayer.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourBusinessAccessLayer\obj\Release\BikeTourBusinessAccessLayer.pdb

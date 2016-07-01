@@ -9,8 +9,7 @@ namespace BikeTourCore.Entity
 {
     public class UploadFileStatus
     {
-        public string FileName { get; set; }
         public List<ErrorMessage> Error { get; set; }
-        public bool Status { get; set; }
+        
     }
 }

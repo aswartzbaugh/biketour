@@ -17,12 +17,12 @@ namespace BikeTourBusinessAccessLayer
             {
                 response = ValidateAuthenticateUser(RequestMessage);
 
-                if (response != null && response.Error==null)
+                if (response != null && response.Log==null)
                 {
                     loginDataProvider = new LoginDataProvider();
                     response = loginDataProvider.AuthenticateUser(RequestMessage);
 
-                    if (response != null && response.Error == null)
+                    if (response != null && response.Log == null)
                     {
                         //Generate token
                         response.Success = true;

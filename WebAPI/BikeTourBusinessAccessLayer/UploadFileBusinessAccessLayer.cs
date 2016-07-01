@@ -15,9 +15,9 @@ namespace BikeTourBusinessAccessLayer
             UploadResponseMessage response = new UploadResponseMessage();
             try
             {
-                response = ValidateFile(requestMessage);
+                response = ValidateFiles(requestMessage);
 
-                if (response != null && response.Error ==null)
+                if (response != null && (response.Log ==null || response.Log.Count != requestMessage.gpxFiles.Count) )
                 {
                     uploadFileDataProvider = new UploadDataProvider();
                     response = uploadFileDataProvider.UploadFile(requestMessage, filePath);
@@ -30,7 +30,7 @@ namespace BikeTourBusinessAccessLayer
             return response;
         }
 
-        private UploadResponseMessage ValidateFile(UploadRequestMessage requestMessage)
+        private UploadResponseMessage ValidateFiles(UploadRequestMessage requestMessage)
         {
             UploadResponseMessage response = new UploadResponseMessage();
             
@@ -47,24 +47,36 @@ namespace BikeTourBusinessAccessLayer
                     ErrorLogManager.WriteLog(response, "004", "Password is mandatory.");
 
                 
-                if (requestMessage.FileData == null)
+                if (requestMessage.gpxFiles == null)
                 {
                     ErrorLogManager.WriteLog(response, "005", "File list should not be empty.");
                 }
                 else
                 {
-                    //var item = requestMessage.FileList;
-                    //foreach (var item in requestMessage.FileList)
-                    //{                        
-                        if (string.IsNullOrEmpty(requestMessage.FileName))
-                            ErrorLogManager.WriteLog(response, "006", "File name is mandatory.");
+                    var gpxFilesTemp = new List<GpxFile>(requestMessage.gpxFiles);
 
-                        if (requestMessage.FileData == null)
-                            ErrorLogManager.WriteLog(response, "007", "File data should not be empty.");
+                    foreach (var item in requestMessage.gpxFiles)
+                    {
+                        if (string.IsNullOrEmpty(item.FileName))
+                        {
+                            ErrorLogManager.WriteLog(response, "006", "File name is mandatory.", item.FileName);
+                            gpxFilesTemp.Remove(item);
+                        }
 
-                        if (requestMessage.FileData != null && requestMessage.FileData.Length == 0)
-                            ErrorLogManager.WriteLog(response, "007", "File data should not be empty.");
-                    //}
+                        if (item.FileData == null)
+                        {
+                            ErrorLogManager.WriteLog(response, "007", "File data should not be empty.", item.FileName);
+                            gpxFilesTemp.Remove(item);
+                        }
+
+                        if (item.FileData != null && item.FileData.Length == 0)
+                        {
+                            ErrorLogManager.WriteLog(response, "007", "File data should not be empty.", item.FileName);
+                            gpxFilesTemp.Remove(item);
+                        }
+                    }
+
+                    requestMessage.gpxFiles = gpxFilesTemp;
                 }
                 
             }

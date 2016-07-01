@@ -7,3 +7,8 @@ D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourCore\bin\D
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourCore\obj\Debug\BikeTour.Core.csprojResolveAssemblyReference.cache
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourCore\obj\Debug\BikeTourCore.dll
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourCore\obj\Debug\BikeTourCore.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourCore\bin\Debug\BikeTourCore.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourCore\bin\Debug\BikeTourCore.pdb
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourCore\obj\Debug\BikeTour.Core.csprojResolveAssemblyReference.cache
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourCore\obj\Debug\BikeTourCore.dll
+D:\Google Drive\TFS-Nik\BIKETourGITClone\biketour\WebAPI\BikeTourCore\obj\Debug\BikeTourCore.pdb

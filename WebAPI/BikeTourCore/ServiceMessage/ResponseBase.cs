@@ -8,11 +8,13 @@ namespace BikeTourCore.ServiceMessage
 {
     public class ResponseBase
     {        
-        public List<ErrorMessage> Error { get; set; }
+        public List<ErrorMessage> Log { get; set; }
     }
 
     public class ErrorMessage
     {
+        public string FileName { get; set; }
+        public bool Status { get; set; }
         public string Code { get; set; }
         public string Message { get; set; }
     }
