@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BikeTourCore.ServiceMessage;
 using Common;
 using BikeTourDataAccessLayer.UploadFileDataProvider;
+using System.Linq;
 
 namespace BikeTourBusinessAccessLayer
 {
@@ -17,8 +18,13 @@ namespace BikeTourBusinessAccessLayer
             {
                 response = ValidateFiles(requestMessage);
 
-                if (response != null && (response.Log ==null || response.Log.Count != requestMessage.gpxFiles.Count) )
+                if (response != null)
                 {
+                    if (response.Log != null && response.Log.Count == requestMessage.gpxFiles.Count
+                    && (response.Log.Where(x => x.Code.Contains("002") || x.Code.Contains("003") || x.Code.Contains("004") || x.Code.Contains("005")).ToList().Count != 0))
+                    {
+                        return response;
+                    }
                     uploadFileDataProvider = new UploadDataProvider();
                     response = uploadFileDataProvider.UploadFile(requestMessage, filePath);
                 }                
@@ -41,10 +47,14 @@ namespace BikeTourBusinessAccessLayer
             else
             {
                 if (string.IsNullOrEmpty(requestMessage.LoginName))
+                {
                     ErrorLogManager.WriteLog(response, "003", "Login name is mandatory.");
+                }
 
                 if (string.IsNullOrEmpty(requestMessage.Password))
+                {
                     ErrorLogManager.WriteLog(response, "004", "Password is mandatory.");
+                }
 
                 
                 if (requestMessage.gpxFiles == null)
