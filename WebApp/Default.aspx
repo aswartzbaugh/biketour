@@ -50,7 +50,8 @@
                         <ItemTemplate>
                             <div data-rownumber='<%# Container.ItemIndex+1%>' id="divrow" class="row">
                                 <div class="counter">
-                                    <asp:Label ID="Label1" runat="server" Text='<%# Container.ItemIndex+1%>' /></div>
+                                    <asp:Label ID="Label1" runat="server" Text='<%# Container.ItemIndex+1%>' />
+                                </div>
                                 <p>
                                     <strong>
                                         <asp:Label ID="lblSchool" runat="server" meta:ResourceKey="lblSchool" Text='<%# Eval("School") %>' />, 
@@ -60,7 +61,7 @@
                                 </p>
                                 <div class="counts">
                                     <div class="col col-60">
-                                        <div id="getScoreWithBonus" data-totaldistance='<%# Eval("totaldistance") %>' data-scorewithbonus='<%# Eval("scorewithbonus") %>' >&nbsp; </div>
+                                        <div class="getScoreWithBonus" data-totaldistance='<%# Eval("totaldistance") %>' data-scorewithbonus='<%# Eval("scorewithbonus") %>'>&nbsp; </div>
                                     </div>
                                     <div class="col col-40">
                                         <asp:Label ID="Label5" runat="server" Text='<%# Eval("scorewithbonus") %>' />
@@ -70,14 +71,13 @@
                                 </div>
                                 <div class="counts">
                                     <div class="col col-60">
-                                        <div id="getList" data-totaldistance='<%# Eval("totaldistance") %>' data-score='<%# Eval("score") %>' >&nbsp; </div>
+                                        <div class="getList" data-totaldistance='<%# Eval("totaldistance") %>' data-score='<%# Eval("score") %>'>&nbsp; </div>
                                     </div>
                                     <div class="col col-40">
                                         <asp:Label ID="Label6" runat="server" Text='<%# Eval("totaldistance")+" km" %>' />
                                     </div>
                                     <div class="clear"></div>
-                            </div>
-
+                                </div>
                         </ItemTemplate>
                     </asp:DataList>
 
@@ -130,17 +130,18 @@
     divrow.className = "row row-1";
 
 
-    var msglist = document.getElementById("getList");
-    var totaldistance = msglist.getAttribute("data-totaldistance");
-    var score = msglist.getAttribute("data-score");
-    var points = (parseInt(totaldistance) * parseInt(score))/1000;
-    msglist.style.width = points + "px";
-
-    var getScoreWithBonus = document.getElementById("getScoreWithBonus");
-    var totaldistance = getScoreWithBonus.getAttribute("data-totaldistance");
-    var scorewithbonus = msglist.getAttribute("data-scorewithbonus");
-    var points = (parseInt(totaldistance) * parseInt(scorewithbonus)) / 1000;
-    getScoreWithBonus.style.width = points + "px";
+   $('.getList').each(function () {var totaldistance = $(this).attr("data-totaldistance");
+       var score = $(this).attr("data-score");
+    var points = (parseInt(totaldistance) * parseInt(score)) / 10000;
+    $(this).width(points + "%");
+    });
+    
+   $('.getScoreWithBonus').each(function () {
+       var totaldistance = $(this).attr("data-totaldistance");
+       var scorewithbonus = $(this).attr("data-scorewithbonus");
+       var points = (parseInt(totaldistance) * parseInt(scorewithbonus)) / 10000;
+       $(this).width(points + "%");
+   });
 
     $('#nav').localScroll(800);
 
@@ -184,7 +185,7 @@
         }
     });
 
-    
+
 
 });
     </script>
