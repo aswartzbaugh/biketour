@@ -48,7 +48,7 @@
                 <div class="pad">
                     <asp:DataList ID="dlsore" runat="server" Width="341px">
                         <ItemTemplate>
-                            <div class="row row-1">
+                            <div data-rownumber='<%# Container.ItemIndex+1%>' id="divrow" class="row">
                                 <div class="counter">
                                     <asp:Label ID="Label1" runat="server" Text='<%# Container.ItemIndex+1%>' /></div>
                                 <p>
@@ -60,7 +60,7 @@
                                 </p>
                                 <div class="counts">
                                     <div class="col col-70">
-                                        <div style="width: 76%">&nbsp; </div>
+                                        <div id="getScoreWithBonus" data-totaldistance='<%# Eval("totaldistance") %>' data-scorewithbonus='<%# Eval("scorewithbonus") %>' >&nbsp; </div>
                                     </div>
                                     <div class="col col-30">
                                         <asp:Label ID="Label5" runat="server" Text='<%# Eval("scorewithbonus") %>' />
@@ -70,13 +70,12 @@
                                 </div>
                                 <div class="counts">
                                     <div class="col col-70">
-                                        <div style="width: 33%">&nbsp; </div>
+                                        <div id="getList" data-totaldistance='<%# Eval("totaldistance") %>' data-score='<%# Eval("score") %>' >&nbsp; </div>
                                     </div>
                                     <div class="col col-30">
                                         <asp:Label ID="Label6" runat="server" Text='<%# Eval("totaldistance")+" km" %>' />
                                     </div>
                                     <div class="clear"></div>
-                                </div>
                             </div>
 
                         </ItemTemplate>
@@ -123,6 +122,26 @@
         </div>
     </div>
     <script>$(document).ready(function () {
+
+    var divrow = document.getElementById("divrow");
+    var rownumber = divrow.getAttribute("data-rownumber");
+    if (parseInt(rownumber) > 1)
+        divrow.className = "row"
+    divrow.className = "row row-1";
+
+
+    var msglist = document.getElementById("getList");
+    var totaldistance = msglist.getAttribute("data-totaldistance");
+    var score = msglist.getAttribute("data-score");
+    var points = (parseInt(totaldistance) * parseInt(score))/1000;
+    msglist.style.width = points + "px";
+
+    var getScoreWithBonus = document.getElementById("getScoreWithBonus");
+    var totaldistance = getScoreWithBonus.getAttribute("data-totaldistance");
+    var scorewithbonus = msglist.getAttribute("data-scorewithbonus");
+    var points = (parseInt(totaldistance) * parseInt(scorewithbonus)) / 1000;
+    getScoreWithBonus.style.width = points + "px";
+
     $('#nav').localScroll(800);
 
     $('.flexslider').flexslider({
@@ -165,9 +184,7 @@
         }
     });
 
-    function checkUncheck(contactName) {
-        alert(contactName);
-    }
+    
 
 });
     </script>
