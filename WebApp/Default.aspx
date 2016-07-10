@@ -69,10 +69,10 @@
                                     <div class="clear"></div>
                                 </div>
                                 <div class="counts">
-                                    <div class="col col-65">
+                                    <div class="col col-60">
                                         <div id="getList" data-totaldistance='<%# Eval("totaldistance") %>' data-score='<%# Eval("score") %>' >&nbsp; </div>
                                     </div>
-                                    <div class="col col-35">
+                                    <div class="col col-40">
                                         <asp:Label ID="Label6" runat="server" Text='<%# Eval("totaldistance")+" km" %>' />
                                     </div>
                                     <div class="clear"></div>
