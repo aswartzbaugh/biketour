@@ -337,6 +337,7 @@ a:hover img{
 	max-width:250px;
 	padding-bottom:30px;
 	margin-bottom:30px;
+    text-align:left;
 }
 .main-left .row .counter{
 	position:absolute;
