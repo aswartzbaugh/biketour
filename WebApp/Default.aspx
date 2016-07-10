@@ -59,10 +59,10 @@
                                         <asp:Label ID="Label3" runat="server" Text='<%# Eval("CityName") %>' /></em>
                                 </p>
                                 <div class="counts">
-                                    <div class="col col-65">
+                                    <div class="col col-60">
                                         <div id="getScoreWithBonus" data-totaldistance='<%# Eval("totaldistance") %>' data-scorewithbonus='<%# Eval("scorewithbonus") %>' >&nbsp; </div>
                                     </div>
-                                    <div class="col col-35">
+                                    <div class="col col-40">
                                         <asp:Label ID="Label5" runat="server" Text='<%# Eval("scorewithbonus") %>' />
                                         Punkte
                                     </div>
