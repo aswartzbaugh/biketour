@@ -21,8 +21,11 @@ namespace BikeTour.WebAPI.Controllers
            
             uploadBusinessProvider = new UploadFileBusinessAccessLayer();
 
+            //UploadResponseMessage response =
+            //uploadBusinessProvider.UploadFile(requestMessage, System.Web.Hosting.HostingEnvironment.MapPath("~\\FileUpload\\"));
+
             UploadResponseMessage response =
-            uploadBusinessProvider.UploadFile(requestMessage, System.Web.Hosting.HostingEnvironment.MapPath("~\\FileUpload\\"));
+            uploadBusinessProvider.UploadFile(requestMessage, System.Configuration.ConfigurationManager.AppSettings["GPXWebPath"]);
 
             HttpResponseMessage tempResponse = Request.CreateResponse(HttpStatusCode.OK,response);
 

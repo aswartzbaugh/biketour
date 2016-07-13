@@ -13,16 +13,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2016 10:22:00</publishTime>
     </File>
     <File Include="bin/BikeTour.WebAPI.dll">
-      <publishTime>07/05/2016 21:36:32</publishTime>
+      <publishTime>07/11/2016 23:13:11</publishTime>
     </File>
     <File Include="bin/BikeTourBusinessAccessLayer.dll">
-      <publishTime>07/05/2016 21:36:32</publishTime>
+      <publishTime>07/11/2016 23:03:49</publishTime>
     </File>
     <File Include="bin/BikeTourCore.dll">
       <publishTime>07/03/2016 15:32:14</publishTime>
     </File>
     <File Include="bin/BikeTourDataAccessLayer.dll">
-      <publishTime>07/03/2016 15:32:16</publishTime>
+      <publishTime>07/11/2016 23:03:47</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>04/05/2016 21:38:14</publishTime>
@@ -85,7 +85,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2016 10:21:46</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/16/2016 21:17:25</publishTime>
+      <publishTime>07/11/2016 23:17:52</publishTime>
     </File>
   </ItemGroup>
 </Project>

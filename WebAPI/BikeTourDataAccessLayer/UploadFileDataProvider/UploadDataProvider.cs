@@ -121,8 +121,12 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                 DataTable studInfo = null;
 
                 foreach(var PostedFile in requestFiles.gpxFiles)
-                { 
+                {   
                  string FileName = PostedFile.FileName;
+
+                 if (response.Log != null && response.Log.Where(x => x.FileName == FileName).Count() > 0)
+                     continue;
+
                 string NewFile = "";
                 string NewFileName = "";
                 string FilePath = string.Empty;
@@ -157,7 +161,8 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                 //{
                 if (IsFileUploaded(FilePath + FileName + ".xml"))
                     {
-                        ErrorLogManager.WriteLog(response, "008", "File already uploaded!", PostedFile.FileName);
+                        ErrorLogManager.WriteLog(response, "008", "File already uploaded!", FileName);
+                        File.Delete(FilePath + FileName + ".xml");
                     }
                     else
                     {
@@ -365,6 +370,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                         else
                         {                            
                             ErrorLogManager.WriteLog(response, "008", "File already uploaded!", PostedFile.FileName);
+                            File.Delete(NewFile);
                         }
                     }
                 //}
@@ -380,7 +386,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
             {
                 //string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";//Select GPX file!
                 //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                ErrorLogManager.WriteLog(response, "013", "Select GPX file!" + ex.Message);
+                ErrorLogManager.WriteLog(response, "013", "Select GPX file! - " + ex.Message);
             }
         }
 

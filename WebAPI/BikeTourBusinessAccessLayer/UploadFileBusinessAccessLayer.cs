@@ -20,7 +20,7 @@ namespace BikeTourBusinessAccessLayer
 
                 if (response != null)
                 {
-                    if (response.Log != null && response.Log.Count == requestMessage.gpxFiles.Count
+                    if (response.Log != null 
                     && (response.Log.Where(x => x.Code.Contains("002") || x.Code.Contains("003") || x.Code.Contains("004") || x.Code.Contains("005")).ToList().Count != 0))
                     {
                         return response;
