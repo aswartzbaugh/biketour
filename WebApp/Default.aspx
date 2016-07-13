@@ -61,7 +61,7 @@
                                 </p>
                                 <div class="counts">
                                     <div class="col col-60">
-                                        <div class="getScoreWithBonus" data-totaldistance='<%# Eval("totaldistance") %>' data-scorewithbonus='<%# Eval("scorewithbonus") %>'>&nbsp; </div>
+                                        <div class="getScoreWithBonus" data-score='<%# Eval("score") %>' data-scorewithbonus='<%# Eval("scorewithbonus") %>'>&nbsp; </div>
                                     </div>
                                     <div class="col col-40">
                                         <asp:Label ID="Label5" runat="server" Text='<%# Eval("scorewithbonus") %>' />
@@ -132,14 +132,14 @@
 
    $('.getList').each(function () {var totaldistance = $(this).attr("data-totaldistance");
        var score = $(this).attr("data-score");
-    var points = (parseInt(totaldistance) * parseInt(score)) / 10000;
+       var points = (parseInt(score) / parseInt(totaldistance)) * 100;
     $(this).width(points + "%");
     });
     
    $('.getScoreWithBonus').each(function () {
-       var totaldistance = $(this).attr("data-totaldistance");
+       var score = $(this).attr("data-score");
        var scorewithbonus = $(this).attr("data-scorewithbonus");
-       var points = (parseInt(totaldistance) * parseInt(scorewithbonus)) / 10000;
+       var points = (parseInt(score) / parseInt(scorewithbonus)) * 100;
        $(this).width(points + "%");
    });
 
