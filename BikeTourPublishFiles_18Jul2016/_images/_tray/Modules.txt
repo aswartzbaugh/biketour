@@ -1,0 +1,8 @@
+1. Registration / forgot pwd / login      10 hrs
+2. Barcode search / AWS integration       16 hrs
+3. Sales Basket Page 			  6 hrs
+4. Sale Items page			  10 hrs		
+5. Add formula                            4 hrs	
+6. DB design                              4 hrs
+----------------------------------------------------
+Total					 50 hrs				

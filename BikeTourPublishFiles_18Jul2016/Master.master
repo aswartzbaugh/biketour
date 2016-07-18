@@ -1,0 +1,263 @@
+﻿<%@ master language="C#" autoeventwireup="true" inherits="Master, App_Web_1q0p2yyy" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+    <link rel="shortcut icon" href="favicon.ico" type="_image/x-icon" />
+    <title>Stadt-Land-Rad | Eine Initiative des adfc Rhein-Neckar/Heidelberg</title>
+    
+	<!-- Behavioral Meta Data -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no">
+    
+    <meta name="keywords" content="Stadt, Land, Rad, Stadt-Land-Rad, adfc, Heidelberg, Rhein-Neckar, Fahrrad, Kinder, App" />
+	<meta name="description" content="Kindern den Spaß am Radfahren näher bringen, das eigene Land besser kennenlernen sowie den Umgang mit Navigationstechnik spielerisch vermitteln. Das sind die drei Schwerpunkte des Projekts aber es gibt noch viel mehr...  " />
+    
+    <meta property="og:title" content="Stadt-Land-Rad | Eine Initiative des adfc Rhein-Neckar/Heidelberg" />
+    <meta property="og:url" content="http://stadt-land-rad.org" />
+    <meta property="og:site_name" content="Stadt-Land-Rad | Eine Initiative des adfc Rhein-Neckar/Heidelberg"/>
+    <meta property="og:image" content="_images/header-01.jpg" />
+      <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<!-- Styles -->
+	<link rel="stylesheet" type="text/css" href="_css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="_fonts/MyFontsWebfontsKit.css">
+    
+	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 1000px)" href="_css/mobile-l.css" type="text/css" />
+	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 800px)" href="_css/mobile-m.css" type="text/css" />
+	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 600px)" href="_css/mobile-s.css" type="text/css" />
+	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 480px)" href="_css/mobile-xs.css" type="text/css" />
+
+	<script src="_js/jquery11.min.js"></script>
+    
+    <!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="_js/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="_js/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+	<!-- Add Button helper (this is optional) 
+	<link rel="stylesheet" type="text/css" href="js/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+	<script type="text/javascript" src="js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>-->
+
+	<!-- Add Thumbnail helper (this is optional) 
+	<link rel="stylesheet" type="text/css" href="js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+	<script type="text/javascript" src="js/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>-->
+
+	<!-- Add Media helper (this is optional) -->
+	<script type="text/javascript" src="_js/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+    
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="_js/flexslider.css" type="text/css" media="screen" />
+    
+
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+
+   
+	<div class="header">
+    	<div class="wrapper">
+        	<div class="logo">
+            	<a href="Default.aspx"><img src="_images/logo.jpg" alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>
+            </div>
+            <div class="navi">
+            	<ul>
+                	<li class="first"><a href="Default.aspx">Home</a></li>
+                	<li><a href="DasProject.aspx">Das Projekt</a></li>
+                	<li><a href="JoinUs.aspx">Mitmachen</a></li>
+                	<li><a href="UeberUns.aspx">Über uns</a></li>
+                	<li><a href="Support.aspx">Support / Hilfe</a></li>
+                	<li class="miles"><a href="ContactUs.aspx">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="mobile-navigation">
+            	<a><img src="_images/mobile-navi.gif" /></a>
+            </div>
+            <div class="login">
+            	<a href="Login.aspx"><img src="_images/login.jpg" /></a>
+            </div>
+            <div class="mobile-navi">
+            	<ul>
+                	<li class="first"><a href="Default.aspx">Home</a></li>
+                	<li><a href="DasProject.aspx">Das Projekt</a></li>
+                	<li><a href="JoinUs.aspx">Mitmachen</a></li>
+                	<li><a href="UeberUns.aspx">Über uns</a></li>
+                	<li><a href="Support.aspx">Support / Hilfe</a></li>
+                	<li class="miles"><a href="ContactUs.aspx">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+     <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+         <div class="supporter">
+    	<div class="wrapper">
+        	<div class="col col-55">
+                <h1>Bald als auch App verfügbar</h1>
+                <h2>für dein Android-Smartphone</h2>
+                <p>Mit der App für den Android-Smartphone kannst du die Tracks ganz leicht erstellen und direkt ins Internet hochladen - einfacher gehts nicht!  </p>
+                <p><img src="_images/apple-appstore.png" /> <img src="_images/playstore.png" /></p>
+            </div>
+        	<div class="col col-45">
+            	<div class="placeholder">
+            		<img src="_images/kind-mit-smartphone.png" />
+                </div>            	
+			</div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+    <div class="contact" id="contact">
+    	<div class="wrapper">
+        	<div class="col col-31 contact-1">
+                <div class="pad">
+                    <h5>Kontakt zu Stadt-Lad-Rad</h5>
+                    <p>adfc Rhein-Neckar/Heidelberg<br />
+                    Kurfürsten-Anlage 62<br />
+                    69115 Heidelberg</p>
+                    <p>              
+                    Telefon: 	06221 - 6554-104<br />
+                    E-Mail: 	<a href="mailto:stadt-land-rad@adfc-bw.de">stadt-land-rad@adfc-bw.de</a></p>
+                </div>
+            </div>
+            <div class="col col-3">&nbsp;</div>
+            <div class="col col-31 contact-2">
+                <div class="pad">
+                    <h5>Hilfe und Support</h5>
+                    <p>Du hast Fragen zum Projekt, benötigst<br />
+                     Hilfe bei der Anmeldung oder Bedienung <br />
+                    der Technik?</p>
+                    <p>              
+                    Telefon: 	06221 - 6554-104<br />
+                    E-Mail: 	<a href="mailto:stadt-land-rad@adfc-bw.de">stadt-land-rad@adfc-bw.de</a></p>
+            	</div>
+            </div>
+            <div class="col col-3">&nbsp;</div>
+            <div class="col col-31 contact-3">
+                <div class="pad">
+                    <h5>Anmelden und Mitmachen</h5>
+                    <p>Du möchtest deine Daten hochladen?<br />
+                    Hier kannst du dich einloggen oder<br />
+                    resgistrieren:</p>
+                    <p>» <a href="http://www.stadt-land-rad.org/Login.aspx">anmelden</a><br />
+                    » <a href="http://www.stadt-land-rad.org/StudentRegistration.aspx">registrieren</a></p>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>   
+    
+    <div class="legal">
+    	<div class="wrapper">
+        	<div class="col col-70">
+            	<p>© 2016 adfc Rhein-Neckar/Heidelberg | Alle Rechte vorbehalten</p>
+            </div>
+        	<div class="col col-30" style="text-align:right;">
+            	<p><a href="ContactUs.aspx">Impressum</a></p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    	<!-- Scripts -->
+    <script defer src="_js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="_js/jquery.localscroll-1.2.7-min.js"></script>
+	<script type="text/javascript" src="_js/TweenMax.min.js"></script>
+	<script type="text/javascript" src="_js/jquery.scrollTo-1.4.2-min.js"></script>
+    <script type="text/javascript" src="_js/jquery.superscrollorama.js"></script>
+	<script type="text/javascript" src="_js/jquery.parallax-1.1.3.js"></script>
+
+
+	<script type="text/javascript" src="_js/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+	<script type="text/javascript" src="_js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+	<script type="text/javascript" src="_js/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+	<script type="text/javascript" src="_js/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+	
+	<script>
+
+
+	    $(document).ready(function () {
+	        $('#nav').localScroll(800);
+
+	        //$('.flexslider').flexslider({
+	        //    animation: "fade",
+	        //    slideshow: true,
+	        //    animationLoop: true,
+	        //    slideshowSpeed: 5000,
+	        //    animationSpeed: 1500
+	        //});
+
+	        //$('.flexslider2').flexslider({
+	        //    animation: "slide",
+	        //    slideshow: true,
+	        //    animationLoop: true,
+	        //    slideshowSpeed: 3000,
+	        //    animationSpeed: 1500
+	        //});
+
+	        //$('.link-01').click(function () {
+	        //    $('.flexslider').flexslider(0);
+	        //});
+	        //$('.link-02').click(function () {
+	        //    $('.flexslider').flexslider(1);
+	        //});
+	        //$('.link-03').click(function () {
+	        //    $('.flexslider').flexslider(2);
+	        //});
+	        //$('.link-04').click(function () {
+	        //    $('.flexslider').flexslider(3);
+	        //});
+
+
+	        //$('.fancybox').fancybox({
+	        //    padding: 1,
+	        //    width: 920,
+	        //    height: 518,
+	        //    aspectRatio: true,
+	        //    helpers: {
+	        //        media: {}
+	        //    }
+	        //});
+
+	        $('.miles a[href*=#]:not([href=#])').click(function () {
+	            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+
+	                var target = $(this.hash);
+	                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+	                if (target.length) {
+	                    $('html,body').animate({
+	                        scrollTop: target.offset().top - 100
+	                    }, 1000);
+	                    return false;
+	                }
+	            }
+	        });
+
+	        $('.mobile-navigation').click(function () {
+	            $('.mobile-navi').slideToggle("fast");
+	        });
+
+
+	        //$('.bodywrapper').parallax("50%", 0.35);
+
+	        var controller = $.superscrollorama();
+	        controller.addTween('.main-container', TweenMax.from($('.header'), .3, { css: { top: '24px' } }));
+	        controller.addTween('.main-container', TweenMax.from($('.logo a'), .3, { css: { padding: '14px 0 14px 14px' } }));
+	        controller.addTween('.main-container', TweenMax.from($('.login'), .3, { css: { top: '0px' } }));
+	        controller.addTween('.main-container', TweenMax.from($('.login img'), .1, { css: { width: '81px' } }));
+	        controller.addTween('.supporter', TweenMax.from($('.supporter .placeholder img'), .3, { css: { bottom: '-50px' } }));
+
+	    });
+
+	</script>
+
+    </form>
+</body>
+</html>

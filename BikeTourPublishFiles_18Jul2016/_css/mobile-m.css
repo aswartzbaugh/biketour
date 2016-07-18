@@ -1,0 +1,45 @@
+.navi{
+	display:none;
+}
+.mobile-navigation{
+	display: block;
+}
+.main-container .main-left{
+	display:none;
+}
+.zacke h1, .zacke h2{
+	padding-left:34%;
+}
+.main-container .col-50 {
+    padding: 10px 10%;
+    width: 80%;
+}
+.supporter .col-45 .placeholder{
+	display:none;
+}
+.supporter .col-55{
+	width:85%;
+}
+.zacke{
+	background-position:-792px;
+}
+.zacke h1, .zacke h2 {
+    padding-left: 0;
+	text-align:center;
+	padding:0 5%;
+}
+h4{
+	padding:0 10%;
+}
+.subsite .col-45{
+	width:100%;
+	float:none;
+	text-align:center;
+}
+.subsite .col-10{
+	display:none;
+}
+.subsite-holder{
+	height:400px;
+	background-position:center -50px;
+}

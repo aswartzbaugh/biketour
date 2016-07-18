@@ -1,0 +1,39 @@
+h1, h2{
+	font-size:26px;
+}
+.navi li{
+	padding:12px 5px;
+}
+.navi ul{
+	padding-left:160px;
+}
+.supporter .col-45 .placeholder{
+	width:350px;
+	height:312px;
+}
+.supporter .col-45 .placeholder{
+	margin-top:66px;
+}
+.login img{
+	width:55px !important;
+}
+.header{
+	top:-16px !important;
+}
+.logo a{
+	padding:20px 0 8px 6px !important;
+}
+.login{
+	top:16px !important;
+}
+.supporter .col-55 h1,
+.supporter .col-55 h2,
+.supporter .col-55 p{
+	padding-left:10px;
+}
+.first{
+	/*display:none !important;*/
+}
+h4{
+	padding:0 15%;
+}
