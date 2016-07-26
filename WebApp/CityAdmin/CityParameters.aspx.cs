@@ -17,6 +17,7 @@ public partial class AppAdmin_CityParameters : System.Web.UI.Page
             Response.Redirect(System.Web.Security.FormsAuthentication.LoginUrl.ToString() + "?ReturnUrl=" + Request.RawUrl.ToString());
         if (!IsPostBack)
         {
+            ddlClass.DataBind();
             ddlClass.SelectedIndex = 0;
             LoadCityParameter();
         }
@@ -31,7 +32,7 @@ public partial class AppAdmin_CityParameters : System.Web.UI.Page
 
             if (result != null && result.Rows.Count > 0)
             {
-                txt_Date.Text = (result.Rows[0]["CityStartDate"] != null ? Convert.ToString(result.Rows[0]["CityStartDate"]) : string.Empty);
+                txt_Date.Text = (result.Rows[0]["CityStartDate"] != null ? Convert.ToString(result.Rows[0]["CityStartDate"]).Substring(0,10) : string.Empty);
                 chkMarkInvalid.Checked = (result.Rows[0]["IsAllFileInvalid"] != null ? Convert.ToBoolean(result.Rows[0]["IsAllFileInvalid"]) : false);
             }
         }
@@ -90,5 +91,9 @@ public partial class AppAdmin_CityParameters : System.Web.UI.Page
             popupScript = "alert('" + (string)GetLocalResourceObject("Message.Error") + "');";
         }
         ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), popupScript, true);
+    }
+    protected void ddlClass_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        LoadCityParameter();
     }
 }
