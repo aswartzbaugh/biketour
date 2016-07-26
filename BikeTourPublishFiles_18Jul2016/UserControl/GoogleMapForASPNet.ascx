@@ -19,7 +19,7 @@
 
 //   This program comes with ABSOLUTELY NO WARRANTY.
 --%>
-<%@ control language="C#" autoeventwireup="true" inherits="GoogleMapForASPNet, App_Web_tz0byomm" %>
+<%@ control language="C#" autoeventwireup="true" inherits="GoogleMapForASPNet, App_Web_srurlt0p" %>
 <%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     Namespace="System.Web.UI" TagPrefix="asp" %>
   <asp:ScriptManagerProxy id="proxy1" runat="server">

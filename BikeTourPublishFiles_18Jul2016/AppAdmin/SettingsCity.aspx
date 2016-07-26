@@ -1,4 +1,4 @@
-﻿<%@ page title="BikeTour : Setting City" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_SettingsCity, App_Web_x1fc3qah" %>
+﻿<%@ page title="BikeTour : Setting City" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_SettingsCity, App_Web_ekadcbkj" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

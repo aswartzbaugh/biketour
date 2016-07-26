@@ -1,4 +1,4 @@
-﻿<%@ page title="BikeTour - School Master" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_SchoolMaster, App_Web_tvrek5y1" %>
+﻿<%@ page title="BikeTour - School Master" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_SchoolMaster, App_Web_qvm2tkwv" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script type="text/javascript">

@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Transfer Responsibility" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="CityAdmin_TransferResponsibility, App_Web_tvrek5y1" %>
+﻿<%@ page title="Bike Tour - Transfer Responsibility" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="CityAdmin_TransferResponsibility, App_Web_qvm2tkwv" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

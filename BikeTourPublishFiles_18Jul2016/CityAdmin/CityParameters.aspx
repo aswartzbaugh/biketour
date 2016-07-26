@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Set Date" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_CityParameters, App_Web_tvrek5y1" %>
+﻿<%@ page title="Bike Tour - Set Date" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_CityParameters, App_Web_qvm2tkwv" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
@@ -47,7 +47,7 @@
                     <asp:UpdatePanel ID="Up_ddlClass" runat="server">
                         <ContentTemplate>
                             <asp:DropDownList ID="ddlClass" runat="server" AutoPostBack="True" DataSourceID="sdsClass"
-                                DataTextField="CityName" DataValueField="CityId">
+                                DataTextField="CityName" DataValueField="CityId" OnSelectedIndexChanged="ddlClass_SelectedIndexChanged">
                             </asp:DropDownList>
                             <span class="error right">*</span>
                              <asp:SqlDataSource ID="sdsClass" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
@@ -70,6 +70,7 @@
                     </asp:UpdatePanel>
                 </td>
                 </tr>
+                     
                     <tr>
                         <td class="style1">
                             <asp:Label ID="lblSetCityDate" runat="server" meta:ResourceKey="lblSetCityDate" CssClass="blue"></asp:Label>

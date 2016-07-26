@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Class Admin" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_ClassAdmin, App_Web_tvrek5y1" %>
+﻿<%@ page title="Bike Tour - Class Admin" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_ClassAdmin, App_Web_qvm2tkwv" %>
 
 <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

@@ -1,4 +1,4 @@
-﻿<%@ page culture="de-DE" uiculture="de-DE" title="Bike Tour - Participating Cities" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_ParticipatingCityAdmin, App_Web_x1fc3qah" %>
+﻿<%@ page culture="de-DE" uiculture="de-DE" title="Bike Tour - Participating Cities" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_ParticipatingCityAdmin, App_Web_ekadcbkj" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

@@ -1,4 +1,4 @@
-﻿<%@ page title="BikeTour - Quiz Test Report" language="C#" culture="de-DE" uiculture="de-DE" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_TestReport, App_Web_xqp2cbbr" %>
+﻿<%@ page title="BikeTour - Quiz Test Report" language="C#" culture="de-DE" uiculture="de-DE" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_TestReport, App_Web_4pgugvei" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

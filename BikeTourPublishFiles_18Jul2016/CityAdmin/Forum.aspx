@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Forum" culture="de-DE" uiculture="de-DE" language="C#" enableeventvalidation="false" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_Forum, App_Web_tvrek5y1" %>
+﻿<%@ page title="Bike Tour - Forum" culture="de-DE" uiculture="de-DE" language="C#" enableeventvalidation="false" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_Forum, App_Web_qvm2tkwv" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="../UserControl/GoogleMapForASPNet.ascx" TagName="GoogleMapForASPNet"

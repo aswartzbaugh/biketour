@@ -1,4 +1,4 @@
-﻿<%@ page title="Student Details" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_StudentDetails, App_Web_xqp2cbbr" %>
+﻿<%@ page title="Student Details" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_StudentDetails, App_Web_4pgugvei" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 

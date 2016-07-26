@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Class Admin" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_ClassAdmin, App_Web_x1fc3qah" %>
+﻿<%@ page title="Bike Tour - Class Admin" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_ClassAdmin, App_Web_ekadcbkj" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 

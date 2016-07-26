@@ -1,4 +1,4 @@
-﻿<%@ master language="C#" autoeventwireup="true" inherits="SiteMaster_Start, App_Web_ucbtvllq" %>
+﻿<%@ master language="C#" autoeventwireup="true" inherits="SiteMaster_Start, App_Web_vi5fatrn" %>
 <%@ Register src="~/UserControl/GoogleMapForASPNet.ascx" tagname="GoogleMapForASPNet" tagprefix="uc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
