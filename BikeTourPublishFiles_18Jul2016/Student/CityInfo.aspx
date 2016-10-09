@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - City Information" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="Student_CityInfo, App_Web_ydinyeuu" %>
+﻿<%@ page title="Bike Tour - City Information" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="Student_CityInfo, App_Web_hbtpidhk" %>
 
 <%@ Register src="~/UserControl/GoogleMapForASPNet.ascx" tagname="GoogleMapForASPNet" tagprefix="uc1" %>
 

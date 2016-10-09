@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - City List" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_CityList, App_Web_ekadcbkj" %>
+﻿<%@ page title="Bike Tour - City List" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_CityList, App_Web_tbocijxi" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

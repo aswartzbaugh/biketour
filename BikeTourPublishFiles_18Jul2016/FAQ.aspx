@@ -1,4 +1,4 @@
-﻿<%@ page title="BikeTour - FAQ" culture="de-DE" uiculture="de-DE" language="C#" autoeventwireup="true" masterpagefile="~/Master.master" inherits="FAQ, App_Web_eo3yqcjt" %>
+﻿<%@ page title="BikeTour - FAQ" culture="de-DE" uiculture="de-DE" language="C#" autoeventwireup="true" masterpagefile="~/Master.master" inherits="FAQ, App_Web_ng55utgi" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

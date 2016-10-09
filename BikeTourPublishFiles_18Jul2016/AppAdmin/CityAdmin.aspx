@@ -1,4 +1,4 @@
-﻿<%@ page culture="de-DE" uiculture="de-DE" title="Bike Tour - City Admin" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_CityAdmin, App_Web_ekadcbkj" %>
+﻿<%@ page culture="de-DE" uiculture="de-DE" title="Bike Tour - City Admin" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_CityAdmin, App_Web_tbocijxi" %>
 
 <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>

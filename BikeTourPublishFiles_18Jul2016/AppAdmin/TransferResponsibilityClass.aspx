@@ -1,4 +1,4 @@
-﻿<%@ page title="" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_TransferResponsibility, App_Web_1d3e1omr" %>
+﻿<%@ page title="" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_TransferResponsibility, App_Web_y515qcee" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

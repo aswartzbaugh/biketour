@@ -6,3 +6,6 @@ D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\b
 D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\obj\Release\FileBytesConvertToJson.csprojResolveAssemblyReference.cache
 D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\obj\Release\FileBytesConvertToJson.exe
 D:\Google Drive\TFS-Nik\BikeTour\FileBytesConvertToJson\FileBytesConvertToJson\obj\Release\FileBytesConvertToJson.pdb
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\Tools\FileBytesConvertToJson\FileBytesConvertToJson\bin\Release\FileBytesConvertToJson.exe.config
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\Tools\FileBytesConvertToJson\FileBytesConvertToJson\obj\Release\FileBytesConvertToJson.exe
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\Tools\FileBytesConvertToJson\FileBytesConvertToJson\obj\Release\FileBytesConvertToJson.pdb

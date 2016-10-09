@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Stage Plan" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_StagePlan, App_Web_4pgugvei" %>
+﻿<%@ page title="Bike Tour - Stage Plan" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ClassAdmin_StagePlan, App_Web_2l5yi1hb" %>
     <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="../UserControl/GoogleMapForASPNet.ascx" TagName="GoogleMapForASPNet"
     TagPrefix="uc1" %>

@@ -213,7 +213,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
 
                        
                         _dtTrkpts = dtNew;
-                        int trackCount = (dtNew.Rows.Count / 5) + 1;
+                        int trackCount = dtNew.Rows.Count; //(dtNew.Rows.Count / 5) + 1;
                         double highestSpeed = 0;
 
                         DataTable dtNewRows = CheckPreviousGPXTrackPoints(UserId, 
@@ -416,14 +416,14 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
 
         public DataTable CloneDataTableForGPXUpload(DataTable _dtTrkpts)
         {
-            DataTable _newTable;
-            _newTable = _dtTrkpts.Clone();
+            //DataTable _newTable;
+            //_newTable = _dtTrkpts.Clone();
 
-            for (int i = 0; i < _dtTrkpts.Rows.Count; i += 5)
-            {
-                _newTable.ImportRow(_dtTrkpts.Rows[i]);
-            }
-            return _newTable;
+            //for (int i = 0; i < _dtTrkpts.Rows.Count; i += 5)
+            //{
+            //    _newTable.ImportRow(_dtTrkpts.Rows[i]);
+            //}
+            return _dtTrkpts;
         }
 
 

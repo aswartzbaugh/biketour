@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" inherits="_Default, App_Web_xmsie2x4" %>
+﻿<%@ page language="C#" autoeventwireup="true" inherits="_Default, App_Web_xkabdslp" %>
 
 
 <%@ Register src="../UserControl/GoogleMapForASPNet.ascx" tagname="GoogleMapForASPNet" tagprefix="uc2" %>

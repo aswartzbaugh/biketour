@@ -124,22 +124,24 @@
     <script>$(document).ready(function () {
 
     var divrow = document.getElementById("divrow");
-    var rownumber = divrow.getAttribute("data-rownumber");
-    if (parseInt(rownumber) > 1)
-        divrow.className = "row"
-    divrow.className = "row row-1";
 
+    if (divrow !== null && divrow !== "undefined") {
+        var rownumber = divrow.getAttribute("data-rownumber");
+        if (parseInt(rownumber) > 1)
+            divrow.className = "row"
+        divrow.className = "row row-1";
+    }
 
    $('.getList').each(function () {var totaldistance = $(this).attr("data-totaldistance");
        var score = $(this).attr("data-score");
-       var points = (parseInt(score) / parseInt(totaldistance)) * 100;
+       var points = (parseInt(score) / 5 );
     $(this).width(points + "%");
     });
     
    $('.getScoreWithBonus').each(function () {
        var score = $(this).attr("data-score");
        var scorewithbonus = $(this).attr("data-scorewithbonus");
-       var points = (parseInt(score) / parseInt(scorewithbonus)) * 100;
+       var points = ((parseInt(scorewithbonus) / parseInt(score)) / 50) * 100;
        $(this).width(points + "%");
    });
 

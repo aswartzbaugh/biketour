@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Change Your Password" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ChangePassword_ChangePassword, App_Web_ekadcbkj" %>
+﻿<%@ page title="Bike Tour - Change Your Password" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="ChangePassword_ChangePassword, App_Web_tbocijxi" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script src="_js/jquery-1.7.1.js" type="text/javascript"></script>

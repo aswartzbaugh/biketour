@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Upload GPX File" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="Student_UploadGpx, App_Web_ydinyeuu" %>
+﻿<%@ page title="Bike Tour - Upload GPX File" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="Student_UploadGpx, App_Web_hbtpidhk" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

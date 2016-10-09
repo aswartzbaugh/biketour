@@ -22,3 +22,15 @@ D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourDataAccess
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourDataAccessLayer\obj\Release\BikeTour.DataAccessLayer.csprojResolveAssemblyReference.cache
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourDataAccessLayer\obj\Release\BikeTourDataAccessLayer.dll
 D:\Google Drive\TFS-Nik\BIKETourGITClone\btapi\BikeTourWebAPI\BikeTourDataAccessLayer\obj\Release\BikeTourDataAccessLayer.pdb
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourDataAccessLayer.dll.config
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourDataAccessLayer.dll
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourDataAccessLayer.pdb
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourCore.dll
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\bin\Release\EntityFramework.dll
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\bin\Release\EntityFramework.SqlServer.dll
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\bin\Release\BikeTourCore.pdb
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\bin\Release\EntityFramework.xml
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\bin\Release\EntityFramework.SqlServer.xml
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\obj\Release\BikeTour.DataAccessLayer.csprojResolveAssemblyReference.cache
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\obj\Release\BikeTourDataAccessLayer.dll
+C:\D Drive\SoftwareDevelopment\GItRepos\BikeTour\biketour\WebAPI\BikeTourDataAccessLayer\obj\Release\BikeTourDataAccessLayer.pdb

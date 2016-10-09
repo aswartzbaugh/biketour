@@ -373,14 +373,16 @@ public partial class Student_UploadGpx : System.Web.UI.Page
 
     public DataTable CloneDataTableForGPXUpload(DataTable _dtTrkpts)
     {
-        DataTable _newTable;
-        _newTable = _dtTrkpts.Clone();
+        //Commenting for ACCURACY of CALCUALTION
 
-        for (int i = 0; i < _dtTrkpts.Rows.Count; i += 5)
-        {
-            _newTable.ImportRow(_dtTrkpts.Rows[i]);
-        }
-        return _newTable;
+        //DataTable _newTable;
+        //_newTable = _dtTrkpts.Clone();
+
+        //for (int i = 0; i < _dtTrkpts.Rows.Count; i += 5)
+        //{
+        //    _newTable.ImportRow(_dtTrkpts.Rows[i]);
+        //}
+        return _dtTrkpts;
     }
 
 

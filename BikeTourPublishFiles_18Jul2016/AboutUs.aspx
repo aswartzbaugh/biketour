@@ -1,4 +1,4 @@
-﻿<%@ page title="BikeTour - About Us" language="C#" masterpagefile="~/Master.master" autoeventwireup="true" inherits="AboutUs, App_Web_eo3yqcjt" %>
+﻿<%@ page title="BikeTour - About Us" language="C#" masterpagefile="~/Master.master" autoeventwireup="true" inherits="AboutUs, App_Web_ng55utgi" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

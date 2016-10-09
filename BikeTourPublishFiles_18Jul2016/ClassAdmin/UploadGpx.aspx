@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Upload GPX File" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="Student_UploadGpx, App_Web_4pgugvei" %>
+﻿<%@ page title="Bike Tour - Upload GPX File" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="Student_UploadGpx, App_Web_2l5yi1hb" %>
 
 <%@ Register Src="../UserControl/GoogleMapForASPNet.ascx" TagName="GoogleMapForASPNet" TagPrefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>

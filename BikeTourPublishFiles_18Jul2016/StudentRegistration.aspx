@@ -1,4 +1,4 @@
-﻿<%@ page title="Bike Tour - Student Registration" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/UserMaster.master" autoeventwireup="true" inherits="StudentRegistration, App_Web_14ubujc3" %>
+﻿<%@ page title="Bike Tour - Student Registration" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/UserMaster.master" autoeventwireup="true" inherits="StudentRegistration, App_Web_pu2x2azh" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

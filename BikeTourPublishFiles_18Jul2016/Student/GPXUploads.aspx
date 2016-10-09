@@ -1,4 +1,4 @@
-﻿<%@ page title="" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/UserMaster.master" autoeventwireup="true" inherits="Student_GPXUploads, App_Web_oe4n1ss3" %>
+﻿<%@ page title="" culture="de-DE" uiculture="de-DE" language="C#" masterpagefile="~/SiteMaster/UserMaster.master" autoeventwireup="true" inherits="Student_GPXUploads, App_Web_hbtpidhk" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

@@ -1,4 +1,4 @@
-﻿<%@ page title="BikeTour - About Us" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_AddCityContent, App_Web_ekadcbkj" culture="de-DE" uiculture="de-DE" %>
+﻿<%@ page title="BikeTour - About Us" language="C#" masterpagefile="~/SiteMaster/AdminMaster.master" autoeventwireup="true" inherits="AppAdmin_AddCityContent, App_Web_tbocijxi" culture="de-DE" uiculture="de-DE" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit.HTMLEditor"
     TagPrefix="cc1" %>
