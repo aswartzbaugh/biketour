@@ -220,12 +220,12 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
 
                        
                         _dtTrkpts = dtNew;
-                        int trackCount = (dtNew.Rows.Count / 5) + 1;
+                        int trackCount = dtNew.Rows.Count;
                         double highestSpeed = 0;
 
                         DataTable dtNewRows = CheckPreviousGPXTrackPoints(UserId, 
                             schoolId,
-                            classId, CloneDataTableForGPXUpload(dtNew));
+                            classId, dtNew);
 
                         if (dtNewRows.Rows.Count > 0)
                         {
