@@ -222,4 +222,10 @@
   <data name="lblgrdDelete.Text" xml:space="preserve">
     <value>Select</value>
   </data>
+  <data name="lblPassword.Text" xml:space="preserve">
+    <value>Password :</value>
+  </data>
+  <data name="rfvPassword.ErrorMessage" xml:space="preserve">
+    <value>Please enter password.</value>
+  </data>
 </root>

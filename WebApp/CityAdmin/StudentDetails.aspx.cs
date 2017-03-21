@@ -46,6 +46,7 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
                         hdn_ClassID.Value = dtCityAdmin.Rows[0]["ClassId"].ToString();
 
                         txtUsername.Text = dtCityAdmin.Rows[0]["UserName"].ToString();
+                        txtPassword.Text = dtCityAdmin.Rows[0]["Password"].ToString();
 
                         txtEmail.Text = dtCityAdmin.Rows[0]["Email"].ToString();
                     }
@@ -228,7 +229,7 @@ public partial class ClassAdmin_StudentDetails : System.Web.UI.Page
         objUser.FirstName = txt_FirstName.Text;
         objUser.LastName = txt_LastName.Text;
         objUser.Email = txtEmail.Text;
-        objUser.Password = "";
+        objUser.Password = txtPassword.Text;
         objUser.CityId = Convert.ToInt16(hdn_CityID.Value);
         objUser.SchoolId = Convert.ToInt16(hdn_SchoolID.Value);
         objUser.ClassId = Convert.ToInt16(hdn_ClassID.Value);

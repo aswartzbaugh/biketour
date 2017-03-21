@@ -213,4 +213,10 @@
   <data name="lblgrdDelete.Text" xml:space="preserve">
     <value>Wählen</value>
   </data>
+  <data name="lblPassword.Text" xml:space="preserve">
+    <value>Passwort :</value>
+  </data>
+  <data name="rfvPassword.ErrorMessage" xml:space="preserve">
+    <value>Bitte gib einen gültige Passwort an</value>
+  </data>
 </root>

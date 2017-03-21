@@ -162,19 +162,6 @@
                                 <asp:CheckBox ID="chk_Active" runat="server" Checked='<%# Eval("IsStatusConfirmed") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <%-- <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />--%>
-                        <asp:TemplateField>
-                            <HeaderTemplate>
-                                <asp:LinkButton ID="grdlnkPassword" runat="server" meta:ResourceKey="grdlnkPassword"
-                                    CommandName="Sort" CommandArgument="Password"></asp:LinkButton>
-                                <asp:PlaceHolder ID="placeholderPassword" runat="server"></asp:PlaceHolder>
-                                <%--<asp:Label ID="grdlblPassword" runat="server" meta:ResourceKey="grdlblPassword"></asp:Label>--%>
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="lblPassword" runat="server" Text='<%#Eval("Password") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-
                         <asp:TemplateField>
                                     <HeaderTemplate>
                                         <asp:Label ID="lblEditDetails" runat="server" meta:ResourceKey="lblEditDetails"></asp:Label>

@@ -186,6 +186,19 @@
                             </asp:UpdatePanel>
                             </td>
                     </tr>
+
+                    <tr>
+                        <td><asp:Label ID="lblPassword" runat="server" meta:ResourceKey="lblPassword" CssClass="Glblbl"></asp:Label>
+                           </td>
+                        <td>
+                           <asp:TextBox ID="txtPassword" runat="server" CssClass="gltxt" AutoPostBack="true" 
+                                       ></asp:TextBox>
+                            <span class="error">*</span>
+                            <asp:RequiredFieldValidator ID="rfvPassword" runat="server"
+                                ControlToValidate="txtPassword" meta:ResourceKey="rfvPassword" ValidationGroup="Submit" CssClass="error" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </td>
+                    </tr>
+
                     <tr>
                         <td>
                             <asp:Label ID="lblCity" runat="server" meta:ResourceKey="lblCity" CssClass="Glblbl"></asp:Label>

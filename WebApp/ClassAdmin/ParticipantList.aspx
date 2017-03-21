@@ -170,17 +170,6 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblgrdPass" runat="server" Text='<%#Eval("Password") %>'></asp:Label>
-                                    </ItemTemplate>
-                                    <HeaderTemplate>
-                                        <asp:LinkButton ID="lbtngrdPass" runat="server" meta:ResourceKey="lbtngrdPass" CommandName="Sort"
-                                            CommandArgument="Password"></asp:LinkButton>
-                                        <asp:PlaceHolder ID="placeholderPassword" runat="server"></asp:PlaceHolder>
-                                    </HeaderTemplate>
-                                </asp:TemplateField>
-
-                                <asp:TemplateField>
                                     <HeaderTemplate>
                                         <asp:Label ID="lblEditDetails" runat="server" meta:ResourceKey="lblEditDetails"></asp:Label>
                                     </HeaderTemplate>
