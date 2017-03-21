@@ -1,0 +1,188 @@
+﻿USE [BikeTour]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_GET_STUDENT]    Script Date: 3/21/2017 6:51:04 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/*    
+EXEC SP_GET_STUDENT 2    
+*/    
+    
+ALTER proc [dbo].[SP_GET_STUDENT]        
+(        
+ @StudentID int        
+)        
+as        
+begin        
+ select  
+ SM.StudentId,--Added later  
+  SM.FirstName,        
+     SM.LastName,        
+     SM.Email,        
+     CM.CityName,        
+     CM.CityId,        
+     SCHM.School,        
+     SCHM.SchoolId,        
+     SCM.Class,        
+     SCM.ClassId,        
+     CAC.ClassAdminId,        
+     CAM.Email as ClassAdminEmail,        
+     CAM.FirstName+' '+CAM.LastName as ClassAdminName ,      
+     LD.loginname as UserName,   
+	 LD.Password as Password, 
+     CityAdminName=(select FirstName+' '+LastName from CityAdminMaster     
+  where CityAdminId=(ISNULL((select Top 1 CityAdminId     
+   from CityAdminCities where CityId=CM.CityId and IsActive=1),0))),    
+ CityAdminEmail=(select Email from CityAdminMaster     
+  where CityAdminId=(ISNULL((select Top 1 CityAdminId     
+   from CityAdminCities where CityId=CM.CityId and IsActive=1),0)))    
+         
+ from StudentMaster SM inner join CityMaster CM on SM.CityId=CM.CityId         
+ inner join LoginDtls LD on SM.LoginId = LD.LoginId      
+ inner join SchoolMaster SCHM on SM.SchoolId=SCHM.SchoolId        
+ inner join SchoolClassMaster SCM on SCM.ClassId=SM.ClassId        
+ LEFT OUTER JOIN ClassAdminClasses CAC ON SCM.ClassId=CAC.ClassId        
+ LEFT OUTER JOIN ClassAdminMaster CAM ON CAC.ClassAdminId=CAM.ClassAdminId        
+         
+ where SM.StudentId = @StudentID        
+end 
+GO
+
+
+-------------------------------------------------
+
+USE [BikeTour]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_INSERTUPDATE_STUDENT]    Script Date: 3/21/2017 6:54:14 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/*          
+Author- Manali          
+Created On- 19/3/2013          
+Insert update student master          
+*/          
+ALTER proc [dbo].[SP_INSERTUPDATE_STUDENT]          
+(          
+ @StudentId INT,          
+ @FirstName VARCHAR(50),  
+ @UserName varchar(50),          
+ @LastName VARCHAR(50),          
+ @CityId INT,          
+ @SchoolId INT,          
+ @ClassId INT,          
+ @Email  VARCHAR(100),          
+ @PASSWORD VARCHAR(50),          
+ @RESULT INT OUTPUT          
+)          
+AS          
+BEGIN          
+ declare @loginid int          
+ SET @RESULT = 1          
+ -- NEW RECORD          
+ IF(@StudentId = 0)          
+ BEGIN          
+  -- DUPLICATE RECORD          
+  IF (EXISTS(SELECT 1 FROM StudentMaster WHERE (@Email != '' and Email= @Email) and IsDeleted = 0)          
+   or EXISTS(SELECT 1 FROM LoginDtls where LoginName = @UserName and IsActive=1))          
+  begin          
+   SET @RESULT = 0          
+  end          
+  ELSE          
+  BEGIN          
+   --Login table          
+   insert into LoginDtls          
+   (          
+    RoleId,          
+    LoginName,          
+    [Password],          
+    IsActive,          
+    IsFirstLogin          
+   )          
+   values          
+   (          
+    5, -- ROLE STUDENT FROM ROLEMASTER          
+    @UserName,          
+    @Password,          
+    1,          
+    0          
+   )          
+   set @loginid = @@IDENTITY          
+             
+   INSERT INTO StudentMaster          
+   (          
+    loginid,          
+    FirstName,          
+    LastName,          
+    CityId,          
+    SchoolId,          
+    ClassId,          
+    Email,          
+    IsStatusActive,          
+    IsStatusConfirmed,          
+    IsDeleted,
+    isUploadBlock          
+   )          
+   VALUES          
+   (          
+    @loginid,          
+    @FirstName,          
+    @LastName,          
+    @CityId,          
+    @SchoolId,          
+    @ClassId,          
+    @Email,          
+    0,          
+    0,          
+    0,
+    0          
+   )          
+         
+   set @RESULT = (select MAX(StudentId) from StudentMaster)      
+             
+  END          
+ END          
+ --update record          
+ ELSE          
+ BEGIN          
+  set @loginid = (select loginid from StudentMaster where StudentId = @StudentId)          
+ IF (EXISTS(SELECT 1 FROM StudentMaster WHERE (@Email != '' and Email= @Email) and IsDeleted = 0 AND StudentId <> @StudentId)          
+  or exists(SELECT 1 FROM LoginDtls where LoginName = @UserName and IsActive=1 and LoginId <> @loginid))          
+  begin          
+   SET @RESULT = 0          
+  end          
+  ELSE          
+  BEGIN          
+             
+   UPDATE StudentMaster SET          
+    FirstName = @FirstName,          
+    LastName = @LastName,          
+    CityId = @CityId,          
+    SchoolId = @SchoolId,          
+    ClassId = @ClassId,          
+    Email = @Email          
+   WHERE StudentId = @StudentId          
+             
+   --update login table          
+   update LoginDtls set          
+    LoginName  = @UserName,
+	Password = @PASSWORD         
+   where loginid = @loginid          
+             
+  END          
+ END          
+ return @result          
+END
+
+GO
+
+
+----------------------------------------------
