@@ -30,10 +30,10 @@ public partial class AppAdmin_CityParameters : System.Web.UI.Page
         {
             result = objCityAdmin.GetCityContent(Convert.ToInt32(ddlClass.SelectedValue),0);
 
-            if (result != null && result.Rows.Count > 0)
+            if (result != null && result.Rows != null && result.Rows.Count > 0)
             {
-                txt_Date.Text = (result.Rows[0]["CityStartDate"] != null ? Convert.ToString(result.Rows[0]["CityStartDate"]).Substring(0,10) : string.Empty);
-                chkMarkInvalid.Checked = (result.Rows[0]["IsAllFileInvalid"] != null ? Convert.ToBoolean(result.Rows[0]["IsAllFileInvalid"]) : false);
+                txt_Date.Text = (result.Rows[0]["CityStartDate"] !=  DBNull.Value ? Convert.ToString(result.Rows[0]["CityStartDate"]).Substring(0,10) : string.Empty);
+                chkMarkInvalid.Checked = (result.Rows[0]["IsAllFileInvalid"] != DBNull.Value ? Convert.ToBoolean(result.Rows[0]["IsAllFileInvalid"]) : false);
             }
         }
     }
