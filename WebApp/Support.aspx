@@ -24,7 +24,7 @@ Dann habt ihr hier die richtigen Ansprechpartner bei allen Problemen bezüglich 
 bei anderen Fragen oder zur App:</h4>
 
                 <a href="mailto:stadt-land-rad@adfc-bw.de"><h1 style="text-align:center;">stadt-land-rad@adfc-bw.de</h1></a>
-                <h2 style="text-align:center;">06221/6554104</h2>
+                <h2 style="text-align:center;">06221/6554106</h2>
                 
              </div>
         </div>

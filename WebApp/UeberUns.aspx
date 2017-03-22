@@ -19,7 +19,7 @@
     <div class="main-container">
     	<div class="wrapper">
         	<div class="pad">
-                <h4>Die Abteilung Verkehrspädagogik des ADFC Rhein-Neckar/Heidelberg hat sich zur Aufgabe gemacht, bei Kindern und Jugendlichen die Mobilität mit dem Fahrrad in den Vordergrund zu rücken. Damit möchte man der Entwicklung entgegenwirken, dass immer mehr Kinder mit dem Auto zur Schule gefahren werden und durch mangelnde sporliche Betätigung mit daraus resultierenden Problemen zu kämpfen haben. </h4>
+                <h4>Die Abteilung Verkehrspädagogik des ADFC Baden-Württemberg hat sich zur Aufgabe gemacht, bei Kindern und Jugendlichen die Mobilität mit dem Fahrrad in den Vordergrund zu rücken. Damit möchte man der Entwicklung entgegenwirken, dass immer mehr Kinder mit dem Auto zur Schule gefahren werden und durch mangelnde sporliche Betätigung mit daraus resultierenden Problemen zu kämpfen haben.</h4>
                 <h4 style="font-weight:normal;">
 Hauptziel ist die Steigerung der Nutzung des Fahrrads und damit die Steigerung der eigenständigen Mobilität, der Verkehrssicherheit, der Gesundheit und auch die Förderung von sozialer Verantwortung und selbständigem Denken. </h4>
                 

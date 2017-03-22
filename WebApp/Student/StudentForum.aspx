@@ -138,7 +138,7 @@
                                                             DataTextField="CityName" DataValueField="CityId" OnSelectedIndexChanged="ddlCompetitionCity_SelectedIndexChanged">
                                                         </asp:DropDownList>
                                                         <asp:SqlDataSource ID="ddlparticipatigcity" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
-                                                            SelectCommand="SELECT '0' as [CityId] ,' Deutschlandweit' As [CityName] union All  
+                                                            SelectCommand="SELECT '0' as [CityId] ,'Baden Württemberg' As [CityName] union All  
                                                     SELECT CityId, CityName   from  CityMaster where IsActive = 1 and IsParticipatingCity=1 
                                                     AND CityId IN (select DISTINCT CityId
                                                     from StudentUpload SU INNER JOIN SchoolClassMaster SCM

@@ -8,7 +8,7 @@
                 <div class="wrapper">
                     <div class="main-box box-layout-left">
                         <h1 class="title white">Du hast Lust auf Fahrrad Fahren?</h1>
-                        <p>Einer der Dreh und Angelpunkte des Projekts ist dass Fahrrad fahren, solltest du jetzt schon ein begeisterter Fahrrad Fahrer sein bist du hier genau richtig. </p>
+                        <p>Einer der Dreh- und Angelpunkte des Projekts ist das Fahrrad fahren, solltest du jetzt schon ein begeisterter Fahrrad Fahrer sein bist du hier genau richtig. </p>
                         <p><a href="DasProject.aspx">ja, das bin ich!</a></p>
                     </div>
                 </div>

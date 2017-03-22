@@ -71,12 +71,12 @@
     <div class="main-container">
         <div class="wrapper">
             <div class="pad">
-                <h4>Kindern den Spaß am Radfahren näher bringen, das eigene Land besser kennenlernen +
+                <h4>Kindern den Spaß am Radfahren näher bringen, das eigene Land besser kennenlernen 
                 sowie den Umgang mit Navigationstechnik spielerisch vermitteln.
                 Das sind die drei Schwerpunkte des Projekts aber es gibt noch viel mehr... </h4>
                 <div class="col col-45">
-                    <p>Jede Klasse bildet ein Team und tritt dann gegen die anderen Klassen in einem Wettstreit um die meisten Kilometer an. Jedes Kind erhält im Vorfeld ein GPS Gerät und zeichnet damit so viele zurückgelegte Kilometer wie möglich auf. Diese Strecken werden dann auf der eigenen Internetseite hochgeladen und gesammelt. Jeder Schüler ist so ein gleichwertiges Mitglied seines Teams.</p>
-                    <p>Mit den hochgeladenen Kilometern legen die Schüler eine virtuelle Deutschlandreise durch verschiedene Städte zurück. Zu jeder vorher festgelegten Stadt oder Region gibt es immer ein  kleines Quiz, welches gelöst werden muss bevor zur nächsten Station weiter "geradelt" werden kann. </p>
+                    <p>Jede Klasse bildet ein Team und tritt dann gegen die anderen Klassen in einem Wettstreit um die meisten Kilometer an. Jedes Kind erhält im Vorfeld ein GPS Gerät und zeichnet damit so viele zurückgelegte Kilometer wie möglich auf. Diese Strecken werden dann auf der eigenen Internetseite hochgeladen und gesammelt. Jeder Schülerinnen ist so ein gleichwertiges Mitglied seines Teams.</p>
+                    <p>Mit den hochgeladenen Kilometern legen die Schülerinnen eine virtuelle Deutschlandreise durch verschiedene Städte zurück. Zu jeder vorher festgelegten Stadt oder Region gibt es immer ein  kleines Quiz, welches gelöst werden muss bevor zur nächsten Station weiter "geradelt" werden kann. </p>
                     <p>Ziel des Projekts ist es, dass sich Kinder mehr bewegen und Lust am Radfahren bekommen. Durch die virtuelle Deutschlandreise lernen die Schüler viel neues über ihr Heimatland und sammeln praktische Erfahrungen im Umgang mit dem GPS Gerät, der passenden Software und einer App.</p>
                     <p>Auf der Internetseite haben die Schülerinnen und Schüler auch die Möglichkeit einen Klassenblog zu pflegen, der sowohl die Schreibkompetenz als auch die Kommunikation innerhalb der Klasse fördert. </p>
 
