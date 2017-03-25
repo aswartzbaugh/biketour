@@ -10,6 +10,10 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Collections;
 using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.ComponentModel;
 
 /// <summary>
 /// Summary description for cGoogleMap
@@ -26,6 +30,7 @@ public class GoogleObject
     {
         try
         {
+			Directions = prev.Directions;
             Points = GooglePoints.CloneMe(prev.Points);
             Polylines = GooglePolylines.CloneMe(prev.Polylines);
             Polygons = GooglePolygons.CloneMe(prev.Polygons);
@@ -37,11 +42,18 @@ public class GoogleObject
             MapType = prev.MapType;
             APIKey = prev.APIKey;
             ShowTraffic = prev.ShowTraffic;
+			RecenterMap = prev.RecenterMap;
+	        AutomaticBoundaryAndZoom = prev.AutomaticBoundaryAndZoom;
         }
         catch (Exception)
         {}
     }
-
+	private GoogleDirections _gdirections = new GoogleDirections();
+    public GoogleDirections Directions
+    {
+        get { return _gdirections; }
+        set { _gdirections = value; }
+    }
     GooglePoints _gpoints = new GooglePoints();
     public GooglePoints Points
     {
@@ -82,6 +94,28 @@ public class GoogleObject
     {
         get { return _showzoomcontrol; }
         set { _showzoomcontrol = value; }
+    }
+
+    bool _recentermap = false;
+    public bool RecenterMap
+    {
+        get { return _recentermap; }
+        set { _recentermap = value; }
+    }
+
+    bool _ispostback = false;
+    public bool IsPostback
+    {
+        get { return _ispostback; }
+        set { _ispostback = value; }
+    }
+
+
+    bool _automaticboundaryandzoom = false;
+    public bool AutomaticBoundaryAndZoom
+    {
+        get { return _automaticboundaryandzoom; }
+        set { _automaticboundaryandzoom = value; }
     }
 
     bool _showtraffic = false;
@@ -167,6 +201,72 @@ public class GoogleObject
 }
 
 [Serializable()]
+public class GoogleDirections
+{
+    public GoogleDirections()
+    {
+    }
+
+    private ArrayList _addresses = new ArrayList();
+    public ArrayList Addresses
+    {
+        get {return _addresses; }
+        set { _addresses = value; }
+
+    }
+
+    private string _locale = "en_US";
+    public string Locale
+    {
+        get { return _locale; }
+        set { _locale = value; }
+    }
+
+
+    private bool _showdirectioninstructions = false;
+    public bool ShowDirectionInstructions
+    {
+        get { return _showdirectioninstructions; }
+        set { _showdirectioninstructions = value; }
+    }
+
+    bool _hideMarkers = false;
+    public bool HideMarkers
+    {
+        get { return _hideMarkers; }
+        set { _hideMarkers = value; }
+    }
+
+    private double _polylineopacity = 0.6;
+// <summary>
+// Lokales Connection-Timeout Für Feld_Ausgeben().
+// </summary>    
+    [Description("Direction line opacity. Valid values : 0.1 to 1.0")]
+    public double PolylineOpacity
+    {
+        get { return _polylineopacity; }
+        set { _polylineopacity = value; }
+    }
+
+    private int _polylineweight = 3;
+
+    [Description("Direction line weight or width. Valid values : 1 to 10.")]
+    public int PolylineWeight
+    {
+        get { return _polylineweight; }
+        set { _polylineweight = value; }
+    }
+
+    private string _polylinecolor = "#0000FF";
+
+    [Description("Direction line color")]
+    public string PolylineColor
+    {
+        get { return _polylinecolor; }
+        set { _polylinecolor = value; }
+    }
+}
+[Serializable()]
 public class GooglePoint
 {
     public GooglePoint()
@@ -180,6 +280,12 @@ public class GooglePoint
         set { _pointstatus = value; }
     }
 
+    string _address = "";
+    public string Address
+    {
+        get { return _address; }
+        set { _address = value; }
+    }
     public GooglePoint(string pID,double plat, double plon, string picon, string pinfohtml)
     {
         ID = pID;
@@ -187,6 +293,17 @@ public class GooglePoint
         Longitude = plon;
         IconImage = picon;
         InfoHTML = pinfohtml;
+    }
+
+    public GooglePoint(string pID, double plat, double plon, string picon, string pinfohtml,string pTooltipText,bool pDraggable)
+    {
+        ID = pID;
+        Latitude = plat;
+        Longitude = plon;
+        IconImage = picon;
+        InfoHTML = pinfohtml;
+        ToolTip = pTooltipText;
+        Draggable = pDraggable;
     }
 
     public GooglePoint(string pID, double plat, double plon, string picon)
@@ -239,11 +356,45 @@ public class GooglePoint
             {
                 IconImageWidth = img.Width;
                 IconImageHeight = img.Height;
+
+                IconAnchor_posX = img.Width / 2;
+                IconAnchor_posY = img.Height;
+
+                InfoWindowAnchor_posX = img.Width / 2;
+                InfoWindowAnchor_posY = img.Height / 3;
             }
             _icon = cCommon.GetHttpURL() + sIconImage;
 
 
             _icon = value;
+        }
+    }
+
+    string _iconshadowimage = "";
+    public string IconShadowImage
+    {
+        get
+        {
+            return _iconshadowimage;
+        }
+        set
+        {
+
+            //Get physical path of icon image. Necessary for Bitmap object.
+            string sShadowImage = value;
+            if (sShadowImage == "")
+                return;
+            string ShadowIconPhysicalPath = cCommon.GetLocalPath() + sShadowImage.Replace("/", "\\");
+            //Find width and height of icon using Bitmap image.
+
+            using (System.Drawing.Image img = System.Drawing.Image.FromFile(ShadowIconPhysicalPath))
+            {
+                IconShadowWidth = img.Width;
+                IconShadowHeight = img.Height;
+            }
+            _iconshadowimage = cCommon.GetHttpURL() + sShadowImage;
+
+            _iconshadowimage = value;
         }
     }
 
@@ -257,6 +408,96 @@ public class GooglePoint
         set
         {
             _iconimagewidth = value;
+        }
+    }
+
+    int _iconshadowwidth = 0;
+    public int IconShadowWidth
+    {
+        get
+        {
+            return _iconshadowwidth;
+        }
+        set
+        {
+            _iconshadowwidth = value;
+        }
+    }
+
+    int _iconshadowheight = 0;
+    public int IconShadowHeight
+    {
+        get
+        {
+            return _iconshadowheight;
+        }
+        set
+        {
+            _iconshadowheight = value;
+        }
+    }
+
+    int _iconanchor_posx = 16;
+    public int IconAnchor_posX
+    {
+        get
+        {
+            return _iconanchor_posx;
+        }
+        set
+        {
+            _iconanchor_posx = value;
+        }
+    }
+    int _iconanchor_posy = 32;
+    public int IconAnchor_posY
+    {
+        get
+        {
+            return _iconanchor_posy;
+        }
+        set
+        {
+            _iconanchor_posy = value;
+        }
+    }
+
+    int _infowindowanchor_posx = 16;
+    public int InfoWindowAnchor_posX
+    {
+        get
+        {
+            return _infowindowanchor_posx;
+        }
+        set
+        {
+            _infowindowanchor_posx = value;
+        }
+    }
+
+    int _infowindowanchor_posy = 5;
+    public int InfoWindowAnchor_posY
+    {
+        get
+        {
+            return _infowindowanchor_posy;
+        }
+        set
+        {
+            _infowindowanchor_posy = value;
+        }
+    }
+
+    bool _draggable = false;
+    public bool Draggable
+    {
+        get
+        {
+            return _draggable;
+        }
+        set
+        {
+            _draggable = value;
         }
     }
 
@@ -311,6 +552,19 @@ public class GooglePoint
             _infohtml = value;
         }
     }
+
+    string _tooltip = "";
+    public string ToolTip
+    {
+        get
+        {
+            return _tooltip;
+        }
+        set
+        {
+            _tooltip = value;
+        }
+    }
     public override bool Equals(System.Object obj)
     {
         // If parameter is null return false.
@@ -329,8 +583,16 @@ public class GooglePoint
         // Return true if the fields match:
         return (InfoHTML == p.InfoHTML) && (IconImage == p.IconImage) && (p.ID==ID) && (p.Latitude==Latitude) && (p.Longitude==Longitude);
     }
-}
+    public bool GeocodeAddress()
+    {
+        return cCommon.GeocodeAddress(this);
+    }
 
+    public bool ReverseGeocode()
+    {
+        return cCommon.ReverseGeocode(this);
+    }
+}
 [Serializable()]
 public class GooglePoints : CollectionBase
 {
@@ -589,9 +851,10 @@ public class GooglePolylines : CollectionBase
 [Serializable()]
 public sealed class GoogleMapType
 {
-    public const string NORMAL_MAP = "G_NORMAL_MAP";
-    public const string SATELLITE_MAP = "G_SATELLITE_MAP";
-    public const string HYBRID_MAP = "G_HYBRID_MAP";
+    public const string NORMAL_MAP = "google.maps.MapTypeId.ROADMAP";
+    public const string SATELLITE_MAP = "google.maps.MapTypeId.SATELLITE";
+    public const string HYBRID_MAP = "google.maps.MapTypeId.HYBRID";
+    public const string TERRAIN_MAP = "google.maps.MapTypeId.TERRAIN";
 }
 
 [Serializable()]
@@ -604,7 +867,197 @@ public class cCommon
         //
     }
     public static Random random = new Random();
+    public static bool IsNumeric(object s)
+    {
+        try
+        {
+            double.Parse(s.ToString());
+        }
+        catch
+        {
+            return false;
+        }
+        return true;
+    }
 
+
+    public static int GetIntegerValue(object pNumValue)
+    {
+        if ((pNumValue == null))
+        {
+            return 0;
+        }
+        if (IsNumeric(pNumValue))
+        {
+            return int.Parse((pNumValue.ToString()));
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    
+    public static bool GeocodeAddress(GooglePoint GP)
+    {
+        string sURL = "http://maps.googleapis.com/maps/api/geocode/xml?address="+GP.Address+"&sensor=false";
+        WebRequest request = WebRequest.Create(sURL);
+        request.Timeout = 10000;
+        // Set the Method property of the request to POST.
+        request.Method = "POST";
+        // Create POST data and convert it to a byte array.
+        string postData = "";
+        byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+        // Set the ContentType property of the WebRequest.
+        request.ContentType = "application/x-www-form-urlencoded";
+        // Set the ContentLength property of the WebRequest.
+        request.ContentLength = byteArray.Length;
+        // Get the request stream.
+        Stream dataStream = request.GetRequestStream();
+        
+        // Write the data to the request stream.
+        dataStream.Write(byteArray, 0, byteArray.Length);
+        // Close the Stream object.
+        dataStream.Close();
+        // Get the response.
+        WebResponse response = request.GetResponse();
+        // Display the status.
+        //Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+        // Get the stream containing content returned by the server.
+        dataStream = response.GetResponseStream();
+        // Open the stream using a StreamReader for easy access.
+        StreamReader reader = new StreamReader(dataStream);
+        // Read the content.
+        string responseFromServer = reader.ReadToEnd();
+
+        StringReader tx = new StringReader(responseFromServer) ;
+        
+        //return false;
+        //System.Xml.XmlReader xr = new System.Xml.XmlReader();
+
+        //return false;
+        
+        DataSet DS = new DataSet();
+        DS.ReadXml(tx);
+        //DS.ReadXml(dataStream);
+        //DS.ReadXml(tx);
+
+
+
+        string status = cCommon.GetStringValue(DS.Tables["GeocodeResponse"].Rows[0]["status"]);
+        if (status == "OK")
+        {
+            GP.Latitude = cCommon.GetNumericValue(DS.Tables["location"].Rows[0]["lat"]);
+            GP.Longitude = cCommon.GetNumericValue(DS.Tables["location"].Rows[0]["lng"]);
+            if (DS.Tables["result"] != null)
+            {
+                GP.Address = cCommon.GetStringValue(DS.Tables["result"].Rows[0]["formatted_address"]);
+            }
+            return true;
+        }
+        return false;
+
+    }
+
+
+    public static bool ReverseGeocode(GooglePoint GP)
+    {
+        string sURL = "http://maps.googleapis.com/maps/api/geocode/xml?latlng=" + GP.Latitude.ToString() + "," + GP.Longitude.ToString() + "&sensor=false";
+        WebRequest request = WebRequest.Create(sURL);
+        request.Timeout = 10000;
+        // Set the Method property of the request to POST.
+        request.Method = "POST";
+        // Create POST data and convert it to a byte array.
+        string postData = "";
+        byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+        // Set the ContentType property of the WebRequest.
+        request.ContentType = "application/x-www-form-urlencoded";
+        // Set the ContentLength property of the WebRequest.
+        request.ContentLength = byteArray.Length;
+        // Get the request stream.
+        Stream dataStream = request.GetRequestStream();
+
+        // Write the data to the request stream.
+        dataStream.Write(byteArray, 0, byteArray.Length);
+        // Close the Stream object.
+        dataStream.Close();
+        // Get the response.
+        WebResponse response = request.GetResponse();
+        // Display the status.
+        //Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+        // Get the stream containing content returned by the server.
+        dataStream = response.GetResponseStream();
+        // Open the stream using a StreamReader for easy access.
+        StreamReader reader = new StreamReader(dataStream);
+        // Read the content.
+        string responseFromServer = reader.ReadToEnd();
+
+        StringReader tx = new StringReader(responseFromServer);
+
+        //return false;
+        //System.Xml.XmlReader xr = new System.Xml.XmlReader();
+
+        //return false;
+
+        DataSet DS = new DataSet();
+        DS.ReadXml(tx);
+        //DS.ReadXml(dataStream);
+        //DS.ReadXml(tx);
+
+
+
+        string status = cCommon.GetStringValue(DS.Tables["GeocodeResponse"].Rows[0]["status"]);
+        if (status == "OK")
+        {
+            GP.Latitude = cCommon.GetNumericValue(DS.Tables["location"].Rows[0]["lat"]);
+            GP.Longitude = cCommon.GetNumericValue(DS.Tables["location"].Rows[0]["lng"]);
+            if (DS.Tables["result"] != null)
+            {
+                GP.Address = cCommon.GetStringValue(DS.Tables["result"].Rows[0]["formatted_address"]);
+            }
+            return true;
+        }
+        return false;
+
+    }
+
+
+
+    public static double GetNumericValue(object pNumValue)
+    {
+        if ((pNumValue == null))
+        {
+            return 0;
+        }
+        if (IsNumeric(pNumValue))
+        {
+            return double.Parse((pNumValue.ToString()));
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public static string GetStringValue(object obj)
+    {
+        if (obj == null)
+        {
+            return "";
+        }
+        if ((obj == null))
+        {
+            return "";
+        }
+        if (!(obj == null))
+        {
+            return obj.ToString();
+        }
+        else
+        {
+            return "";
+        }
+    }
     public static string GetHttpURL()
     {
         string[] s = System.Web.HttpContext.Current.Request.Url.AbsoluteUri.Split(new char[] { '/' });

@@ -43,7 +43,36 @@ public class GService : System.Web.Services.WebService
         //InitializeComponent(); 
     }
 
- 
+    [WebMethod(EnableSession = true)]
+    public void SetLatLon(string pID, double pLatitude, double pLongitude)
+    {
+        GoogleObject objGoogleNew = (GoogleObject)System.Web.HttpContext.Current.Session["GOOGLE_MAP_OBJECT"];
+        GoogleObject objGoogleOld = (GoogleObject)System.Web.HttpContext.Current.Session["GOOGLE_MAP_OBJECT_OLD"];
+        objGoogleNew.Points[pID].Latitude = pLatitude;
+        objGoogleNew.Points[pID].Longitude = pLongitude;
+        objGoogleOld.Points[pID].Latitude = pLatitude;
+        objGoogleOld.Points[pID].Longitude = pLongitude;
+    }
+
+    [WebMethod(EnableSession = true)]
+    public void SetZoom(string pID, int pZoomLevel)
+    {
+        GoogleObject objGoogleNew = (GoogleObject)System.Web.HttpContext.Current.Session["GOOGLE_MAP_OBJECT"];
+        GoogleObject objGoogleOld = (GoogleObject)System.Web.HttpContext.Current.Session["GOOGLE_MAP_OBJECT_OLD"];
+        objGoogleNew.ZoomLevel = pZoomLevel;
+        objGoogleOld.ZoomLevel = pZoomLevel;
+    }
+
+    //This method will be used once map centering is complete. This will set RecenterMap flag to false. So next time map will not recenter automatically.
+    [WebMethod(EnableSession = true)]
+    public void RecenterMapComplete()
+    {
+        GoogleObject objGoogleNew = (GoogleObject)System.Web.HttpContext.Current.Session["GOOGLE_MAP_OBJECT"];
+        GoogleObject objGoogleOld = (GoogleObject)System.Web.HttpContext.Current.Session["GOOGLE_MAP_OBJECT_OLD"];
+        objGoogleNew.RecenterMap=false;
+        objGoogleOld.RecenterMap = false;
+    }
+
     [WebMethod(EnableSession = true)]
     public GoogleObject GetGoogleObject()
     {
@@ -174,6 +203,9 @@ public class GService : System.Web.Services.WebService
         objGoogle.CenterPoint = objGoogleNew.CenterPoint;
         objGoogle.ZoomLevel = objGoogleNew.ZoomLevel;
         objGoogle.ShowTraffic = objGoogleNew.ShowTraffic;
+        objGoogle.RecenterMap = objGoogleNew.RecenterMap;
+        objGoogle.MapType = objGoogleNew.MapType;
+        objGoogle.AutomaticBoundaryAndZoom = objGoogleNew.AutomaticBoundaryAndZoom;
         //Save new Google object state in session variable.
         //System.Web.HttpContext.Current.Session["GOOGLE_MAP_OBJECT_OLD"] = objGoogleNew;
         System.Web.HttpContext.Current.Session["GOOGLE_MAP_OBJECT_OLD"] = new GoogleObject(objGoogleNew);
