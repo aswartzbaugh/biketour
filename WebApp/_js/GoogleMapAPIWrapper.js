@@ -30,7 +30,7 @@ function PolylineClickFunction(latlng) {
 
 function ZoomChangeFunction(overlay, latlng) {
     //alert(map.getZoom());
-    RaiseEvent('ZoomChanged', map.getZoom());
+    //RaiseEvent('ZoomChanged', map.getZoom());
 }
 function fGetGoogleObject(result, userContext) {
     returned_result = result;
