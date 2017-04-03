@@ -34,7 +34,7 @@
                 color: #c96;
             }
     </style>
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false&language=de"
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&language=de&amp;key=<%=ConfigurationManager.AppSettings["GoogleAPIKey"] %>"
         type="text/javascript"></script>
 
 

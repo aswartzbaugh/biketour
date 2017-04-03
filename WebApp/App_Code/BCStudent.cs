@@ -587,7 +587,8 @@ public class BCStudent
     {
         try
         {
-            _dt = DataAccessLayer.ReturnDataTable("Select * from QuizResult where ClassId=" + classid + " and CityId=" + cityid + " and IsPassed=1 and IsDeleted=0");
+            //_dt = DataAccessLayer.ReturnDataTable("Select * from QuizResult where ClassId=" + classid + " and CityId=" + cityid + " and IsPassed=1 and IsDeleted=0");
+            _dt = DataAccessLayer.ReturnDataTable("Select * from QuizResult where ClassId=" + classid + " and CityId=" + cityid + " and IsDeleted=0");
         }
         catch (Exception ex)
         {
