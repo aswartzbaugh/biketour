@@ -66,5 +66,14 @@
             ValidationGroup="Submit" /> <br />
         <asp:Label ID="lblMessage" runat="server" Text="" meta:ResourceKey="lblMessage" Visible="false"></asp:Label>
         </div>
-    </div>
+
+        <div class="AdminContWrap" style="min-height:auto !important">
+            <a href="Downloads/Support/Student/SupportStudentDownload.pdf" target ="_blank">Download PDF</a>
+        </div>
+
+        <div class="AdminContWrap" style="min-height:auto !important">
+            <a href="Downloads/Support/Student/SupportStudentDownload.pdf" target="_blank">Download Software</a>
+        </div>
+
+</div>
 </asp:Content>

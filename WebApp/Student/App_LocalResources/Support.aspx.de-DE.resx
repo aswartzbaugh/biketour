@@ -124,7 +124,7 @@
     <value />
   </data>
   <data name="lblh2Head.Text" xml:space="preserve">
-    <value>Hier ist, wie können Sie Bike Tour für weitere Unterstützung kontaktieren</value>
+    <value>Gibt es Probleme mit der Internetseite, der App oder dem GPS Gerät? Dann habt ihr hier die richtigen Ansprechpartner bei allen Problemen bezüglich der Internet Seite Matchrider bei anderen Fragen oder zur App:</value>
   </data>
   <data name="lblh2n.Text" xml:space="preserve">
     <value>Kontakt:</value>
@@ -139,10 +139,10 @@
     <value>Ihre Nachricht wurde gesendet!</value>
   </data>
   <data name="lblp1.Text" xml:space="preserve">
-    <value>Fahrrad Projekt</value>
+    <value />
   </data>
   <data name="lblp2.Text" xml:space="preserve">
-    <value>Kurfürsten-Anlage 62, 69115 Heidelberg, vertretungsberechtigter Geschäftsführer:: Michael Fröhlich, Tel: 06221 6554103</value>
+    <value />
   </data>
   <data name="lblp3.Text" xml:space="preserve">
     <value>Email Adresse</value>
