@@ -184,5 +184,99 @@ END
 
 GO
 
+--------------------------------------------------------------------------------------------------------------------------------------------
+USE [BikeTour]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GETSCORE_FOR_STARTPAGE]    Script Date: 05-04-2017 07:41:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
-----------------------------------------------
+
+/*          
+EXEC SP_GETSCORE_FOR_STARTPAGE 8  
+*/          
+ALTER PROC [dbo].[SP_GETSCORE_FOR_STARTPAGE]          
+(          
+ @CITYID INT          
+)          
+AS          
+BEGIN          
+ if @CITYID<>0        
+ begin        
+ --declare @cityid int
+ --set @CITYID = 12
+  select TOP 3 SCM.Class,        
+  SCM.ClassId,        
+  SM.School ,      
+  round(((SUM(SP.Distance_Covered) + SUM(SP.Distance_Extra))),2) as totaldistance,                
+  score=
+	(case (select COUNT(*) from StudentMaster SM1 Where SM1.ClassId=SCM.ClassId) 
+  when 0 then 0     
+  else 
+	  round((((SUM(SP.Distance_Covered) + SUM(SP.Distance_Extra))/
+	  (select COUNT(*) from StudentMaster SM1 Where SM1.ClassId=SCM.ClassId))*20),2) 
+  end),    
+    
+  scorewithbonus = 
+	(case (select COUNT(*) from StudentMaster SM1 Where SM1.ClassId=SCM.ClassId) 
+  when 0 then 0     
+  else 
+	  round(((((SUM(SP.Distance_Covered) + SUM(SP.Distance_Extra))/
+	  (select COUNT(*) from StudentMaster SM1 Where SM1.ClassId=SCM.ClassId))+    
+	  ((SELECT COUNT(*) FROM QuizResult QR WHERE QR.ClassId = SCM.ClassId AND QR.IsPassedFirstAttempt = 1) * 10))*20),2) 
+  end),     
+    
+  CM.CityName,        
+  CityId=@CITYID        
+  from StagePlan SP           
+  INNER JOIN SchoolClassMaster SCM          
+  ON SP.ClassId = SCM.ClassId  AND scm.IsActive=1         
+  INNER JOIN SchoolMaster SM          
+  ON SCM.SchoolId = SM.SchoolId  AND sm.IsActive=1     
+  LEFT OUTER JOIN CityMaster CM ON SM.CityId=CM.CityId                   
+  WHERE SM.CityId = @CITYID AND          
+  SM.IsActive = 1 AND          
+  SCM.IsActive = 1          
+  GROUP BY SCM.Class,  SCM.ClassId,        
+  SM.School, CM.CityName        
+  ORDER BY scorewithbonus DESC          
+ END          
+ else        
+ begin        
+  select TOP 4 SCM.Class,          
+  SM.School ,        
+  SCM.ClassId,      
+  round(SUM(SP.Distance_Covered)+ SUM(SP.Distance_Extra),2) AS totaldistance,        
+  score=
+	(case (select COUNT(*) from StudentMaster SM1 Where SM1.ClassId=SCM.ClassId) 
+  when 0 then 0     
+  else 
+	  round((((SUM(SP.Distance_Covered) + SUM(SP.Distance_Extra))/
+	  (select COUNT(*) from StudentMaster SM1 Where SM1.ClassId=SCM.ClassId))* 20),2) 
+  end),   
+    
+  scorewithbonus = 
+	(case (select COUNT(*) from StudentMaster SM1 Where SM1.ClassId=SCM.ClassId) 
+  when 0 then 0     
+  else 
+	  round(((((SUM(SP.Distance_Covered) + SUM(SP.Distance_Extra))/
+	  (select COUNT(*) from StudentMaster SM1 Where SM1.ClassId=SCM.ClassId))+    
+	  ((SELECT COUNT(*) FROM QuizResult QR WHERE QR.ClassId = SCM.ClassId AND QR.IsPassedFirstAttempt = 1) * 10)) * 20),2) 
+  end),   
+       
+  CM.CityName,        
+  CityId=0        
+  from StagePlan SP           
+  INNER JOIN SchoolClassMaster SCM ON SP.ClassId = SCM.ClassId  AND scm.IsActive=1       
+  LEFT OUTER JOIN SchoolMaster SM ON SCM.SchoolId = SM.SchoolId AND sm.IsActive=1    
+  LEFT OUTER JOIN CityMaster CM ON SM.CityId=CM.CityId         
+  WHERE           
+  SM.IsActive = 1 AND          
+  SCM.IsActive = 1          
+  GROUP BY SCM.Class, SCM.ClassId,         
+  SM.School, CM.CityName        
+  ORDER BY scorewithbonus DESC     
+ end        
+END
