@@ -268,7 +268,7 @@ public partial class Student_Forum : System.Web.UI.Page
                             catch { showOld = 0; }
                             #endregion
 
-                            QuizTest(Convert.ToInt32(hdn_StartCity.Value));
+                            QuizTest(Convert.ToInt32(hdn_EndCity.Value));
                             div_NextStage.Visible = true;
                             lbtnUpload.Visible = false;
                             //  div_RightCol.Visible = false;

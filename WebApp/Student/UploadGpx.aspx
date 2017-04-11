@@ -32,10 +32,16 @@
                     <HeaderTemplate>
                                 <asp:Label ID="lblgrdUploadedFile" runat="server" meta:ResourceKey="lblgrdUploadedFile"></asp:Label>
                             </HeaderTemplate>
-                    <ItemTemplate>
+                   <%-- <ItemTemplate>
                         <asp:Label ID="lbl_FileName" runat="server" Text='<%# Eval("FileName") %>' ></asp:Label>
                         <asp:Label ID="lbl_File" runat="server" Text='<%# Eval("FilePath") %>' Visible="false"></asp:Label>
-                    </ItemTemplate>
+                    </ItemTemplate>--%>
+                     <ItemTemplate>
+                                <a target="_blank" href='<%# "../GPXFiles/" + Eval("SchoolId") + "/" + Eval("ClassId") + "/" + Eval("StudentId") + "/" + Eval("FileName") %>'
+                                    id="GpxDownload" runat="server">
+                                    <asp:Label ID="lblGpx" runat="server" Text='<%# Eval("FileName") %>'></asp:Label>
+                                </a>
+                            </ItemTemplate>
                 </asp:TemplateField>
 
                 <%--<asp:BoundField DataField="AddedOn" HeaderText="Date" 
