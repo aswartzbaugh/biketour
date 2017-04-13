@@ -156,4 +156,9 @@
   <data name="rfvtxtEmail.ErrorMessage" xml:space="preserve">
     <value>Bitte geben sie eine Emailadresse an.</value>
   </data>
+  <data name="lblDownloadMessage.Text" xml:space="preserve">
+    <value>Hier findet ihr eine Software um Dateien, die ihr mit dem GPS Gerät aufgezeichnet habt anzusehen
+und sie in einem Format abzuspeichern das es euch erlaubt die Datei hochzuladen. Wie das
+funktioniert erklärt euch der Leitfaden, den ihr euch ebenfalls hier runderladen könnt.</value>
+  </data>
 </root>

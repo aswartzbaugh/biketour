@@ -5,7 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
+    <link rel="stylesheet" type="text/css" href="../_css/download-button.css">
 
     <style type="text/css">
         .multiline {
@@ -24,7 +24,7 @@
             <asp:Label ID="lblh3" runat="server" meta:ResourceKey="lblh3"></asp:Label>
         </h5>
         <div class="AdminContWrap">
-             <h2 class="colorh">
+            <h2 class="colorh">
                 <asp:Label ID="lblh2Head" runat="server" meta:ResourceKey="lblh2Head"></asp:Label>
             </h2>
             <br />
@@ -43,26 +43,52 @@
             <br />
             <br />
             <p class="lightcol">
-            <asp:Label ID="lblp3" runat="server" meta:ResourceKey="lblp3"></asp:Label></p>
-        <asp:TextBox ID="txtEmail" runat="server" CssClass="textbox"></asp:TextBox><span
-            class="error">*</span>
-        <asp:RequiredFieldValidator ID="rfvtxtEmail" runat="server" ControlToValidate="txtEmail"
-            Display="Dynamic" meta:ResourceKey="rfvtxtEmail" CssClass="error" ValidationGroup="Submit">
-        </asp:RequiredFieldValidator>
-        <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail"
-             meta:ResourceKey="revEmail" CssClass="error" Display="Dynamic" ValidationExpression="^[\w-\.]{1,}\@([\da-zA-Z-]{1,}\.){1,}[\da-zA-Z-]{2,3}$"
-            ValidationGroup="Submit" ForeColor="#FF3300">
-        </asp:RegularExpressionValidator>
+                <asp:Label ID="lblp3" runat="server" meta:ResourceKey="lblp3"></asp:Label>
+            </p>
+            <asp:TextBox ID="txtEmail" runat="server" CssClass="textbox"></asp:TextBox><span
+                class="error">*</span>
+            <asp:RequiredFieldValidator ID="rfvtxtEmail" runat="server" ControlToValidate="txtEmail"
+                Display="Dynamic" meta:ResourceKey="rfvtxtEmail" CssClass="error" ValidationGroup="Submit">
+            </asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail"
+                meta:ResourceKey="revEmail" CssClass="error" Display="Dynamic" ValidationExpression="^[\w-\.]{1,}\@([\da-zA-Z-]{1,}\.){1,}[\da-zA-Z-]{2,3}$"
+                ValidationGroup="Submit" ForeColor="#FF3300">
+            </asp:RegularExpressionValidator>
 
-        <p class="lightcol">
-            <asp:Label ID="lblp4" runat="server" meta:ResourceKey="lblp4"></asp:Label></p>
-        <asp:TextBox ID="txtComments" runat="server" TextMode="MultiLine" CssClass="multiline"></asp:TextBox><span
-            class="error">*</span><br />
-        <asp:RequiredFieldValidator ID="rfvtxtComment" runat="server" ControlToValidate="txtComments"
-            Display="Dynamic" meta:ResourceKey="rfvtxtComment" CssClass="error" ValidationGroup="Submit"></asp:RequiredFieldValidator>
-        <asp:Button ID="btnSend" runat="server" meta:ResourceKey="btnSend" OnClick="btnSend_Click"
-            ValidationGroup="Submit" /> <br />
-        <asp:Label ID="lblMessage" runat="server" Text="" meta:ResourceKey="lblMessage" Visible="false"></asp:Label>
+            <p class="lightcol">
+                <asp:Label ID="lblp4" runat="server" meta:ResourceKey="lblp4"></asp:Label>
+            </p>
+            <asp:TextBox ID="txtComments" runat="server" TextMode="MultiLine" CssClass="multiline"></asp:TextBox><span
+                class="error">*</span><br />
+            <asp:RequiredFieldValidator ID="rfvtxtComment" runat="server" ControlToValidate="txtComments"
+                Display="Dynamic" meta:ResourceKey="rfvtxtComment" CssClass="error" ValidationGroup="Submit"></asp:RequiredFieldValidator>
+            <asp:Button ID="btnSend" runat="server" meta:ResourceKey="btnSend" OnClick="btnSend_Click"
+                ValidationGroup="Submit" />
+            <br />
+            <asp:Label ID="lblMessage" runat="server" Text="" meta:ResourceKey="lblMessage" Visible="false"></asp:Label>
+            <br />
+            <br />
+            
         </div>
+        <asp:Label ID="lblDownloadMessage" runat="server" Text="" meta:ResourceKey="lblDownloadMessage" Visible="true"></asp:Label>
+        <table>
+            <tr>                
+                <td>
+                    <div class="button">
+                        <a href="Downloads/Support/classAdmin.pdf" target="_blank">Lehrer Leitfaden</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="button">
+                        <a href="Downloads/Support/student.pdf" target="_blank">Schüler Leitfaden</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="button">
+                        <a href="Downloads/Support/software.pdf" target="_blank">GPS Software</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </asp:Content>

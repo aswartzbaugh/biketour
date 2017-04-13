@@ -1,0 +1,13 @@
+﻿.button a {
+  display: block;
+  height: 30px;
+  width: 100px;
+  background: #00b7ea;
+  
+  /*TYPE*/
+  color: white;
+  font: 12px/30px Helvetica, Verdana, sans-serif;
+  text-decoration: none;
+  text-align: center;
+  /*text-transform: uppercase;*/
+}

@@ -164,4 +164,7 @@ With other questions or the app:</value>
   <data name="rfvtxtEmail.ErrorMessage" xml:space="preserve">
     <value>Please Enter Email Id.</value>
   </data>
+  <data name="lblDownloadMessage.Text" xml:space="preserve">
+    <value>Here you will find a software to view files that you have recorded with the GPS device and save it in a format that allows you to upload the file.                                                                      As the Works explained you the guide, which you can also find here.</value>
+  </data>
 </root>
