@@ -75,17 +75,17 @@
             <tr>                
                 <td>
                     <div class="button">
-                        <a href="Downloads/Support/classAdmin.pdf" target="_blank">Lehrer Leitfaden</a>
+                        <a href="../Downloads/Support/Leitfaden Lehrer.pdf" target="_blank">Lehrer Leitfaden</a>
                     </div>
                 </td>
                 <td>
                     <div class="button">
-                        <a href="Downloads/Support/student.pdf" target="_blank">Schüler Leitfaden</a>
+                        <a href="../Downloads/Support/Leitfaden Schüler 2.pdf" target="_blank">Schüler Leitfaden</a>
                     </div>
                 </td>
                 <td>
                     <div class="button">
-                        <a href="Downloads/Support/software.pdf" target="_blank">GPS Software</a>
+                        <a href="../Downloads/Support/setup_NCC_latest.exe" target="_blank">GPS Software</a>
                     </div>
                 </td>
             </tr>
