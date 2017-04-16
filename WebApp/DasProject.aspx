@@ -100,9 +100,10 @@
             <table width="100%" cellpadding="5">
                 <tr>
                     <td><a href="https://www.adfc-bw.de/heidelberg/" target="_blank">
-                        <img src="_images/logo-adfc.jpg" alt="adfc heidelberg" /></a></td>
+                        <img src="_images/logo-adfc-new.jpg" alt="adfc heidelberg" /></a></td>
                     <td><a href="https://www.matchrider.de/" target="_blank">
-                        <img src="_images/logo-matchrider.jpg" alt="Matchrider" /></a></td>
+                       <%-- <img src="_images/logo-matchrider.jpg" alt="Matchrider" /></a></td>--%>
+                        <img src="_images/MRGO-Logos_Marketing-Kit-8.jpg" alt="Matchrider" /></a></td>
                     <td><a href="https://www.xing.com/profile/Sebastian_Weimann" target="_blank">
                         <img src="_images/logo-sebastian-weimann.jpg" alt="Sebastian Weimann" /></a></td>
                     <td><a href="http://www.pixelcloud.de" target="_blank">

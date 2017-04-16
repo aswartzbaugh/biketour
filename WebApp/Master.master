@@ -63,7 +63,8 @@
 	<div class="header">
     	<div class="wrapper">
         	<div class="logo">
-            	<a href="Default.aspx"><img src="_images/logo.jpg" alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>
+            	<%--<a href="Default.aspx"><img src="_images/logo.jpg" alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>--%>
+                <a href="Default.aspx"><img src="_images/logo-adfc-new.jpg" alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>
             </div>
             <div class="navi">
             	<ul>
