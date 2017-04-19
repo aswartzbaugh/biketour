@@ -41,9 +41,9 @@
     <!-- startblock -->
     <script type="text/javascript">
         window.onload = function () {
-                                <%=MapData%>
+            <%=MapData%>
             <%=ZoomLevelString%>
-                            }
+        }
 
         function toggleBounce() {
 
@@ -82,7 +82,7 @@
 
                 </div>
                 <div class="col col-10">&nbsp;</div>
-                <div class="col col-45" style="margin-top: 20px; background: #ccc; height: 400px;border-radius: 7px;-moz-border-radius: 7px;-webkit-border-radius: 7px; "  id="map-canvas"  >
+                <div class="col col-45" style="margin-top: 20px; background: #ccc; height: 400px; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px;" id="map-canvas">
                     <div class="clear">
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                     <td><a href="https://www.adfc-bw.de/heidelberg/" target="_blank">
                         <img src="_images/logo-adfc-new.jpg" alt="adfc heidelberg" /></a></td>
                     <td><a href="https://www.matchrider.de/" target="_blank">
-                       <%-- <img src="_images/logo-matchrider.jpg" alt="Matchrider" /></a></td>--%>
+                        <%-- <img src="_images/logo-matchrider.jpg" alt="Matchrider" /></a></td>--%>
                         <img src="_images/MRGO-Logos_Marketing-Kit-8.jpg" alt="Matchrider" /></a></td>
                     <td><a href="https://www.xing.com/profile/Sebastian_Weimann" target="_blank">
                         <img src="_images/logo-sebastian-weimann.jpg" alt="Sebastian Weimann" /></a></td>
@@ -114,12 +114,19 @@
             <hr />
             <p>&nbsp;</p>
             <p>&nbsp;</p>
-            <h1 style="text-align: center;">Stadt-Land-Rad wird durch die Stadt Heidelberg gefördert</h1>
+            <h1 style="text-align: center;">Wird gefördert durch:</h1>
             <p>&nbsp;</p>
             <table width="100%" cellpadding="5">
                 <tr>
                     <td><a href="https://www.heidelberg.de/" target="_blank">
-                        <img src="_images/logo-heidelberg.jpg" alt="stadt heidelberg" /></a></td>
+                        <img src="_images/logo-heidelberg.jpg" alt="stadt heidelberg" /></a>
+                    </td>
+                    <td>
+                        <img src="_images/LogoMinisterium Seite1.tif" alt="Ministerium Seite" />
+                    </td>
+                    <td>
+                        <img src="_images/Logo_SidS3_NEW.jpg" alt="SPORT IN DER SCHULE" />
+                    </td>
                 </tr>
             </table>
             <p>&nbsp;</p>
