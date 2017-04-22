@@ -124,7 +124,7 @@
     <value />
   </data>
   <data name="lblh2Head.Text" xml:space="preserve">
-    <value>Gibt es Probleme mit der Internetseite, der App oder dem GPS Gerät? Dann habt ihr hier die richtigen Ansprechpartner bei allen Problemen bezüglich der Internet Seite Matchrider bei anderen Fragen oder zur App:</value>
+    <value>Gibt es Probleme mit der Internetseite, der App oder dem GPS- Gerät? Dann habt ihr hier die richtigen Ansprechpartner bei allen Problemen bezüglich der Internet Seite, Matchrider bei anderen Fragen oder zur App:</value>
   </data>
   <data name="lblh2n.Text" xml:space="preserve">
     <value>Kontakt:</value>
@@ -157,8 +157,8 @@
     <value>Bitte geben sie eine Emailadresse an.</value>
   </data>
   <data name="lblDownloadMessage.Text" xml:space="preserve">
-    <value>Hier findet ihr eine Software um Dateien, die ihr mit dem GPS Gerät aufgezeichnet habt anzusehen
-und sie in einem Format abzuspeichern das es euch erlaubt die Datei hochzuladen. Wie das
-funktioniert erklärt euch der Leitfaden, den ihr euch ebenfalls hier runderladen könnt.</value>
+    <value>Hier findet ihr eine Software, um Dateien, die ihr mit dem GPS-Gerät aufgezeichnet habt, anzusehen
+und sie in einem Format abzuspeichern, das es euch erlaubt, sie Datei hochzuladen. Wie das
+funktioniert, erklärt euch der Leitfaden, den ihr euch ebenfalls hier runderladen könnt.</value>
   </data>
 </root>

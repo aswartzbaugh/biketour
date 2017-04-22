@@ -138,7 +138,7 @@ public partial class Student_Forum : System.Web.UI.Page
         try
         {
             double percentage = 0.0;
-
+            string quizForCity = string.Empty;
             DataTable dsStud = objStudent.GetStudentInfo(Convert.ToInt32(Session["UserId"]));
             int classId = Convert.ToInt32(dsStud.Rows[0]["ClassId"].ToString());
             int CompleteLegs = objStudent.GetCompleteLegCount(classId);
@@ -157,7 +157,7 @@ public partial class Student_Forum : System.Web.UI.Page
                     ddlcity.DataTextField = "CityName";
                     ddlcity.DataValueField = "CityId";
                     ddlcity.DataBind();
-                    ddlcity.Items.Insert(0, new ListItem(" Stadt", "0"));
+                    ddlcity.Items.Insert(0, new ListItem(" Stadt", "0"));                    
                 }
                 else
                 {
@@ -268,9 +268,11 @@ public partial class Student_Forum : System.Web.UI.Page
                             catch { showOld = 0; }
                             #endregion
 
-                            QuizTest(Convert.ToInt32(hdn_EndCity.Value));
+                            quizForCity = (dtm.Rows.Count > 0 ? hdn_EndCity.Value : hdn_StartCity.Value);
+
+                            QuizTest(Convert.ToInt32(quizForCity));
                             div_NextStage.Visible = true;
-                            lbtnUpload.Visible = false;
+                            //lbtnUpload.Visible = false;
                             //  div_RightCol.Visible = false;
                             div_QuizTest.Visible = false;
                         }
@@ -443,26 +445,26 @@ public partial class Student_Forum : System.Web.UI.Page
         //Deleteting appeared test files from respective folder
         #region Check existing files and delete
 
-        string directoryPath = Server.MapPath("../QuizTests/HtmlQuiz1").ToString();
-        string[] filePaths = Directory.GetFiles(directoryPath);
-        if (filePaths.Length > 0)
-        {
-            foreach (string filePath in filePaths)
-                File.Delete(filePath);
-            string[] dirPaths = Directory.GetDirectories(directoryPath);
-            if (dirPaths != null)
-            {
-                foreach (string dirPath in dirPaths)
-                {
-                    filePaths = Directory.GetFiles(dirPath);
-                    foreach (string filePath in filePaths)
-                    {
-                        File.Delete(filePath);
-                    }
-                    Directory.Delete(dirPath);
-                }
-            }
-        }
+        //string directoryPath = Server.MapPath("../QuizTests/HtmlQuiz1").ToString();
+        //string[] filePaths = Directory.GetFiles(directoryPath);
+        //if (filePaths.Length > 0)
+        //{
+        //    foreach (string filePath in filePaths)
+        //        File.Delete(filePath);
+        //    string[] dirPaths = Directory.GetDirectories(directoryPath);
+        //    if (dirPaths != null)
+        //    {
+        //        foreach (string dirPath in dirPaths)
+        //        {
+        //            filePaths = Directory.GetFiles(dirPath);
+        //            foreach (string filePath in filePaths)
+        //            {
+        //                File.Delete(filePath);
+        //            }
+        //            Directory.Delete(dirPath);
+        //        }
+        //    }
+        //}
         #endregion
 
         #region QuizTest`dc

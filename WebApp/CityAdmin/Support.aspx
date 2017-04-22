@@ -29,7 +29,7 @@
             </h2>
             <br />
             <h2>
-                <asp:Label ID="lblh2" runat="server" meta:ResourceKey="lblh2"></asp:Label></h2>
+                <asp:Label ID="lblh2" Font-Bold="true" runat="server" meta:ResourceKey="lblh2"></asp:Label></h2>
             <p>
                 <asp:Label ID="lblp1" runat="server" meta:ResourceKey="lblp1"></asp:Label>
             </p>
@@ -38,7 +38,7 @@
             </p>
             <br />
             <h2>
-                <asp:Label ID="lblh2n" runat="server" meta:ResourceKey="lblh2n"></asp:Label></h2>
+                <asp:Label ID="lblh2n" Font-Bold="true" runat="server" meta:ResourceKey="lblh2n"></asp:Label></h2>
             <a id="mailLink" runat="server"></a>
             <br />
             <br />
