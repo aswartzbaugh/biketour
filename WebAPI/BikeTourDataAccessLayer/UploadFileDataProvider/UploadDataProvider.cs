@@ -69,22 +69,22 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                     }
                     response.UploadFileStatus = new List<UploadFileStatus>();
                     //var item = requestMessage.FileData;
-                            //foreach (var item in requestMessage.FileList)
-                            //{
-                            //var schoolClassDetail = GetSchoolClassMasterDetails(item.SchoolName, item.ClassName);
+                    foreach (var item in requestMessage.FileList)
+                    {
+                        //var schoolClassDetail = GetSchoolClassMasterDetails(item.SchoolName, item.ClassName);
 
-                            //if (schoolClassDetail != null &&
-                            //    schoolClassDetail.Rows.Count>0)
-                            //{
+                        //if (schoolClassDetail != null &&
+                        //    schoolClassDetail.Rows.Count>0)
+                        //{
 
-                            Upload(requestMessage, response, filePath);
-                            response.UploadFileStatus.Add(new UploadFileStatus
-                            {
-                                FileName = requestMessage.FileName,
-                                Status = (response.Error != null && response.Error.Count > 0 ? false : true),
-                                Error = response.Error,
+                        Upload(item, response, filePath);
+                        response.UploadFileStatus.Add(new UploadFileStatus
+                        {
+                            FileName = item.FileName,
+                            Status = (response.Error != null && response.Error.Count > 0 ? false : true),
+                            Error = response.Error,
 
-                            });
+                        });
                         //}
                         //else
                         //{
@@ -98,7 +98,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                         //    response.UploadFileStatus.Add(fileStatus);
                         //}
                         response.Error = null;
-                    //}
+                    }
                 }
                 else
                 {
@@ -113,7 +113,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
         }
 
         #region Private Methods
-        protected void Upload(UploadRequestMessage PostedFile,
+        protected void Upload(UploadFile PostedFile,
             UploadResponseMessage response, string filePath)
         {
             try
@@ -122,7 +122,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                 DateTime cityStartDate = new DateTime();
                 DataTable _dtTrkpts = new DataTable();
                 DataTable studInfo = null;
-                 string FileName = PostedFile.FileName;
+                string FileName = PostedFile.FileName;
                 string NewFile = "";
                 string NewFileName = "";
                 string FilePath = string.Empty;
@@ -164,7 +164,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                     #region Save file on server for evaluation
 
 
-                       File.WriteAllBytes(FilePath + FileName + ".xml", PostedFile.FileData);
+                        File.WriteAllBytes(FilePath + FileName + ".xml", PostedFile.FileData);
                         //fu_UploadGpx.SaveAs(FilePath + FileName.Replace(".gpx", ".xml"));
                         DataTable dt = cityContent.GetCityContent(cityId, 0);
                         XElement root = null;

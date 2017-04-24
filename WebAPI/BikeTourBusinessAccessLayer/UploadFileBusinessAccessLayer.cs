@@ -47,24 +47,24 @@ namespace BikeTourBusinessAccessLayer
                     ErrorLogManager.WriteLog(response, "004", "Password is mandatory.");
 
                 
-                if (requestMessage.FileData == null)
+                if (requestMessage.FileList == null)
                 {
                     ErrorLogManager.WriteLog(response, "005", "File list should not be empty.");
                 }
                 else
                 {
                     //var item = requestMessage.FileList;
-                    //foreach (var item in requestMessage.FileList)
-                    //{                        
-                        if (string.IsNullOrEmpty(requestMessage.FileName))
+                    foreach (var item in requestMessage.FileList)
+                    {
+                        if (string.IsNullOrEmpty(item.FileName))
                             ErrorLogManager.WriteLog(response, "006", "File name is mandatory.");
 
-                        if (requestMessage.FileData == null)
+                        if (item.FileData == null)
                             ErrorLogManager.WriteLog(response, "007", "File data should not be empty.");
 
-                        if (requestMessage.FileData != null && requestMessage.FileData.Length == 0)
+                        if (item.FileData != null && item.FileData.Length == 0)
                             ErrorLogManager.WriteLog(response, "007", "File data should not be empty.");
-                    //}
+                    }
                 }
                 
             }
