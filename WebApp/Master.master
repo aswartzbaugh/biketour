@@ -64,7 +64,7 @@
     	<div class="wrapper">
         	<div class="logo">
             	<%--<a href="Default.aspx"><img src="_images/logo.jpg" alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>--%>
-                <a href="Default.aspx"><img src="_images/logo-adfc-new.jpg" alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>
+                <a href="Default.aspx"><img src="_images/weiß-orange - Hintergrund blau.jpg"  alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>
             </div>
             <div class="navi">
             	<ul>
@@ -103,7 +103,11 @@
                 <h1>Jetzt auch als App verfügbar</h1>
                 <h2>für dein Android-Smartphone</h2>
                 <p>Mit der App für den Android-Smartphone kannst du die Tracks ganz leicht erstellen und direkt ins Internet hochladen - einfacher gehts nicht!  </p>
-                <p><img src="_images/apple-appstore.png" /> <img src="_images/playstore.png" /></p>
+                <p>
+                   
+                    <img src="_images/apple-appstore.png" /> 
+                   <a href="https://play.google.com/store/apps/details?id=de.pixelcloud.stadtlandrad&hl=de" target="_blank"><img src="_images/playstore.png"/></a>                    
+                        </p>
             </div>
         	<div class="col col-45">
             	<div class="placeholder">

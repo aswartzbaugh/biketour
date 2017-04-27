@@ -124,12 +124,7 @@
     <value>Company Details:</value>
   </data>
   <data name="lblh2Head.Text" xml:space="preserve">
-    <value>Are there problems with the website,
-The app or the GPS device? Then
-You have the right ones here
-Contact for all problems
-Concerning the Internet site Matchrider
-With other questions or the app:</value>
+    <value>Are there problems with the website, The app or the GPS-device? Then you have the right ones here contact for all problems concerning the web site Matchrider, with other questions or the app:</value>
   </data>
   <data name="lblh2n.Text" xml:space="preserve">
     <value>Contact:</value>
@@ -165,6 +160,6 @@ With other questions or the app:</value>
     <value>Please Enter Email Id.</value>
   </data>
   <data name="lblDownloadMessage.Text" xml:space="preserve">
-    <value>Here you will find a software to view files that you have recorded with the GPS device and save it in a format that allows you to upload the file.                                                                      As the Works explained you the guide, which you can also find here.</value>
+    <value>Here you will find, a software to view files that you have recorded with the GPS-device and save it in a format, that allows you, to upload the file. As the Works explained you the guide, which you can also find here.</value>
   </data>
 </root>

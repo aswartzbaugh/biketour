@@ -21,7 +21,8 @@ public partial class Default : System.Web.UI.Page
     {
         DataTable dt = new DataTable();
         dt = bcadmin.HighScore(Convert.ToInt32(Id));
-        if (dt.Rows.Count > 0)
+        if (dt!=null &&
+            dt.Rows.Count > 0)
         {
             //lblmsg.Visible = false;
             dlsore.DataSource = dt;

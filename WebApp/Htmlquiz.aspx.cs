@@ -80,7 +80,9 @@ public partial class quiz : System.Web.UI.Page
                 {
 
                     int res = objStudent.InsertQuizResult(0, userid, classid, cityid, outofscore, passingscore, studentscore, pass);
-                    if (res > 0 && pass == 1)
+                    DataTable dt = objStudent.GetQuizResult(classid, cityid);
+
+                    if (res > 0 && (pass == 1|| dt.Rows.Count>5))
                     {
                         //Deleteting appeared test files from respective folder
                         string directoryPath = Server.MapPath("QuizTests/HtmlQuiz1").ToString();
