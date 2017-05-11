@@ -29,6 +29,8 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
         public UploadResponseMessage UploadFile(UploadRequestMessage requestMessage, string filePath ="")
         {
             UploadResponseMessage response = new UploadResponseMessage();
+            response.Log = new List<UploadFileStatus>();
+            
             try
             {
                 StringBuilder sqlString = new StringBuilder();
@@ -41,7 +43,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
 
                 var login = DataAccessLayer.ReturnDataTable(sqlString.ToString());
 
-                if (login != null)
+                if (login != null && login.Rows!=null && login.Rows.Count>0)
                 {
                     UserRoleId = Convert.ToInt32(login.Rows[0]["RoleId"]);
                     UserId = Convert.ToInt32(login.Rows[0]["LoginId"]);
@@ -64,12 +66,13 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                     }
                     else
                     {
-                        ErrorLogManager.WriteLog(response, "013", "Only Student can upload  file.");
+                        ErrorLogManager.WriteLog(response,"TestFile","013", "Only Student can upload file.");
                         return response;
                     }
-                    response.UploadFileStatus = new List<UploadFileStatus>();
+                    //throw new Exception("To Verify the Error log file writting");
+                    
                     //var item = requestMessage.FileData;
-                    foreach (var item in requestMessage.FileList)
+                    foreach (var item in requestMessage.gpxFiles)
                     {
                         //var schoolClassDetail = GetSchoolClassMasterDetails(item.SchoolName, item.ClassName);
 
@@ -78,37 +81,40 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                         //{
 
                         Upload(item, response, filePath);
-                        response.UploadFileStatus.Add(new UploadFileStatus
-                        {
-                            FileName = item.FileName,
-                            Status = (response.Error != null && response.Error.Count > 0 ? false : true),
-                            Error = response.Error,
-
-                        });
-                        //}
-                        //else
+                        //var status = new UploadFileStatus
+                        //  {
+                        //      FileName = item.FileName,
+                        //      Code                      
+                        //  };
+                        //if (response==null) 
                         //{
-                        //    var fileStatus = (new UploadFileStatus
-                        //    {
-                        //        FileName = item.FileName,
-                        //        Status = false,                                
-                        //    });
-                        //    fileStatus.Error = new List<ErrorMessage>();
-                        //    ErrorMessage err = new ErrorMessage { Code = "015", Message = "School /Class does not exist." };
-                        //    response.UploadFileStatus.Add(fileStatus);
+                        //    status.Status=true;
                         //}
-                        response.Error = null;
+                        //else if (response!=null && response.Error==null) 
+                        //{
+                        //    status.Status=true;
+                        //}
+                        //else 
+                        //{
+                        //    status.Status = (response.Error.Where(x => x.IsError == true).Count() > 0 ? false : true);
+                        //}
+                                               
+                        //response.Log.Add(status);
+                       
+                        //response.Log = null;
                     }
                 }
                 else
                 {
-                    ErrorLogManager.WriteLog(response, "000", "Unable to find user.");
+                    ErrorLogManager.WriteLog(response,"TestFile",  "000", "Unable to find user.");
                 }
             }
             catch (Exception ex)
             {
-                ErrorLogManager.WriteLog(response, "999", ex.Message);
+                ErrorLogManager.WriteLog(response, "TestFile", "999", ex.Message, ex: ex);
+                //ErrorLogManager.WriteLog(error, "012", ex.Message, ex: ex);  
             }
+            
             return response;
         }
 
@@ -116,13 +122,14 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
         protected void Upload(UploadFile PostedFile,
             UploadResponseMessage response, string filePath)
         {
+            string FileName = string.Empty;
             try
             {
                 BCCityAdmin cityContent = new BCCityAdmin();
                 DateTime cityStartDate = new DateTime();
                 DataTable _dtTrkpts = new DataTable();
                 DataTable studInfo = null;
-                string FileName = PostedFile.FileName;
+                FileName = PostedFile.FileName;
                 string NewFile = "";
                 string NewFileName = "";
                 string FilePath = string.Empty;
@@ -157,7 +164,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                 //{
                 if (IsFileUploaded(FilePath + FileName + ".xml"))
                     {
-                        ErrorLogManager.WriteLog(response, "008", "File already uploaded!");
+                        ErrorLogManager.WriteLog(response,FileName, "008", "File already uploaded!");
                     }
                     else
                     {
@@ -176,7 +183,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                         }
                         catch (Exception ex)
                         {
-                            ErrorLogManager.WriteLog(response, "009", "Uploaded File does not have Time Information, Please check the file and re-upload");
+                            ErrorLogManager.WriteLog(response,FileName, "009", "Uploaded File does not have Time Information, Please check the file and re-upload");
                             return;
                         }
                         if (dt != null && dt.Rows.Count > 0)
@@ -187,7 +194,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                                 DateOfFile != new DateTime() &&
                                 DateOfFile.Date <= cityStartDate.Date)
                             {
-                                ErrorLogManager.WriteLog(response, "010", "File can not be uploaded prior to Batch Start Date.");
+                                ErrorLogManager.WriteLog(response,FileName, "010", "File can not be uploaded prior to Batch Start Date.");
                                 return;
                             }
                         }
@@ -216,9 +223,9 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                         int trackCount = dtNew.Rows.Count; //(dtNew.Rows.Count / 5) + 1;
                         double highestSpeed = 0;
 
-                        DataTable dtNewRows = CheckPreviousGPXTrackPoints(UserId, 
+                        DataTable dtNewRows = CheckPreviousGPXTrackPointsNew(UserId, 
                             schoolId,
-                            classId, CloneDataTableForGPXUpload(dtNew));
+                            classId, dtNew);
 
                         if (dtNewRows.Rows.Count > 0)
                         {
@@ -248,7 +255,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                             
                             if (avgSpeed == 0)
                             {
-                                ErrorLogManager.WriteLog(response, "011", "Invalid file!");
+                                ErrorLogManager.WriteLog(response,FileName, "011", "Invalid file!");
                                 File.Delete(NewFile);
                             }
                             else
@@ -273,7 +280,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                             #endregion
                             if (avgSpeed > speedLimit)
                             {
-                                ErrorLogManager.WriteLog(response, "016", "Speed Limit Crossed!");
+                                ErrorLogManager.WriteLog(response,FileName, "016", "Speed Limit Crossed!");
                             }
                             else if (avgSpeed <= speedLimit && highestSpeed <= speedLimit)
                             {
@@ -293,11 +300,11 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                                 if (res > 0)
                                 {
                                     _SaveTrackPoints(_dtTrkpts, res);
-                                    ErrorLogManager.WriteLog(response, "012", "File uploaded successfully!");
+                                    ErrorLogManager.WriteLog(response,FileName, "012", "File uploaded successfully!",false);
                                 }
                                 else
                                 {
-                                    ErrorLogManager.WriteLog(response, "008", "File already uploaded!");
+                                    ErrorLogManager.WriteLog(response,FileName, "008", "File already uploaded!");
                                     File.Delete(NewFile);
                                 }
 
@@ -348,11 +355,11 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                                         #endregion
                                     //}
                                 
-                                    ErrorLogManager.WriteLog(response, "012", "File uploaded successfully!");
+                                    ErrorLogManager.WriteLog(response,FileName, "012", "File uploaded successfully!",false);
                                 }
                                 else
                                 {
-                                    ErrorLogManager.WriteLog(response, "008", "File already uploaded!");
+                                    ErrorLogManager.WriteLog(response,FileName, "008", "File already uploaded!");
                                     File.Delete(NewFile);
                                 }
 
@@ -362,7 +369,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                         }
                         else
                         {                            
-                            ErrorLogManager.WriteLog(response, "008", "File already uploaded!");
+                            ErrorLogManager.WriteLog(response,FileName, "008", "File already uploaded!");
                         }
                     }
                 //}
@@ -377,14 +384,12 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
             {
                 //string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";//Select GPX file!
                 //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                ErrorLogManager.WriteLog(response, "013", "Select GPX file!" + ex.Message);
+                ErrorLogManager.WriteLog(response,FileName, "013", "Select GPX file!" + ex.Message);
             }
         }
 
         private bool checkGPXWayPoints(DataTable dt)
         {
-
-
             return false;
         }
 
@@ -496,6 +501,13 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                 }
                 result = dtNew;
             }
+            return result;
+        }
+
+        public DataTable CheckPreviousGPXTrackPointsNew(int UserId, int SchoolId, int ClassId, DataTable dtNew)
+        {
+            DataTable result = objStudent.CheckGPXFileTable(dtNew, ClassId, UserId);
+
             return result;
         }
 
@@ -704,9 +716,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                         if (_dt.Rows[i]["time"].ToString() == "")
                             _dtFiltered.Rows.Remove(_dt.Rows[i]);
                     }
-
-
-
+                    
                     for (int i = 0; i < _dtFiltered.Rows.Count - 1; i++)
                     {
 
@@ -783,5 +793,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
             catch { }
             return _dt;
         }
+
+       
     }
 }

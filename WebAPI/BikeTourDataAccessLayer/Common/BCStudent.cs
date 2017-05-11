@@ -519,7 +519,23 @@ namespace Common
             }
 
         }
+        public DataTable CheckGPXFileTable(DataTable dt, int classid, int studentId)
+        {
 
+            DataTable val;
+            try
+            {
+                val = (DataAccessLayer.ExecuteStoredProcedureToRetDataTable(new SqlParameter[] { 
+                new SqlParameter("@myTableType", dt), new SqlParameter("@classId",classid), 
+                new SqlParameter("@studentId", studentId) }, "SP_CHECK_GPXTRACKPOINTSOVERLAP_NEW"));
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return val;
+        }
         public int DeleteStudentUpload(int StudentUploadId)
         {
             int result = 0;

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="BikeTour - School Master" Culture="de-DE" UICulture="de-DE" Language="C#"
+﻿<%@ Page Title="BikeTour - School Master" Culture="en-US" UICulture="en-US" Language="C#"
     MasterPageFile="~/SiteMaster/AdminMaster.master" AutoEventWireup="true" CodeFile="SchoolMaster.aspx.cs"
     Inherits="AppAdmin_SchoolMaster" %>
 

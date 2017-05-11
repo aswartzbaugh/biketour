@@ -26,7 +26,7 @@ namespace BikeTourDataAccessLayer
                 sqlString.Append(RequestMessage.Password);
                 sqlString.Append("' as varbinary(50)) and IsActive=1");
 
-                var login = DataAccessLayer.ExecuteScalar(sqlString.ToString());
+                var login = DataAccessLayer.ExecuteScalar(sqlString.ToString());                
 
                 if (login != null)
                 {                    
@@ -39,7 +39,8 @@ namespace BikeTourDataAccessLayer
             }
             catch (Exception ex)
             {
-                ErrorLogManager.WriteLog(response, "999", ex.Message);                
+                //ErrorLogManager.WriteLog(response, "999", ex.Message,ex:ex);                
+                ErrorLogManager.WriteLog(response, "012", ex.Message, ex: ex);                
             }
             return response;
         }

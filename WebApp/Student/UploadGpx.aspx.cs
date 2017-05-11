@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Linq;
 using System.Xml.Linq;
 using System.Text;
 using System.Xml;
@@ -174,7 +173,10 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                     double highestSpeed = 0;
                     //DataTable dtNewRows = CheckPreviousGPX(Convert.ToInt32(Session["UserId"]), Convert.ToInt32(studInfo.Rows[0]["SchoolId"].ToString()), Convert.ToInt32(studInfo.Rows[0]["ClassId"].ToString()), dtNew);
 
-                    DataTable dtNewRows = CheckPreviousGPXTrackPoints(Convert.ToInt32(Session["UserId"]), Convert.ToInt32(studInfo.Rows[0]["SchoolId"].ToString()), Convert.ToInt32(studInfo.Rows[0]["ClassId"].ToString()), CloneDataTableForGPXUpload(dtNew));
+                    DataTable dtNewRows = CheckPreviousGPXTrackPointsNew
+                        (Convert.ToInt32(Session["UserId"]), 
+                        Convert.ToInt32(studInfo.Rows[0]["SchoolId"].ToString()), 
+                        Convert.ToInt32(studInfo.Rows[0]["ClassId"].ToString()), dtNew);
 
 
 
@@ -211,7 +213,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
 
                         if (avgSpeed == 0)
                         {
-                            string popupScript = "alert('Invalid file!');";
+                            string popupScript = "alert('" + (string)GetLocalResourceObject("MsgAvgSpeedIsLow") + "');";
                             ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                             File.Delete(NewFile);
                         }
@@ -255,7 +257,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                                 }
                                 else
                                 {
-                                    string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileAlredyUploaded") + "');";//File already uploaded!
+                                    string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";//File already uploaded!
                                     ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                                     File.Delete(NewFile);
                                 }
@@ -296,18 +298,19 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                                         }
                                         catch (Exception ex)
                                         {
-
+                                            string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";//File already uploaded!
+                                            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                                         }
                                     }
 
                                     #endregion
 
-                                    string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileUploaded") + "');";//File uploaded successfully!
-                                    ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                                    string popupScripts = "alert('" + (string)GetLocalResourceObject("MsgFileUploaded") + "');";//File uploaded successfully!
+                                    ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScripts, true);
                                 }
                                 else
                                 {
-                                    string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileAlredyUploaded") + "');";//File already uploaded!
+                                    string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";//File already uploaded!
                                     ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                                     File.Delete(NewFile);
                                 }
@@ -337,7 +340,12 @@ public partial class Student_UploadGpx : System.Web.UI.Page
         }
     }
 
-
+    public DataTable CheckPreviousGPXTrackPointsNew(int UserId, int SchoolId, int ClassId, DataTable dtNew)
+    {
+        DataTable result = objStudent.CheckGPXFileTable(dtNew, ClassId, UserId);
+        
+        return result;
+    }
     private bool checkGPXWayPoints(DataTable dt)
     {
 
@@ -401,7 +409,8 @@ public partial class Student_UploadGpx : System.Web.UI.Page
             for (int i = 0; i < dtPrv.Rows.Count; i++)
             {
                 DataRow[] _dr;
-                _dr = dtNew.Select("Lat='" + dtPrv.Rows[i]["lat"].ToString() + "' AND Lon='" + dtPrv.Rows[i]["lon"].ToString() + "' AND Time='" + dtPrv.Rows[i]["TrackTime"].ToString() + "'");
+                _dr = dtNew.Select("Lat='" + dtPrv.Rows[i]["lat"].ToString() + "' AND Lon='" + 
+                    dtPrv.Rows[i]["lon"].ToString() + "' AND Time='" + dtPrv.Rows[i]["TrackTime"].ToString() + "'");
                 if (_dr.Length != 0)
                 {
                     int oldRows = 0;

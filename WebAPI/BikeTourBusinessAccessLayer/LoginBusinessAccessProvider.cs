@@ -9,6 +9,10 @@ namespace BikeTourBusinessAccessLayer
 {
     public class LoginBusinessAccessProvider : ILogin
     {
+        public LoginBusinessAccessProvider(string filePath)
+        {
+            ErrorLogManager.FilePath = filePath;
+        }
         ILogin loginDataProvider = null;
         public LoginResponseMessage AuthenticateUser(LoginRequestMessage RequestMessage)
         {
@@ -31,7 +35,7 @@ namespace BikeTourBusinessAccessLayer
             }
             catch(Exception ex)
             {
-                ErrorLogManager.WriteLog(response, "999", ex.Message);
+                ErrorLogManager.WriteLog(response, "999", ex.Message, ex: ex);
             }
             return response;
         }

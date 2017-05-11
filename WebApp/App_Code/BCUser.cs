@@ -28,8 +28,8 @@ public class BCUser
     {
         try
         {
-            _dt = DataAccessLayer.ReturnDataTable("select Loginid from LoginDtls where LoginName='" + email + "' and cast(Password as varbinary(20))=cast('"
-                + password + "' as varbinary(50)) and IsActive=1");
+            _dt = DataAccessLayer.ReturnDataTable("select Loginid from LoginDtls where LoginName='" + email + "' and [Password] = '"
+                + password + "' and IsActive=1");
         }
         catch (Exception ex)
         {

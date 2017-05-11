@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Collections.Generic;
 namespace BikeTourCore.ServiceMessage
 {
     public class ResponseBase
@@ -14,6 +9,7 @@ namespace BikeTourCore.ServiceMessage
     public class ErrorMessage
     {
         public string Code { get; set; }
-        public string Message { get; set; }
+        public string Message { get; set; }        
+        public bool IsError { get; set; }
     }
 }

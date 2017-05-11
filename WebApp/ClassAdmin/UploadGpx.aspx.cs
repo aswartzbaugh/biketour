@@ -203,7 +203,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
 
                         if (avgSpeed > speedLimit || avgSpeed == 0)
                         {
-                            string popupScript = "alert('Invalid file!');";
+                            string popupScript = "alert('" + (string)GetLocalResourceObject("MsgAvgSpeedIsLow") + "');";
                             ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                             File.Delete(NewFile);
                         }
@@ -245,7 +245,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                                     }
                                     else
                                     {
-                                        string popupScript = "alert('File already uploaded!');";
+                                        string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";
                                         ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                                         File.Delete(NewFile);
                                     }
@@ -264,7 +264,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                 }
                 else
                 {
-                    string popupScript = "alert('Select GPX file!');";
+                    string popupScript = "alert('" + (string)GetLocalResourceObject("MsgSelectGPX") + "');";//Select GPX file!
                     ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                 }
             }
@@ -277,6 +277,8 @@ public partial class Student_UploadGpx : System.Web.UI.Page
         }
         catch (Exception ex)
         {
+            string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";
+            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
             Helper.Log(ex.Message, DateTime.Now.ToString() + " : File Upload Issue");
         }
     }

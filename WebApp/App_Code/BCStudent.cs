@@ -295,36 +295,7 @@ public class BCStudent
                 {
                     if (dtCurrentStage.Rows.Count > 0)
                     {
-                        //string qry = "";
-                        //string qry2 = "";
-
-                        //CalculateDist = CurrentStageCovered - ExistingDistance;
-
-                        //if (CalculateDist < 0)
-                        //{
-                        //    //update current & last leg dist
-                        //    qry2 = "Update StagePlan Set Distance_Covered=0 Where StagePlanId=" + CurrentStageId + "";
-                        //    DataAccessLayer.ExecuteNonQuery(qry2);
-
-                        //    CalculateDist = Math.Abs(CalculateDist);
-                        //    double distCovered = CompletedStageDistance - CalculateDist;
-                        //    if (distCovered < 0) { distCovered = 0; }
-                        //    qry = "Update StagePlan Set Distance_Covered='" + distCovered.ToString().Replace(",", ".") + "' Where StagePlanId=" + CompletedStageId + "";
-                        //    DataAccessLayer.ExecuteNonQuery(qry);
-
-                        //    if (dtLastStage.Rows.Count > 0)
-                        //    {
-                        //        int ToCityId = Convert.ToInt32(dtLastStage.Rows[0]["EndCityId"]);
-                        //        string updQuizResults = "update QuizResult Set IsDeleted=1 Where ClassId=" + Convert.ToInt32(_dt.Rows[0]["ClassId"]) + " and CityId=" + ToCityId + "";
-                        //        int resQuizResults = DataAccessLayer.ExecuteNonQuery(updQuizResults);
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    //update current leg dist only
-                        //    qry2 = "Update StagePlan Set Distance_Covered='" + CalculateDist.ToString().Replace(",", ".") + "' Where StagePlanId=" + CurrentStageId + "";
-                        //    DataAccessLayer.ExecuteNonQuery(qry2);
-                        //}
+                        
                     }
                     else if (dtLastStage.Rows.Count > 0)
                     {
@@ -348,8 +319,16 @@ public class BCStudent
                                 if (dtLastStage.Rows.Count > 0)
                                 {
                                     int ToCityId = Convert.ToInt32(dtLastStage.Rows[0]["EndCityId"]);
-                                    string updQuizResults = "Update QuizResult Set IsDeleted=1 Where ClassId=" + Convert.ToInt32(_dt.Rows[0]["ClassId"]) + " and CityId=" + ToCityId + "";
-                                    int resQuizResults = DataAccessLayer.ExecuteNonQuery(updQuizResults);
+                                    int classId = Convert.ToInt32(_dt.Rows[0]["ClassId"]);
+                                    //DataTable dt = GetQuizResult(classId, ToCityId);
+                                    //dt.DefaultView.RowFilter = " IsPassed =1";
+                                    //int isPassed = dt.DefaultView.Count;
+                                    //dt.DefaultView.RowFilter = string.Empty;
+                                    //if ((isPassed == 1 || dt.Rows.Count > 5))
+                                    //{
+                                        string updQuizResults = "Update QuizResult Set IsDeleted=1 Where ClassId=" + classId + " and CityId=" + ToCityId + "";
+                                        int resQuizResults = DataAccessLayer.ExecuteNonQuery(updQuizResults);
+                                    //}
                                 }
                             }
                             else
@@ -386,6 +365,11 @@ public class BCStudent
                         {
                             qry = "Update StagePlan Set Distance_Covered='" + CalculateDist.ToString().Replace(",", ".") + "' where StagePlanId=" + CurrentStageId + "";
                             DataAccessLayer.ExecuteNonQuery(qry);
+                        }
+
+                        if (CalculateDist >= CurrentStageDistance)
+                        {
+                            MoveToNextStage(Convert.ToInt32(_dt.Rows[0]["ClassId"]), CurrentStageId);
                         }
                     }
                     else if (dtLastStage.Rows.Count > 0)
@@ -426,12 +410,17 @@ public class BCStudent
                                     //update Distance_covered to Distance & add Remaining Dist to Distance_Extra
                                     double distExtra = CalculateDist - CurrentStageDistance;
                                     qry = "Update StagePlan Set Distance_Covered='" + CurrentStageDistance.ToString().Replace(",", ".") + "', Distance_Extra=Distance_Extra+'" + distExtra.ToString().Replace(",", ".") + "' where StagePlanId=" + CurrentStageId + "";
-                                    DataAccessLayer.ExecuteNonQuery(qry);
+                                    DataAccessLayer.ExecuteNonQuery(qry);                                    
                                 }
                                 else
                                 {
                                     qry = "Update StagePlan Set Distance_Covered='" + CalculateDist.ToString().Replace(",", ".") + "' where StagePlanId=" + CurrentStageId + "";
                                     DataAccessLayer.ExecuteNonQuery(qry);
+                                }
+
+                                if (CalculateDist >= CurrentStageDistance)
+                                {
+                                    MoveToNextStage(Convert.ToInt32(_dt.Rows[0]["ClassId"]), CurrentStageId);
                                 }
                             }
                         }
@@ -445,7 +434,41 @@ public class BCStudent
         catch { }
         return result;
     }
+    private void MoveToNextStage(int classid, int stagePlanId)
+    {
+        string qry = "Update QuizResult Set IsPassed=1 where StagePlanId=" + stagePlanId + " And classid = " + classid;
+        qry += " and CityId=(select FromCityId from StagePlan where ClassId = " + classid + " ";
+        qry += " and StagePlanId =" + stagePlanId + ")";
 
+        DataAccessLayer.ExecuteNonQuery(qry);
+
+        int NextLegId = 0;
+        double RemainingDist = 0;
+        DataTable dtLastComplete = GetLastCompleteLeg(classid);
+        DataTable dtNextLeg = GetNextStageLeg(classid);
+        if (dtLastComplete.Rows.Count > 0)
+        {
+            int LastLegId = Convert.ToInt32(dtLastComplete.Rows[0]["StagePlanId"]);
+            double ExtraDistance = Convert.ToDouble(dtLastComplete.Rows[0]["Distance_Extra"]);
+
+            if (dtNextLeg.Rows.Count > 0)
+            {
+                NextLegId = Convert.ToInt32(dtNextLeg.Rows[0]["StagePlanId"]);
+                double DistanceToCover = Convert.ToDouble(dtNextLeg.Rows[0]["Distance"]);
+                if (ExtraDistance > DistanceToCover)
+                {
+                    RemainingDist = ExtraDistance - DistanceToCover;
+                    ExtraDistance = DistanceToCover;
+                }
+
+                int result = StartNextLeg(ExtraDistance, RemainingDist, NextLegId);
+                if (result > 0)
+                {
+                    int result2 = ClearExtraLegDistance(LastLegId);
+                }
+            }
+        }
+    }
     public DataTable GetScoreBoard(int classId)
     {
         return DataAccessLayer.ExecuteStoredProcedureToRetDataTable(new SqlParameter[] { new SqlParameter("@ClassId", classId) }, "SP_GET_SCOREBOARD");
@@ -512,7 +535,23 @@ public class BCStudent
         }
 
     }
+    public DataTable CheckGPXFileTable(DataTable dt, int classid, int studentId)
+    {
 
+        DataTable val;
+        try
+        {
+            val = (DataAccessLayer.ExecuteStoredProcedureToRetDataTable(new SqlParameter[] { 
+                new SqlParameter("@myTableType", dt), new SqlParameter("@classId",classid), 
+                new SqlParameter("@studentId", studentId) }, "SP_CHECK_GPXTRACKPOINTSOVERLAP_NEW"));
+            
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        return val;
+    }
     public int DeleteStudentUpload(int StudentUploadId)
     {
         int result = 0;
@@ -601,7 +640,8 @@ public class BCStudent
         int res = 0;
         try
         {
-            string Qry = "select * from StudentUpload where ClassId=" + Classid + " and Uploadeddate > (select ResultDate from QuizResult where ClassId=" + Classid + " and IsPassed=1)";
+            //string Qry = "select * from StudentUpload where ClassId=" + Classid + " and Uploadeddate > (select ResultDate from QuizResult where ClassId=" + Classid + " and IsPassed=1)";
+            string Qry = "select * from StudentUpload where ClassId=" + Classid + " and Uploadeddate > (select TOP 1 ResultDate from QuizResult where ClassId=" + Classid + " Order By ResultDate DESC )";
             _dt = DataAccessLayer.ReturnDataTable(Qry);
             res = _dt.Rows.Count;
         }

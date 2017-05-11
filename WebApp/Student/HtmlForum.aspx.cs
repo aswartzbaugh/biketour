@@ -211,6 +211,7 @@ public partial class Student_Forum : System.Web.UI.Page
                         DataTable dt = objStudent.GetQuizResult(classId, Convert.ToInt32(hdn_StartCity.Value));
                         dt.DefaultView.RowFilter = " IsPassed =1";
                         int isPassed = dt.DefaultView.Count;
+                        dt.DefaultView.RowFilter = string.Empty;
                         if (isPassed==1 || dt.Rows.Count>5)
                         {
                             if (objStudent.GetNextStageFiles(classId) == 0 && CompleteLegs == 0)
@@ -270,11 +271,19 @@ public partial class Student_Forum : System.Web.UI.Page
 
                             quizForCity = (dtm.Rows.Count > 0 ? hdn_EndCity.Value : hdn_StartCity.Value);
 
-                            QuizTest(Convert.ToInt32(quizForCity));
-                            div_NextStage.Visible = true;
-                            //lbtnUpload.Visible = false;
-                            //  div_RightCol.Visible = false;
-                            div_QuizTest.Visible = false;
+                            if (dtm.Rows.Count > 0)
+                            {
+                                div_QuizTest.Visible = true;
+                                QuizTest(Convert.ToInt32(quizForCity));
+                                div_NextStage.Visible = true;
+                                //lbtnUpload.Visible = false;
+                                //  div_RightCol.Visible = false;
+                                div_QuizTest.Visible = false;
+                            }
+                            else
+                            {
+                                div_QuizTest.Visible = false;
+                            }                            
                         }
                     }
                     else

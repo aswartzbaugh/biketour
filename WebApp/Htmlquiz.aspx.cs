@@ -81,27 +81,34 @@ public partial class quiz : System.Web.UI.Page
 
                     int res = objStudent.InsertQuizResult(0, userid, classid, cityid, outofscore, passingscore, studentscore, pass);
                     DataTable dt = objStudent.GetQuizResult(classid, cityid);
-
-                    if (res > 0 && (pass == 1|| dt.Rows.Count>5))
+                    dt.DefaultView.RowFilter = " IsPassed =1";
+                    int isPassed = dt.DefaultView.Count;
+                    dt.DefaultView.RowFilter = string.Empty;
+                    if (res > 0 && (isPassed == 1 || dt.Rows.Count > 5))
                     {
                         //Deleteting appeared test files from respective folder
-                        string directoryPath = Server.MapPath("QuizTests/HtmlQuiz1").ToString();
-                        string[] filePaths = Directory.GetFiles(directoryPath);
-                        foreach (string filePath in filePaths)
-                            File.Delete(filePath);
-                        string[] dirPaths = Directory.GetDirectories(directoryPath);
-                        if (dirPaths != null)
+                        try
                         {
-                            foreach (string dirPath in dirPaths)
+                            string directoryPath = Server.MapPath("QuizTests/HtmlQuiz1").ToString();
+                            string[] filePaths = Directory.GetFiles(directoryPath);
+                            foreach (string filePath in filePaths)
+                                File.Delete(filePath);
+                            string[] dirPaths = Directory.GetDirectories(directoryPath);
+                            if (dirPaths != null)
                             {
-                                filePaths = Directory.GetFiles(dirPath);
-                                foreach (string filePath in filePaths)
+                                foreach (string dirPath in dirPaths)
                                 {
-                                    File.Delete(filePath);
+                                    filePaths = Directory.GetFiles(dirPath);
+                                    foreach (string filePath in filePaths)
+                                    {
+                                        File.Delete(filePath);
+                                    }
+                                    Directory.Delete(dirPath);
                                 }
-                                Directory.Delete(dirPath);
                             }
                         }
+                        catch(Exception ex)
+                        { }
 
                         int NextLegId = 0;
                         double RemainingDist = 0;

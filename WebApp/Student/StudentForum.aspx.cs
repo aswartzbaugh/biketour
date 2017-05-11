@@ -187,7 +187,10 @@ public partial class Student_Forum : System.Web.UI.Page
                         Session["StartCity"] = hdn_StartCity.Value.ToString();
                         Session["CurrentClass"] = classId.ToString();
                         DataTable dt = objStudent.GetQuizResult(classId, Convert.ToInt32(hdn_StartCity.Value));
-                        if (dt.Rows.Count > 0 || CompleteLegs == 0)
+                        dt.DefaultView.RowFilter = " IsPassed =1";
+                        int isPassed = dt.DefaultView.Count;
+                        dt.DefaultView.RowFilter = string.Empty;
+                        if ((isPassed == 1 || dt.Rows.Count > 5) || CompleteLegs == 0)
                         {
                             if (objStudent.GetNextStageFiles(classId) == 0 && CompleteLegs != 0)
                             {

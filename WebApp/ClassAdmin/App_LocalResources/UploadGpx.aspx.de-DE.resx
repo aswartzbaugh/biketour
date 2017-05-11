@@ -210,4 +210,13 @@
   <data name="MsgFileNotForCurrentBatch" xml:space="preserve">
     <value>Das Erstelldatum der Datei kann nicht ausgelesen werden</value>
   </data>
+  <data name="MsgAvgSpeedIsLow" xml:space="preserve">
+    <value>Sie sind sehr langsam, erhöhen Sie bitte Ihre Geschwindigkeit.</value>
+  </data>
+  <data name="MsgSelectGPX" xml:space="preserve">
+    <value>Nur GPX-Dateien können hochladen.</value>
+  </data>
+  <data name="MsgUploadException" xml:space="preserve">
+    <value>Es ist ein Fehler beim Hochladen GPX-Datei, überprüfen Sie bitte .GPX oder Kontakt Administrator</value>
+  </data>
 </root>

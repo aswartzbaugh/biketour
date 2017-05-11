@@ -207,4 +207,13 @@
   <data name="RejectText.ToolTip" xml:space="preserve">
     <value>Reject</value>
   </data>
+  <data name="MsgAvgSpeedIsLow" xml:space="preserve">
+    <value>Your are very slow, Please increase your speed.</value>
+  </data>
+  <data name="MsgSelectGPX" xml:space="preserve">
+    <value>Only GPX files are allowed to upload.</value>
+  </data>
+  <data name="MsgUploadException" xml:space="preserve">
+    <value>There is an error while uploading .GPX file, please check .GPX or contact administrator</value>
+  </data>
 </root>
