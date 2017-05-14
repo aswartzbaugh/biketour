@@ -211,9 +211,12 @@
     <value>Sie sind sehr langsam, erhöhen Sie bitte Ihre Geschwindigkeit.</value>
   </data>
   <data name="MsgSelectGPX" xml:space="preserve">
-    <value>Nur GPX-Dateien können hochladen.</value>
+    <value>Upload nicht erfolgreich. Es können nur GPX Dateien hochgeladen werden.</value>
   </data>
   <data name="MsgUploadException" xml:space="preserve">
-    <value>Es ist ein Fehler beim Hochladen GPX-Datei, überprüfen Sie bitte .GPX oder Kontakt Administrator</value>
+    <value>Die Datei konnte nicht hochgeladen werden. Bitte kontaktiere den System Administrator</value>
+  </data>
+  <data name="MsgFileNotForPriorDate" xml:space="preserve">
+    <value>Diese Datei wurde vor dem Starttermin deiner Stadt erstellt</value>
   </data>
 </root>

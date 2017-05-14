@@ -177,4 +177,7 @@
   <data name="MsgAvgSpeedIsLow" xml:space="preserve">
     <value>Your are very slow, Please increase your speed.</value>
   </data>
+  <data name="MsgFileNotForPriorDate" xml:space="preserve">
+    <value>Prior date file can't be uploaded!.</value>
+  </data>
 </root>

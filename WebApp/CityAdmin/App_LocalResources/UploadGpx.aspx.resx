@@ -216,4 +216,7 @@
   <data name="MsgUploadException" xml:space="preserve">
     <value>There is an error while uploading .GPX file, please check .GPX or contact administrator</value>
   </data>
+  <data name="MsgFileNotForPriorDate" xml:space="preserve">
+    <value>Prior date file can't be uploaded!.</value>
+  </data>
 </root>

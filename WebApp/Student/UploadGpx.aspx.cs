@@ -111,20 +111,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                     }
                     fu_UploadGpx.SaveAs(FilePath + FileName.Replace(".gpx", ".xml"));
                     DataTable dt = cityContent.GetCityContent(Convert.ToInt32(studInfo.Rows[0]["CityId"]), 0);
-
-                    if (dt != null && dt.Rows.Count > 0)
-                    {
-                        cityStartDate = Convert.ToDateTime(dt.Rows[0]["CityStartDate"]);
-                        XElement root = XElement.Load(FilePath + FileName.Replace(".gpx", ".xml"));
-                        var DateOfFile = DateTime.Parse(root.Elements().Skip(1).Take(1).Elements().Take(1).ToList()[0].Value);
-                        if (cityStartDate != new DateTime() &&
-                            DateOfFile <= cityStartDate)
-                        {
-                            string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileNotForPriorDate") + "');";
-                            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                            return;
-                        }
-                    }
+                    
                     try
                     {
                         string TimeStamp = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
@@ -144,18 +131,27 @@ public partial class Student_UploadGpx : System.Web.UI.Page
 
                     DataTable dtNew = new DataTable();
                     dtNew = LoadGPXWaypoints(NewFile);
-
+                    DateTime DateOfFile=DateTime.MinValue;
                     try
                     {
-                        XElement root = XElement.Load(NewFile);
-                        var DateOfFile = DateTime.Parse(root.Elements().Skip(1).Take(1).Elements().Take(1).ToList()[0].Value);
+                        if (dt != null && dt.Rows.Count > 0 && dtNew != null && dtNew.Rows.Count>0)
+                        {
+                            cityStartDate = Convert.ToDateTime(dt.Rows[0]["CityStartDate"]);
+                            DateOfFile = Convert.ToDateTime(dtNew.Rows[0]["time"]);
+                        }
 
-                        //  DateTime fileDate = new DateTime();
-
-
+                        if (cityStartDate != new DateTime() &&
+                                DateOfFile <= cityStartDate)
+                        {
+                            File.Delete(NewFile);
+                            string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileNotForPriorDate") + "');";
+                            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                            return;
+                        }
 
                         if (DateOfFile < DateTime.Parse(ConfigurationManager.AppSettings["BatchStartDate"]))
                         {
+                            File.Delete(NewFile);
                             string popupScript = "alert('" + (string)GetLocalResourceObject("MsgFileNotForCurrentBatch") + "');";
                             ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                             return;
@@ -171,24 +167,19 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                     _dtTrkpts = dtNew;
                     int trackCount = (dtNew.Rows.Count / 5) + 1;
                     double highestSpeed = 0;
-                    //DataTable dtNewRows = CheckPreviousGPX(Convert.ToInt32(Session["UserId"]), Convert.ToInt32(studInfo.Rows[0]["SchoolId"].ToString()), Convert.ToInt32(studInfo.Rows[0]["ClassId"].ToString()), dtNew);
 
                     DataTable dtNewRows = CheckPreviousGPXTrackPointsNew
                         (Convert.ToInt32(Session["UserId"]), 
                         Convert.ToInt32(studInfo.Rows[0]["SchoolId"].ToString()), 
                         Convert.ToInt32(studInfo.Rows[0]["ClassId"].ToString()), dtNew);
-
-
-
-                    if (dtNewRows.Rows.Count > 0)
+                    
+                    if (dtNewRows!=null &&
+                        dtNewRows.Rows.Count > 0)
                     {
-
-
                         double distance = CalculateTotalDistance(dtNewRows);
                         double time = CalculateTotalTime(dtNewRows);
                         double timeAvg = CalculateAvgTime(dtNewRows);
-
-
+                        
                         #region Calculate Average Speed
 
                         if (timeAvg > 0)
@@ -265,8 +256,6 @@ public partial class Student_UploadGpx : System.Web.UI.Page
 
                                 #endregion
 
-                                //string popupScript = "alert('" + (string)GetLocalResourceObject("SpeedLimitCrossed") + "');";//Speed Limit Crossed!
-                                //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                             }
                             else // Upload file out of speed limit. No change in stage distance.
                             {
@@ -342,14 +331,25 @@ public partial class Student_UploadGpx : System.Web.UI.Page
 
     public DataTable CheckPreviousGPXTrackPointsNew(int UserId, int SchoolId, int ClassId, DataTable dtNew)
     {
-        DataTable result = objStudent.CheckGPXFileTable(dtNew, ClassId, UserId);
+        DataTable _dt = null;
+        foreach (DataRow item in dtNew.Rows)
+        {
+            decimal ele=0;
+            decimal.TryParse(Convert.ToString(item["ele"]), out ele);
+            item["ele"] = Convert.ToInt32(ele);
+        }
         
-        return result;
+        DataTable result = objStudent.CheckGPXFileTable(dtNew, ClassId, UserId);
+        if (result!=null)
+        {
+            DataView dv = result.DefaultView;
+            dv.Sort = "time asc";
+            _dt = dv.ToTable();
+        }
+        return _dt;
     }
     private bool checkGPXWayPoints(DataTable dt)
     {
-
-
         return false;
     }
 
@@ -699,19 +699,15 @@ public partial class Student_UploadGpx : System.Web.UI.Page
         return highestSpeed;
     }
 
-
-
-
-
-
-
     public DataTable LoadGPXWaypoints(string sFile)
     {
         DataSet _ds = new DataSet("MyDataSet");
         _ds.ReadXml(sFile);
+        
+        DataView dv = _ds.Tables["trkpt"].DefaultView;
+        dv.Sort="time asc";
+        DataTable _dt = dv.ToTable();
 
-        DataTable _dt = new DataTable();
-        _dt = _ds.Tables["trkpt"];
         return _dt;
     }
 

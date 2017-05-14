@@ -205,18 +205,18 @@
     <value>Ablehnen</value>
   </data>
   <data name="MsgFileNoHaveTimeStamp" xml:space="preserve">
-    <value>Diese Datei wurde vor dem Start des Spiels erstellt und kann daher nicht angekommen werden</value>
+    <value>Diese Datei verfügt über keinen Zeitstempel. Bitte überprüfe die Datei und versuch den Upload erneut</value>
   </data>
   <data name="MsgFileNotForCurrentBatch" xml:space="preserve">
-    <value>Das Erstelldatum der Datei kann nicht ausgelesen werden</value>
+    <value>Diese Datei wurde vor dem Starttermin deiner Stadt erstellt</value>
   </data>
   <data name="MsgAvgSpeedIsLow" xml:space="preserve">
     <value>Sie sind sehr langsam, erhöhen Sie bitte Ihre Geschwindigkeit.</value>
   </data>
   <data name="MsgSelectGPX" xml:space="preserve">
-    <value>Nur GPX-Dateien können hochladen.</value>
+    <value>Upload nicht erfolgreich. Es können nur GPX Dateien hochgeladen werden.</value>
   </data>
   <data name="MsgUploadException" xml:space="preserve">
-    <value>Es ist ein Fehler beim Hochladen GPX-Datei, überprüfen Sie bitte .GPX oder Kontakt Administrator</value>
+    <value>Die Datei konnte nicht hochgeladen werden. Bitte kontaktiere den System Administrator</value>
   </data>
 </root>

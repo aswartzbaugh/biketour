@@ -145,13 +145,13 @@
     <value>GPX Datei hochladen</value>
   </data>
   <data name="MsgFileAlredyUploaded" xml:space="preserve">
-    <value>Datei bereits hochgeladen!</value>
+    <value>Diese Datei wurde schonmal hochgeladen</value>
   </data>
   <data name="MsgFileUploaded" xml:space="preserve">
-    <value>Erfolgreich hochgeladenen Datei!</value>
+    <value>Datei erforgreich hochgeladen.</value>
   </data>
   <data name="MsgSelectGPX" xml:space="preserve">
-    <value>Nur GPX-Dateien können hochladen.</value>
+    <value>Upload nicht erfolgreich. Es können nur GPX Dateien hochgeladen werden.</value>
   </data>
   <data name="SpeedLimitCrossed" xml:space="preserve">
     <value>La limite de vitesse franchi!</value>
@@ -166,15 +166,18 @@
     <value>Abgelehnt</value>
   </data>
   <data name="MsgFileNoHaveTimeStamp" xml:space="preserve">
-    <value>Datei hochgeladen hat keine Zeit Informationen finden Sie die Datei und erneut hochladen</value>
+    <value>Diese Datei verfügt über keinen Zeitstempel. Bitte überprüfe die Datei und versuch den Upload erneut</value>
   </data>
   <data name="MsgFileNotForCurrentBatch" xml:space="preserve">
-    <value>Die Datei wurde vor dem Start des Wettbewerbs erstellt und ist daher für die Runde ungültig</value>
+    <value>Diese Datei wurde vor dem Starttermin deiner Stadt erstellt</value>
   </data>
   <data name="MsgUploadException" xml:space="preserve">
-    <value>Es ist ein Fehler beim Hochladen GPX-Datei, überprüfen Sie bitte .GPX oder Kontakt Administrator</value>
+    <value>Die Datei konnte nicht hochgeladen werden. Bitte kontaktiere den System Administrator</value>
   </data>
   <data name="MsgAvgSpeedIsLow" xml:space="preserve">
     <value>Sie sind sehr langsam, erhöhen Sie bitte Ihre Geschwindigkeit.</value>
+  </data>
+  <data name="MsgFileNotForPriorDate" xml:space="preserve">
+    <value>Diese Datei wurde vor dem Starttermin deiner Stadt erstellt.</value>
   </data>
 </root>

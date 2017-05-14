@@ -36,13 +36,17 @@ public partial class Student_Forum : System.Web.UI.Page
             DataTable _dt = new DataTable();
             int UserId = Convert.ToInt32(Session["UserId"]);
             _dt = objStudent.GetMyProfileInfo(UserId);
-            HdnClassId.Value = Convert.ToString(_dt.Rows[0]["ClassId"]);
-            HdnstudId.Value = UserId.ToString();//Convert.ToString(_dt.Rows[0]["StudentId"]);
+            grdStagePlan.DataSource = null;
+            if (_dt != null && _dt.Rows.Count > 0)
+            {
+                HdnClassId.Value = Convert.ToString(_dt.Rows[0]["ClassId"]);
+                HdnstudId.Value = UserId.ToString();//Convert.ToString(_dt.Rows[0]["StudentId"]);
 
-            SqlParameter param = new SqlParameter();
+                SqlParameter param = new SqlParameter();
 
-            grdStagePlan.DataSource = objStudent.GetStudentStagePlan(HdnClassId.Value, HdnstudId.Value);
-            grdStagePlan.DataBind();
+                grdStagePlan.DataSource = objStudent.GetStudentStagePlan(HdnClassId.Value, HdnstudId.Value);
+                grdStagePlan.DataBind();
+            }
         }
 
         if (!IsPostBack)
@@ -269,7 +273,9 @@ public partial class Student_Forum : System.Web.UI.Page
                             catch { showOld = 0; }
                             #endregion
 
+                           
                             quizForCity = (dtm.Rows.Count > 0 ? hdn_EndCity.Value : hdn_StartCity.Value);
+                            
 
                             if (dtm.Rows.Count > 0)
                             {
@@ -450,40 +456,16 @@ public partial class Student_Forum : System.Web.UI.Page
     }
 
     public void QuizTest(int CityId)
-    {
-        //Deleteting appeared test files from respective folder
-        #region Check existing files and delete
-
-        //string directoryPath = Server.MapPath("../QuizTests/HtmlQuiz1").ToString();
-        //string[] filePaths = Directory.GetFiles(directoryPath);
-        //if (filePaths.Length > 0)
-        //{
-        //    foreach (string filePath in filePaths)
-        //        File.Delete(filePath);
-        //    string[] dirPaths = Directory.GetDirectories(directoryPath);
-        //    if (dirPaths != null)
-        //    {
-        //        foreach (string dirPath in dirPaths)
-        //        {
-        //            filePaths = Directory.GetFiles(dirPath);
-        //            foreach (string filePath in filePaths)
-        //            {
-        //                File.Delete(filePath);
-        //            }
-        //            Directory.Delete(dirPath);
-        //        }
-        //    }
-        //}
-        #endregion
-
+    {        
         #region QuizTest`dc
         StringBuilder sb = new StringBuilder();
 
         DataTable dt = objAdmin.GetQuizTest(CityId);
-        Decompress(dt.Rows[0]["QuizFile"].ToString());
-
+        
         if (dt != null && dt.Rows.Count > 0)
         {
+            Decompress(dt.Rows[0]["QuizFile"].ToString());
+
             sb.Append("<h3>" + dt.Rows[0]["QuizName"].ToString() + "</h3>");
             sb.Append("<table cellpadding='0' cellspacing='0'>");
             sb.Append("<tr>");

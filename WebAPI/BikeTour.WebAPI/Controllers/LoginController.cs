@@ -19,7 +19,10 @@ namespace BikeTour.WebAPI.Controllers
         [HttpPost]
         public HttpResponseMessage AuthenticateUser([FromBody]LoginRequestMessage requestMessage)
         {
-            loginBusinessProvider = new LoginBusinessAccessProvider();
+            string filepath = System.Web.Hosting.HostingEnvironment.MapPath("~\\FileUpload\\");
+
+            loginBusinessProvider = new LoginBusinessAccessProvider(filepath);
+                        
             //requestMessage = new LoginRequestMessage();
             //requestMessage.LoginName = "frankanders";
             //requestMessage.Password = "tourdeeurope123";
