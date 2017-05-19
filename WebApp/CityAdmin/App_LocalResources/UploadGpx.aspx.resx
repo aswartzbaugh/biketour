@@ -219,4 +219,7 @@
   <data name="MsgFileNotForPriorDate" xml:space="preserve">
     <value>Prior date file can't be uploaded!.</value>
   </data>
+  <data name="btn_AddKms.Text" xml:space="preserve">
+    <value>Add Kms Driven</value>
+  </data>
 </root>

@@ -90,6 +90,8 @@
         <div class="AdminContWrap">
             <div class="frmBox">
                 <asp:Label ID="lblMessage" runat="server" Text="" CssClass="CurrentStage" Visible="false"></asp:Label><br />
+                  <asp:TextBox ID="txtKmsDriven" runat="server"></asp:TextBox>
+            <asp:Button ID="btnAddKms" runat="server" meta:ResourceKey="btn_AddKms" style="width:160px" OnClick="btnAddKms_Click"/> <br />
                 <asp:FileUpload ID="fu_UploadGpx" runat="server" />
                 <asp:Button ID="btn_Upload" runat="server" meta:ResourceKey="btn_Upload" OnClick="btn_Upload_Click" />
                 <div class="clear">

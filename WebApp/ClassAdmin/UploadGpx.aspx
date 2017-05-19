@@ -101,6 +101,8 @@
         
         <div class="frmBox"> 
         <asp:Label ID="lblMessage" runat="server" Text=""  CssClass="CurrentStage" Visible="true"></asp:Label><br />
+        <asp:TextBox ID="txtKmsDriven" runat="server"></asp:TextBox>
+            <asp:Button ID="btnAddKms" runat="server" Text ="KM eintragen" style="width:160px"/> <br />
         <asp:FileUpload ID="fu_UploadGpx" runat="server" Visible="true" />
         <asp:Button ID="btn_Upload" runat="server" meta:ResourceKey="btn_Upload" 
             onclick="btn_Upload_Click" Visible="true" style="width:160px" />

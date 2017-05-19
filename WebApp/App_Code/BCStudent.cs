@@ -137,7 +137,7 @@ public class BCStudent
         return result;
     }
 
-    public int StudentsUpload(int StudentUploadId, int StudentId, int StagePlanId, double StagePlanDistance, double DistanceCovered, string FilePath, string FileName, DateTime Uploadeddate, double Kilometer, double Time, int ClassId, int IsValid, int trackCount)
+    public int StudentsUpload(int StudentUploadId, int StudentId, int StagePlanId, double StagePlanDistance, double DistanceCovered, string FilePath, string FileName, DateTime Uploadeddate, double Kilometer, double Time, int ClassId, int IsValid, int trackCount, bool IsKmAddManual = false)
     {
         int result = 0;
         try
@@ -152,14 +152,15 @@ public class BCStudent
             new SqlParameter("@StagePlanDistance",StagePlanDistance),
             new SqlParameter("@DistanceCovered",DistanceCovered),
             new SqlParameter("@CalculateDistance","0"),
-            new SqlParameter("@FilePath", FilePath),
-            new SqlParameter("@FileName", FileName),
+            new SqlParameter("@FilePath", FilePath ?? ""),
+            new SqlParameter("@FileName", FileName ?? ""),
             new SqlParameter("@Uploadeddate",Uploadeddate),
             new SqlParameter("@Kilometer",Kilometer),
             new SqlParameter("@Time",Time),
             new SqlParameter("@ClassId",ClassId),
             new SqlParameter("@IsValid",IsValid),
             new SqlParameter("@TrackCount",trackCount),
+            new SqlParameter("@IsKmAddManual", IsKmAddManual),
             new SqlParameter("@result",SqlDbType.Int, 4, ParameterDirection.Output, false, 0,0,"",DataRowVersion.Proposed,result)}, "SP_INSERT_STUDENTUPLOADS", "@result");
         }
         catch (Exception ex)

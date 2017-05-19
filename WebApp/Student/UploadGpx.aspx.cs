@@ -751,4 +751,48 @@ public partial class Student_UploadGpx : System.Web.UI.Page
             return (string)GetLocalResourceObject("Pending");
         }
     }
+    protected void btnAddKms_Click(object sender, EventArgs e)
+    {
+        DataTable studInfo = objStudent.GetMyProfileInfo(Convert.ToInt32(Session["UserId"]));
+
+        #region Check ongoing stage information
+
+        int stagePlanId = 0;
+        double stageDistance = 0;
+        double distCovered = 0;
+        DataSet _dtStage = objStudent.GetCurrentStageInfo(Convert.ToInt32(Session["UserId"]), Convert.ToInt32(Session["UserRoleId"]), Convert.ToInt32(studInfo.Rows[0]["ClassId"]));
+        if (_dtStage.Tables[0].Rows.Count > 0)
+        {
+            stagePlanId = Convert.ToInt32(_dtStage.Tables[0].Rows[0]["StagePlanId"]);
+            stageDistance = Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance"]);
+            distCovered = double.Parse(_dtStage.Tables[0].Rows[0]["Distance_Covered"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+            //Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance_Covered"]);
+        }
+
+        #endregion
+
+        //Save data in Student Uploads
+        #region Save data in Student Uploads
+        if (stagePlanId != 0)
+        {
+            int res = objStudent.StudentsUpload(0, Convert.ToInt32(Session["UserId"]), stagePlanId, stageDistance, distCovered, null, null, DateTime.Now, double.Parse(txtKmsDriven.Text), 1, Convert.ToInt32(studInfo.Rows[0]["ClassId"]), 0, 0, true);
+            if (res > 0)
+            {
+                string popupScript = "alert('Distance updated successfully! Please wait for approval!');";
+                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+            }
+            else
+            {
+                string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";
+                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+            }
+            grd_Uploads.DataBind();
+        }
+        else
+        {
+            string popupScript = "alert('No active stage plan!');";
+            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+        }
+        #endregion
+    }
 }
