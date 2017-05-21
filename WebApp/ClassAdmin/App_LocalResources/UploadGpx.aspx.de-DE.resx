@@ -219,4 +219,13 @@
   <data name="MsgUploadException" xml:space="preserve">
     <value>Die Datei konnte nicht hochgeladen werden. Bitte kontaktiere den System Administrator</value>
   </data>
+  <data name="MsgAvgSpeedExceed" xml:space="preserve">
+    <value>Die Geschwindigkeit des Tracks ist zu hoch.</value>
+  </data>
+  <data name="MsgHighSpeedExceed" xml:space="preserve">
+    <value>Die Geschwingkeit des Tracks ist zu hoch.</value>
+  </data>
+  <data name="MsgFileAlredyUploaded" xml:space="preserve">
+    <value>Diese Datei wurde schonmal hochgeladen</value>
+  </data>
 </root>

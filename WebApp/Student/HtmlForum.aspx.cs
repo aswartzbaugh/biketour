@@ -53,17 +53,13 @@ public partial class Student_Forum : System.Web.UI.Page
         {
             try
             {
-
-
-
+                
                 ddlCompetitionCity.DataBind();
                 ddlCompetitionCity.SelectedValue = Session["UserCityId"].ToString();
                 GetData(ddlCompetitionCity.SelectedValue.ToString());
 
                 _BindData();
-
-
-
+                
                 ScriptManager.RegisterStartupScript(Page, this.GetType(), "Temp", "ScrollPosition();", true);
                 lbtnAllScore.Visible = false;
 
@@ -71,8 +67,6 @@ public partial class Student_Forum : System.Web.UI.Page
             catch (Exception ex)
             {
             }
-
-
 
         }
 

@@ -183,4 +183,10 @@
   <data name="btn_AddKms.Text" xml:space="preserve">
     <value>Add Kms</value>
   </data>
+ <data name="MsgAvgSpeedExceed" xml:space="preserve">
+    <value>The speed of the track is too high.</value>
+  </data>
+  <data name="MsgHighSpeedExceed" xml:space="preserve">
+    <value>The speed of the track is too high.</value>
+  </data>
 </root>

@@ -77,7 +77,8 @@ public partial class Student_UploadGpx : System.Web.UI.Page
             catch { }
         }
     }
-
+    int avgSpeedLimit = 0;
+    int highSpeedLimit = 0;
     protected void btn_Upload_Click(object sender, EventArgs e)
     {
         try
@@ -212,6 +213,20 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                         {
                             highestSpeed = GetHighestSpeedInGPX(dtNewRows);
 
+                            
+                            string avgMsg = IsAvgSpeedExceed(avgSpeed, out avgSpeedLimit);
+                            if (!string.IsNullOrEmpty(avgMsg))
+                            {
+                                ClientScript.RegisterStartupScript(Page.GetType(), "script", avgMsg, true);
+                                return;
+                            }
+                            string highMsg = IsHighSpeedExceed(highestSpeed, out highSpeedLimit);
+                            if (!string.IsNullOrEmpty(highMsg))
+                            {
+                                ClientScript.RegisterStartupScript(Page.GetType(), "script", highMsg, true);
+                                return;
+                            }
+
                             #region Check ongoing stage information
 
                             int stagePlanId = 0;
@@ -225,12 +240,24 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                                 distCovered = double.Parse(_dtStage.Tables[0].Rows[0]["Distance_Covered"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
                                 //Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance_Covered"]);
                             }
-
-                            #endregion
-
-                            if (avgSpeed <= speedLimit && highestSpeed <= speedLimit)
+                            else
                             {
-
+                                string popupScript = "alert('No active stage plan!');";
+                                ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                            }
+                            #endregion
+                            bool isApproved = true;
+                            if (avgSpeed <= avgSpeedLimit && highestSpeed <= highSpeedLimit)
+                            {
+                                isApproved = true;
+                            }
+                            if (highestSpeed>=40 &&
+                                highestSpeed <= highSpeedLimit)
+                            {
+                                isApproved = false;
+                            }
+                            if (isApproved)
+                            {
                                 //Save data in Student Uploads
 
                                 #region Save data in Student Uploads
@@ -266,7 +293,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                                     _SaveTrackPoints(_dtTrkpts, res);
                                     #region Send email to Class Admin & City Admin for speed limit
 
-                                    if (avgSpeed > speedLimit || highestSpeed > speedLimit)
+                                    if (avgSpeed > avgSpeedLimit || highestSpeed > highSpeedLimit)
                                     {
                                         try
                                         {
@@ -329,14 +356,56 @@ public partial class Student_UploadGpx : System.Web.UI.Page
         }
     }
 
+    private string IsAvgSpeedExceed(double avgSpeed, out Int32 avgSpeedLimit)
+    {
+        int AvgSpeedLimit = 0;
+        avgSpeedLimit = 0;
+        string validationMessage = string.Empty;
+
+        if (ConfigurationManager.AppSettings["AvgSpeedLimit"].ToString() != "")
+        {
+            AvgSpeedLimit = Convert.ToInt32(ConfigurationManager.AppSettings["AvgSpeedLimit"]);
+            avgSpeedLimit = AvgSpeedLimit;
+        }
+        
+        if (avgSpeed>AvgSpeedLimit)
+        {
+           validationMessage = "alert('" + (string)GetLocalResourceObject("MsgAvgSpeedExceed") + "');";
+        }
+        
+        return validationMessage;
+    }
+    private string IsHighSpeedExceed(double highSpeed, out int highSpeedLimit)
+    {        
+        int HighSpeedLimit = 0;
+        highSpeedLimit = 0;
+        string validationMessage = string.Empty;
+        
+        if (ConfigurationManager.AppSettings["HighSpeedLimit"].ToString() != "")
+        {
+            HighSpeedLimit = Convert.ToInt32(ConfigurationManager.AppSettings["HighSpeedLimit"]);
+            highSpeedLimit = HighSpeedLimit;
+        }
+
+        if (avgSpeedLimit > HighSpeedLimit)
+        {
+            validationMessage = "alert('Average speed limit should always set to less than High speed limit');";
+        }
+        else if (highSpeed > HighSpeedLimit)
+        {
+            validationMessage = "alert('" + (string)GetLocalResourceObject("MsgHighSpeedExceed") + "');";
+        }
+        return validationMessage;
+    }
+
     public DataTable CheckPreviousGPXTrackPointsNew(int UserId, int SchoolId, int ClassId, DataTable dtNew)
     {
         DataTable _dt = null;
         foreach (DataRow item in dtNew.Rows)
         {
-            decimal ele=0;
-            decimal.TryParse(Convert.ToString(item["ele"]), out ele);
-            item["ele"] = Convert.ToInt32(ele);
+            int ele=0;
+            ele =int.Parse(Convert.ToString(item["ele"]), System.Globalization.CultureInfo.InvariantCulture);
+            item["ele"] = ele;
         }
         
         DataTable result = objStudent.CheckGPXFileTable(dtNew, ClassId, UserId);
@@ -775,7 +844,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
         #region Save data in Student Uploads
         if (stagePlanId != 0)
         {
-            int res = objStudent.StudentsUpload(0, Convert.ToInt32(Session["UserId"]), stagePlanId, stageDistance, distCovered, null, null, DateTime.Now, double.Parse(txtKmsDriven.Text), 1, Convert.ToInt32(studInfo.Rows[0]["ClassId"]), 0, 0, true);
+            int res = objStudent.StudentsUpload(0, Convert.ToInt32(Session["UserId"]), stagePlanId, stageDistance, distCovered, null, null, DateTime.Now, double.Parse(txtKmsDriven.Text, System.Globalization.CultureInfo.InvariantCulture), 1, Convert.ToInt32(studInfo.Rows[0]["ClassId"]), 0, 0, true);
             if (res > 0)
             {
                 string popupScript = "alert('Distance updated successfully! Please wait for approval!');";

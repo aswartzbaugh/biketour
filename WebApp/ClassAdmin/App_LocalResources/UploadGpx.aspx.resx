@@ -219,4 +219,13 @@
   <data name="MsgUploadException" xml:space="preserve">
     <value>There is an error while uploading .GPX file, please check .GPX or contact administrator</value>
   </data>
+  <data name="MsgAvgSpeedExceed" xml:space="preserve">
+    <value>The speed of the track is too high.</value>
+  </data>
+  <data name="MsgHighSpeedExceed" xml:space="preserve">
+    <value>The speed of the track is too high.</value>
+  </data>
+  <data name="MsgFileAlredyUploaded" xml:space="preserve">
+    <value>File already uploaded!</value>
+  </data>
 </root>

@@ -186,7 +186,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                             double distance = CalculateTotalDistance(dtNewRows);
                             double time = CalculateTotalTime(dtNewRows);
                             double timeAvg = CalculateAvgTime(dtNewRows);
-
+                            double highestSpeed = 0;
                             #region Calculate Average Speed
                             if (timeAvg > 0)
                             {
@@ -197,13 +197,7 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                             if (time > 0) { avgSpeed = distance / time; }
                             #endregion
 
-                            int speedLimit = 15;
-                            if (ConfigurationManager.AppSettings["SpeedLimit"].ToString() != "")
-                            {
-                                speedLimit = Convert.ToInt32(ConfigurationManager.AppSettings["SpeedLimit"]);
-                            }
-
-                            if (avgSpeed > speedLimit || avgSpeed == 0)
+                            if (avgSpeed == 0)
                             {
                                 string popupScript = "alert('" + (string)GetLocalResourceObject("MsgAvgSpeedIsLow") + "');";
                                 ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
@@ -211,6 +205,24 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                             }
                             else
                             {
+
+                                highestSpeed = GetHighestSpeedInGPX(dtNewRows);
+
+                                int avgSpeedLimit = 0;
+                                int highSpeedLimit = 0;
+
+                                string avgMsg = IsAvgSpeedExceed(avgSpeed, out avgSpeedLimit);
+                                if (!string.IsNullOrEmpty(avgMsg))
+                                {
+                                    ClientScript.RegisterStartupScript(Page.GetType(), "script", avgMsg, true);
+                                    return;
+                                }
+                                string highMsg = IsHighSpeedExceed(highestSpeed, out highSpeedLimit);
+                                if (!string.IsNullOrEmpty(highMsg))
+                                {
+                                    ClientScript.RegisterStartupScript(Page.GetType(), "script", highMsg, true);
+                                    return;
+                                }
                                 #region Check ongoing stage information
                                 int stagePlanId = 0;
                                 double stageDistance = 0;
@@ -224,43 +236,36 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                                     // Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance_Covered"]);
                                 }
                                 #endregion
+                                
+                                //Save data in Student Uploads
+                                #region Save data in Student Uploads
+                                if (stagePlanId != 0)
+                                {                             // (0, 0, stagePlanId, stageDistance, distCovered, (NewFile), NewFileName, DateTime.Now, distance, time, Convert.ToInt32(studInfo.Rows[0]["ClassId"]), 1);
+                                    int res = objStudent.StudentsUpload(0, 0, stagePlanId, stageDistance, distCovered, (NewFile), NewFileName, DateTime.Now, distance, time, Convert.ToInt32(ddlClass.SelectedValue), 1, trackCount);
+                                    if (res > 0)
+                                    {
+                                        //BindMap(NewFile, NewFileName);
+                                        //To show map after gpx upload
 
-                                if (avgSpeed > speedLimit)
-                                {
-                                    string popupScript = "alert('Speed Limit Crossed!');";//Speed Limit Crossed!
-                                    ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                                }
-                                else
-                                {
-                                    //Save data in Student Uploads
-                                    #region Save data in Student Uploads
-                                    if (stagePlanId != 0)
-                                    {                             // (0, 0, stagePlanId, stageDistance, distCovered, (NewFile), NewFileName, DateTime.Now, distance, time, Convert.ToInt32(studInfo.Rows[0]["ClassId"]), 1);
-                                        int res = objStudent.StudentsUpload(0, 0, stagePlanId, stageDistance, distCovered, (NewFile), NewFileName, DateTime.Now, distance, time, Convert.ToInt32(ddlClass.SelectedValue), 1, trackCount);
-                                        if (res > 0)
-                                        {
-                                            //BindMap(NewFile, NewFileName);
-                                            //To show map after gpx upload
-
-                                            string popupScript = "alert('File uploaded successfully!');";
-                                            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                                        }
-                                        else
-                                        {
-                                            string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";
-                                            ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                                            File.Delete(NewFile);
-                                        }
-                                        _BindGrid();
+                                        string popupScript = "alert('File uploaded successfully!');";
+                                        ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
                                     }
                                     else
                                     {
-                                        string popupScript = "alert('No active stage plan!');";
+                                        string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";
                                         ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                                        File.Delete(NewFile);
                                     }
-
-                                    #endregion
+                                    _BindGrid();
                                 }
+                                else
+                                {
+                                    string popupScript = "alert('No active stage plan!');";
+                                    ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+                                }
+
+                                #endregion
+
                             }
                         }
                         else
@@ -290,15 +295,96 @@ public partial class Student_UploadGpx : System.Web.UI.Page
             Helper.Log(ex.Message, DateTime.Now.ToString() + " : File Upload Issue");
         }
     }
+    public double GetHighestSpeedInGPX(DataTable _dt)
+    {
+        double highestSpeed = 0;
+        double totalTime = 0;
+        double distance = 0;
 
+        DataTable _dtFiltered = _dt.Copy();
+        if (_dt != null && _dt.Rows.Count > 0)
+        {
+            if (_dt.Columns.Contains("time"))
+            {
+
+                for (int i = 0; i < _dt.Rows.Count; i++)
+                {
+                    if (_dt.Rows[i]["time"].ToString() == "")
+                        _dtFiltered.Rows.Remove(_dt.Rows[i]);
+                }
+
+
+
+                for (int i = 0; i < _dtFiltered.Rows.Count - 1; i++)
+                {
+
+                    DateTime dtStart = Convert.ToDateTime(_dt.Rows[i]["time"].ToString());
+                    DateTime dtEnd = Convert.ToDateTime(_dt.Rows[i + 1]["time"].ToString());
+
+                    totalTime = (dtEnd - dtStart).TotalHours;
+
+                    double lat1 = double.Parse(_dt.Rows[i]["lat"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                    double lon1 = double.Parse(_dt.Rows[i]["lon"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                    double lat2 = double.Parse(_dt.Rows[i + 1]["lat"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                    double lon2 = double.Parse(_dt.Rows[i + 1]["lon"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+
+                    distance = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
+
+                    if (highestSpeed < (distance / totalTime))
+                        highestSpeed = distance / totalTime;
+
+                }
+            }
+
+        }
+
+        return highestSpeed;
+    }
+    private string IsAvgSpeedExceed(double avgSpeed, out Int32 avgSpeedLimit)
+    {
+        int AvgSpeedLimit = 0;
+        avgSpeedLimit = 0;
+        string validationMessage = string.Empty;
+
+        if (ConfigurationManager.AppSettings["AvgSpeedLimit"].ToString() != "")
+        {
+            AvgSpeedLimit = Convert.ToInt32(ConfigurationManager.AppSettings["AvgSpeedLimit"]);
+            avgSpeedLimit = AvgSpeedLimit;
+        }
+
+        if (avgSpeed > AvgSpeedLimit)
+        {
+            validationMessage = "alert('" + (string)GetLocalResourceObject("MsgAvgSpeedExceed") + "');";
+        }
+
+        return validationMessage;
+    }
+    private string IsHighSpeedExceed(double highSpeed, out int highSpeedLimit)
+    {
+        int HighSpeedLimit = 0;
+        highSpeedLimit = 0;
+        string validationMessage = string.Empty;
+
+        if (ConfigurationManager.AppSettings["HighSpeedLimit"].ToString() != "")
+        {
+            HighSpeedLimit = Convert.ToInt32(ConfigurationManager.AppSettings["HighSpeedLimit"]);
+            highSpeedLimit = HighSpeedLimit;
+        }
+
+        if (highSpeed > HighSpeedLimit)
+        {
+            validationMessage = "alert('" + (string)GetLocalResourceObject("MsgHighSpeedExceed") + "');";
+        }
+        return validationMessage;
+    }
     public DataTable CheckPreviousGPXTrackPointsNew(int UserId, int SchoolId, int ClassId, DataTable dtNew)
     {
         DataTable _dt = null;
         foreach (DataRow item in dtNew.Rows)
         {
-            decimal ele = 0;
-            decimal.TryParse(Convert.ToString(item["ele"]), out ele);
-            item["ele"] = Convert.ToInt32(ele);
+            int ele = 0;
+            ele = int.Parse(Convert.ToString(item["ele"]), System.Globalization.CultureInfo.InvariantCulture);
+            item["ele"] = ele;
         }
 
         DataTable result = objStudent.CheckGPXFileTable(dtNew, ClassId, UserId);

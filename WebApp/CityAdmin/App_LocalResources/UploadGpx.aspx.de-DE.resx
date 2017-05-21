@@ -220,6 +220,12 @@
     <value>Diese Datei wurde vor dem Starttermin deiner Stadt erstellt</value>
   </data>
   <data name="btn_AddKms.Text" xml:space="preserve">
-    <value>KM eintragen</value>
+   <value>KM eintragen</value>
+   </data>
+    <data name="MsgAvgSpeedExceed" xml:space="preserve">
+    <value>Die Geschwindigkeit des Tracks ist zu hoch.</value>
+  </data>
+  <data name="MsgHighSpeedExceed" xml:space="preserve">
+    <value>Die Geschwingkeit des Tracks ist zu hoch.</value>
   </data>
 </root>
