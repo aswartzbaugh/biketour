@@ -436,13 +436,7 @@ public class BCStudent
         return result;
     }
     private void MoveToNextStage(int classid, int stagePlanId)
-    {
-        //string qry = "Update QuizResult Set IsPassed=1 where StagePlanId=" + stagePlanId + " And classid = " + classid;
-        //qry += " and CityId=(select FromCityId from StagePlan where ClassId = " + classid + " ";
-        //qry += " and StagePlanId =" + stagePlanId + ")";
-
-        //DataAccessLayer.ExecuteNonQuery(qry);
-
+    {        
         int NextLegId = 0;
         double RemainingDist = 0;
         DataTable dtLastComplete = GetLastCompleteLeg(classid);

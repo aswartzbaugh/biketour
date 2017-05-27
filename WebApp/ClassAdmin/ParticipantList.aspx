@@ -191,8 +191,8 @@
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
-                                 <asp:Button ID="btnDeleteStudent" runat="server" Text="" ToolTip="löschen" CssClass="hide" 
-                                         onclick="btnDeleteStudent_Click"    CommandArgument='<%# Eval("StudentId") %>' Visible="False" />         
+                                 <asp:Button ID="btnDeleteStudent" runat="server" Text="" ToolTip="löschen" CssClass="hide"  Style="display: none;"
+                                         OnClick="btnDeleteStudent_Click"    CommandArgument='<%# Eval("StudentId") %>' />         
                        
                         <%--<asp:SqlDataSource ID="sds_ParticipantsList" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
                             SelectCommand="SP_GET_ClassParticipantsList" SelectCommandType="StoredProcedure">

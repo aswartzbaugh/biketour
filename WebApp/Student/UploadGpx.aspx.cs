@@ -404,7 +404,14 @@ public partial class Student_UploadGpx : System.Web.UI.Page
         foreach (DataRow item in dtNew.Rows)
         {
             int ele=0;
-            ele =int.Parse(Convert.ToString(item["ele"]), System.Globalization.CultureInfo.InvariantCulture);
+            try
+            {
+                ele = int.Parse(Convert.ToString(item["ele"]), System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+
+            }
             item["ele"] = ele;
         }
         
