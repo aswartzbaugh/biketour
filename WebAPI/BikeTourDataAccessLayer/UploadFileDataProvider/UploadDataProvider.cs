@@ -3,12 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using BikeTourDataAccessLayer.EF;
 using BikeTourCore.ServiceMessage;
 using System.Data;
 using System.Configuration;
-using System.Xml.Linq;
 using System.IO;
 using Common;
 using BikeTourDataAccessLayer.Common;
@@ -73,35 +70,8 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                     
                     //var item = requestMessage.FileData;
                     foreach (var item in requestMessage.gpxFiles)
-                    {
-                        //var schoolClassDetail = GetSchoolClassMasterDetails(item.SchoolName, item.ClassName);
-
-                        //if (schoolClassDetail != null &&
-                        //    schoolClassDetail.Rows.Count>0)
-                        //{
-
-                        Upload(item, response, filePath);
-                        //var status = new UploadFileStatus
-                        //  {
-                        //      FileName = item.FileName,
-                        //      Code                      
-                        //  };
-                        //if (response==null) 
-                        //{
-                        //    status.Status=true;
-                        //}
-                        //else if (response!=null && response.Error==null) 
-                        //{
-                        //    status.Status=true;
-                        //}
-                        //else 
-                        //{
-                        //    status.Status = (response.Error.Where(x => x.IsError == true).Count() > 0 ? false : true);
-                        //}
-                                               
-                        //response.Log.Add(status);
-                       
-                        //response.Log = null;
+                    {                        
+                        Upload(item, response, filePath);                        
                     }
                 }
                 else
@@ -111,8 +81,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
             }
             catch (Exception ex)
             {
-                ErrorLogManager.WriteLog(response, "TestFile", "999", ex.Message, ex: ex);
-                //ErrorLogManager.WriteLog(error, "012", ex.Message, ex: ex);  
+                ErrorLogManager.WriteLog(response, "TestFile", "999", ex.Message, ex: ex);                
             }
             
             return response;
@@ -133,8 +102,7 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                 string NewFile = "";
                 string NewFileName = "";
                 string FilePath = string.Empty;
-                //if (UserRoleId == 5)
-                //{
+                
 
                     studInfo = objStudent.GetMyProfileInfo(studentId);
                     schoolId =Convert.ToInt32(studInfo.Rows[0]["SchoolId"]);
@@ -142,13 +110,6 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
 
                     FilePath = filePath + schoolId + @"\" +
                     classId + @"\" + studentId.ToString() + @"\".ToString();
-                //}
-                //else
-                //{
-                //    FilePath = ConfigurationManager.AppSettings["GPXWebPath"].ToString() + schoolId + @"\" +
-                //    classId + @"\".ToString();
-                //}
-                
                 
 
                 System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(FilePath);
@@ -163,126 +124,158 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                 //if ((extension == ".gpx") | (extension == ".GPX"))
                 //{
                 if (IsFileUploaded(FilePath + FileName + ".xml"))
-                    {
-                        ErrorLogManager.WriteLog(response,FileName, "008", "File already uploaded!");
-                    }
-                    else
-                    {
+                {
+                    ErrorLogManager.WriteLog(response, FileName, "008", "File already uploaded!");
+                }
+                else
+                {
                     #region Save file on server for evaluation
 
+                    File.WriteAllBytes(FilePath + FileName + ".xml", PostedFile.FileData);
+                    DataTable dt = cityContent.GetCityContent(Convert.ToInt32(studInfo.Rows[0]["CityId"]), 0);
 
-                        File.WriteAllBytes(FilePath + FileName + ".xml", PostedFile.FileData);
-                        //fu_UploadGpx.SaveAs(FilePath + FileName.Replace(".gpx", ".xml"));
-                        DataTable dt = cityContent.GetCityContent(cityId, 0);
-                        XElement root = null;
-                        DateTime DateOfFile = new DateTime();
-                        try
-                        {
-                            root = XElement.Load(FilePath + FileName + ".xml");
-                            DateOfFile = DateTime.Parse(root.Elements().Skip(1).Take(1).Elements().Take(1).ToList()[0].Value);
-                        }
-                        catch (Exception ex)
-                        {
-                            ErrorLogManager.WriteLog(response,FileName, "009", "Uploaded File does not have Time Information, Please check the file and re-upload");
-                            return;
-                        }
-                        if (dt != null && dt.Rows.Count > 0)
-                        {
-                            cityStartDate = (dt.Rows[0]["CityStartDate"] != DBNull.Value ? Convert.ToDateTime(dt.Rows[0]["CityStartDate"]) : new DateTime());
+                    try
+                    {
+                        string TimeStamp = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
+                        DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + "";
 
-                            if (cityStartDate != new DateTime() &&
-                                DateOfFile != new DateTime() &&
-                                DateOfFile.Date <= cityStartDate.Date)
-                            {
-                                ErrorLogManager.WriteLog(response,FileName, "010", "File can not be uploaded prior to Batch Start Date.");
-                                return;
-                            }
-                        }
-                        try
-                        {
-                            string TimeStamp = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
-                            DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + "";
+                        NewFileName = UserRoleId.ToString() + "_" + UserId.ToString() + "_" + TimeStamp + ".xml";
+                        File.Move(FilePath + FileName + ".xml", FilePath + NewFileName); // Try to move
+                        NewFile = FilePath + NewFileName;
+                    }
+                    catch (IOException ex)
+                    {
+                        NewFile = FilePath + FileName;
+                        NewFileName = FileName;
+                    }
 
-                            NewFileName = UserRoleId.ToString() + "_" + UserId.ToString() + "_" + TimeStamp + ".xml";
-                            File.Move(FilePath + FileName + ".xml", FilePath + NewFileName); // Try to move
-                            NewFile = FilePath + NewFileName;
-                        }
-                        catch (IOException ex)
+                    //File.WriteAllBytes(FilePath + FileName + ".xml", PostedFile.FileData);
+                    ////fu_UploadGpx.SaveAs(FilePath + FileName.Replace(".gpx", ".xml"));
+                    //DataTable dt = cityContent.GetCityContent(cityId, 0);
+                    //XElement root = null;
+                    //DateTime DateOfFile = new DateTime();
+                    //try
+                    //{
+                    //    root = XElement.Load(FilePath + FileName + ".xml");
+                    //    DateOfFile = DateTime.Parse(root.Elements().Skip(1).Take(1).Elements().Take(1).ToList()[0].Value);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    ErrorLogManager.WriteLog(response,FileName, "009", "Uploaded File does not have Time Information, Please check the file and re-upload");
+                    //    return;
+                    //}
+                    //if (dt != null && dt.Rows.Count > 0)
+                    //{
+                    //    cityStartDate = (dt.Rows[0]["CityStartDate"] != DBNull.Value ? Convert.ToDateTime(dt.Rows[0]["CityStartDate"]) : new DateTime());
+
+                    //    if (cityStartDate != new DateTime() &&
+                    //        DateOfFile != new DateTime() &&
+                    //        DateOfFile.Date <= cityStartDate.Date)
+                    //    {
+                    //        ErrorLogManager.WriteLog(response,FileName, "010", "File can not be uploaded prior to Batch Start Date.");
+                    //        return;
+                    //    }
+                    //}
+                    //try
+                    //{
+                    //    string TimeStamp = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
+                    //    DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + "";
+
+                    //    NewFileName = UserRoleId.ToString() + "_" + UserId.ToString() + "_" + TimeStamp + ".xml";
+                    //    File.Move(FilePath + FileName + ".xml", FilePath + NewFileName); // Try to move
+                    //    NewFile = FilePath + NewFileName;
+                    //}
+                    //catch (IOException ex)
+                    //{
+                    //    NewFile = FilePath + FileName + ".xml";
+                    //    NewFileName = FileName;
+                    //}
+
+                    #endregion
+
+                    DataTable dtNew = new DataTable();
+                    dtNew = LoadGPXWaypoints(NewFile);
+                    DateTime DateOfFile = DateTime.MinValue; ;
+                    if (dt != null && dt.Rows.Count > 0 && dtNew != null && dtNew.Rows.Count > 0)
+                    {
+                        cityStartDate = Convert.ToDateTime(dt.Rows[0]["CityStartDate"]);
+                        DateOfFile = Convert.ToDateTime(dtNew.Rows[0]["time"]);
+                    }
+
+                    if ((cityStartDate != new DateTime() &&
+                            DateOfFile <= cityStartDate) ||
+                        (DateOfFile < DateTime.Parse(ConfigurationManager.AppSettings["BatchStartDate"])))
+                    {
+                        ErrorLogManager.WriteLog(response, FileName, "010", "File can not be uploaded prior to Batch Start Date.");
+                        return;
+                    }
+
+                    _dtTrkpts = dtNew;
+                    int trackCount = dtNew.Rows.Count; //(dtNew.Rows.Count / 5) + 1;
+                    double highestSpeed = 0;
+
+                    DataTable dtNewRows = CheckPreviousGPXTrackPointsNew(UserId,
+                        schoolId,
+                        classId, dtNew);
+
+                    if (dtNewRows != null &&
+                        dtNewRows.Rows.Count > 0)
+                    {
+
+                        double distance = CalculateTotalDistance(dtNewRows);
+                        double time = CalculateTotalTime(dtNewRows);
+                        double timeAvg = CalculateAvgTime(dtNewRows);
+
+                        #region Calculate Average Speed
+
+                        if (timeAvg > 0)
                         {
-                            NewFile = FilePath + FileName + ".xml";
-                            NewFileName = FileName;
+                            time = timeAvg;
                         }
+
+                        double avgSpeed = 0.0;
+                        if (time > 0) { avgSpeed = distance / time; }
 
                         #endregion
 
-                        DataTable dtNew = new DataTable();
-                        dtNew = LoadGPXWaypoints(NewFile);
+                        int speedLimit = 15;
 
-                       
-                        _dtTrkpts = dtNew;
-                        int trackCount = dtNew.Rows.Count; //(dtNew.Rows.Count / 5) + 1;
-                        double highestSpeed = 0;
-
-                        DataTable dtNewRows = CheckPreviousGPXTrackPointsNew(UserId, 
-                            schoolId,
-                            classId, dtNew);
-
-                        if (dtNewRows.Rows.Count > 0)
+                        if (ConfigurationManager.AppSettings["SpeedLimit"].ToString() != "")
                         {
-                            
-                            double distance = CalculateTotalDistance(dtNewRows);
-                            double time = CalculateTotalTime(dtNewRows);
-                            double timeAvg = CalculateAvgTime(dtNewRows);
-                            
-                            #region Calculate Average Speed
+                            speedLimit = Convert.ToInt32(ConfigurationManager.AppSettings["SpeedLimit"]);
+                        }
 
-                            if (timeAvg > 0)
+                        if (avgSpeed == 0)
+                        {
+                            ErrorLogManager.WriteLog(response, FileName, "011", "Invalid file!");
+                            File.Delete(NewFile);
+                        }
+                        else
+                        {
+                            highestSpeed = GetHighestSpeedInGPX(dtNewRows);
+
+                            #region Check ongoing stage information
+
+                            int stagePlanId = 0;
+                            double stageDistance = 0;
+                            double distCovered = 0;
+                            DataSet _dtStage = objStudent.GetCurrentStageInfo((studentId > 0 ? studentId : UserId),
+                                UserRoleId, classId);
+                            if (_dtStage.Tables[0].Rows.Count > 0)
                             {
-                                time = timeAvg;
+                                stagePlanId = Convert.ToInt32(_dtStage.Tables[0].Rows[0]["StagePlanId"]);
+                                stageDistance = Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance"]);
+                                distCovered = double.Parse(_dtStage.Tables[0].Rows[0]["Distance_Covered"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                                //Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance_Covered"]);
                             }
-
-                            double avgSpeed = 0.0;
-                            if (time > 0) { avgSpeed = distance / time; }
 
                             #endregion
-
-                            int speedLimit = 15;
-
-                            if (ConfigurationManager.AppSettings["SpeedLimit"].ToString() != "")
-                            {
-                                speedLimit = Convert.ToInt32(ConfigurationManager.AppSettings["SpeedLimit"]);
-                            }
-                            
-                            if (avgSpeed == 0)
-                            {
-                                ErrorLogManager.WriteLog(response,FileName, "011", "Invalid file!");
-                                File.Delete(NewFile);
-                            }
-                            else
-                            {
-                                highestSpeed = GetHighestSpeedInGPX(dtNewRows);
-
-                                #region Check ongoing stage information
-
-                                int stagePlanId = 0;
-                                double stageDistance = 0;
-                                double distCovered = 0;
-                                DataSet _dtStage = objStudent.GetCurrentStageInfo((studentId>0?studentId:UserId), 
-                                    UserRoleId, classId);
-                                if (_dtStage.Tables[0].Rows.Count > 0)
-                                {
-                                    stagePlanId = Convert.ToInt32(_dtStage.Tables[0].Rows[0]["StagePlanId"]);
-                                    stageDistance = Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance"]);
-                                    distCovered = double.Parse(_dtStage.Tables[0].Rows[0]["Distance_Covered"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
-                                    //Convert.ToDouble(_dtStage.Tables[0].Rows[0]["Distance_Covered"]);
-                                }
-
-                            #endregion
-                            if (avgSpeed > speedLimit)
-                            {
-                                ErrorLogManager.WriteLog(response,FileName, "016", "Speed Limit Crossed!");
-                            }
-                            else if (avgSpeed <= speedLimit && highestSpeed <= speedLimit)
+                            //if (avgSpeed > speedLimit)
+                            //{
+                            //    ErrorLogManager.WriteLog(response, FileName, "016", "Speed Limit Crossed!");
+                            //}
+                            //else 
+                            if (avgSpeed <= speedLimit && highestSpeed <= speedLimit)
                             {
 
                                 //Save data in Student Uploads
@@ -300,11 +293,11 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                                 if (res > 0)
                                 {
                                     _SaveTrackPoints(_dtTrkpts, res);
-                                    ErrorLogManager.WriteLog(response,FileName, "012", "File uploaded successfully!",false);
+                                    ErrorLogManager.WriteLog(response, FileName, "012", "File uploaded successfully!", false);
                                 }
                                 else
                                 {
-                                    ErrorLogManager.WriteLog(response,FileName, "008", "File already uploaded!");
+                                    ErrorLogManager.WriteLog(response, FileName, "008", "File already uploaded!");
                                     File.Delete(NewFile);
                                 }
 
@@ -322,68 +315,55 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
                                     DateTime.Now, distance, time, classId, 0, trackCount);
                                 if (res > 0)
                                 {
-                                    //if (UserRoleId == 5)
-                                    //{
-                                        _SaveTrackPoints(_dtTrkpts, res);
-                                        #region Send email to Class Admin & City Admin for speed limit
+                                    _SaveTrackPoints(_dtTrkpts, res);
+                                    #region Send email to Class Admin & City Admin for speed limit
 
-                                        if (avgSpeed > speedLimit || highestSpeed > speedLimit)
+                                    if (avgSpeed > speedLimit || highestSpeed > speedLimit)
+                                    {
+                                        try
                                         {
-                                            try
-                                            {
-                                                string ClassAdminEmail = studInfo.Rows[0]["ClassAdminEmail"].ToString();
-                                                string CityAdminEmail = studInfo.Rows[0]["CityAdminEmail"].ToString();
+                                            string ClassAdminEmail = studInfo.Rows[0]["ClassAdminEmail"].ToString();
+                                            string CityAdminEmail = studInfo.Rows[0]["CityAdminEmail"].ToString();
 
-                                                StringBuilder sb = new StringBuilder();
-                                                sb.Append("<p>Dear " + studInfo.Rows[0]["ClassAdminName"].ToString() + ",</p>");
-                                                sb.Append("<p><b>" + UserName + " (Student in " + studInfo.Rows[0]["School"].ToString() + ", " + studInfo.Rows[0]["Class"].ToString() + ")</b> have uploaded a GPX file (" + NewFileName + ") with speed <b>" + avgSpeed.ToString() + " Kmph and heighest speed being " + highestSpeed + "</b>.</p>");
-                                                sb.Append("<p>Kindly approve or reject file manually.</p>");
-                                                Helper.sendMailMoreThanAvgSpeed("BikeTour - Speed Limit Crossed!", ClassAdminEmail, sb.ToString());
+                                            StringBuilder sb = new StringBuilder();
+                                            sb.Append("<p>Dear " + studInfo.Rows[0]["ClassAdminName"].ToString() + ",</p>");
+                                            sb.Append("<p><b>" + UserName + " (Student in " + studInfo.Rows[0]["School"].ToString() + ", " + studInfo.Rows[0]["Class"].ToString() + ")</b> have uploaded a GPX file (" + NewFileName + ") with speed <b>" + avgSpeed.ToString() + " Kmph and heighest speed being " + highestSpeed + "</b>.</p>");
+                                            sb.Append("<p>Kindly approve or reject file manually.</p>");
+                                            Helper.sendMailMoreThanAvgSpeed("BikeTour - Speed Limit Crossed!", ClassAdminEmail, sb.ToString());
 
-                                                StringBuilder sb2 = new StringBuilder();
-                                                sb2.Append("<p>Dear " + studInfo.Rows[0]["CityAdminName"].ToString() + ",</p>");
-                                                sb.Append("<p><b>" + UserName + " (Student in " + studInfo.Rows[0]["School"].ToString() + ", " + studInfo.Rows[0]["Class"].ToString() + ")</b> have uploaded a GPX file (" + NewFileName + ") with speed <b>" + avgSpeed.ToString() + "Kmph and heighest speed being " + highestSpeed + "</b>.</p>");
-                                                sb.Append("<p>Kindly approve or reject file manually.</p>");
-                                                Helper.sendMailMoreThanAvgSpeed("BikeTour - Speed Limit Crossed!", ClassAdminEmail, sb2.ToString());
-                                            }
-                                            catch (Exception ex)
-                                            {
-
-                                            }
+                                            StringBuilder sb2 = new StringBuilder();
+                                            sb2.Append("<p>Dear " + studInfo.Rows[0]["CityAdminName"].ToString() + ",</p>");
+                                            sb.Append("<p><b>" + UserName + " (Student in " + studInfo.Rows[0]["School"].ToString() + ", " + studInfo.Rows[0]["Class"].ToString() + ")</b> have uploaded a GPX file (" + NewFileName + ") with speed <b>" + avgSpeed.ToString() + "Kmph and heighest speed being " + highestSpeed + "</b>.</p>");
+                                            sb.Append("<p>Kindly approve or reject file manually.</p>");
+                                            Helper.sendMailMoreThanAvgSpeed("BikeTour - Speed Limit Crossed!", ClassAdminEmail, sb2.ToString());
                                         }
+                                        catch (Exception ex)
+                                        {
 
-                                        #endregion
-                                    //}
-                                
-                                    ErrorLogManager.WriteLog(response,FileName, "012", "File uploaded successfully!",false);
+                                        }
+                                    }
+
+                                    #endregion
+                                    ErrorLogManager.WriteLog(response, FileName, "012", "File uploaded successfully!", false);
                                 }
                                 else
                                 {
-                                    ErrorLogManager.WriteLog(response,FileName, "008", "File already uploaded!");
+                                    ErrorLogManager.WriteLog(response, FileName, "008", "File already uploaded!");
                                     File.Delete(NewFile);
                                 }
 
                                 #endregion
                             }
-                            }
-                        }
-                        else
-                        {                            
-                            ErrorLogManager.WriteLog(response,FileName, "008", "File already uploaded!");
                         }
                     }
-                //}
-                //else
-                //{
-                //    //string popupScript = "alert('" + (string)GetLocalResourceObject("MsgSelectGPX") + "');";//Select GPX file!
-                //    //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
-                //    ErrorLogManager.WriteLog(response, "010", "Select GPX file!");
-                //}
+                    else
+                    {
+                        ErrorLogManager.WriteLog(response, FileName, "008", "File already uploaded!");
+                    }
+                }                
             }
             catch (Exception ex)
-            {
-                //string popupScript = "alert('" + (string)GetLocalResourceObject("MsgUploadException") + "');";//Select GPX file!
-                //ClientScript.RegisterStartupScript(Page.GetType(), "script", popupScript, true);
+            {                
                 ErrorLogManager.WriteLog(response,FileName, "013", "Select GPX file!" + ex.Message);
             }
         }
@@ -506,9 +486,29 @@ namespace BikeTourDataAccessLayer.UploadFileDataProvider
 
         public DataTable CheckPreviousGPXTrackPointsNew(int UserId, int SchoolId, int ClassId, DataTable dtNew)
         {
-            DataTable result = objStudent.CheckGPXFileTable(dtNew, ClassId, UserId);
+            DataTable _dt = null;
+            foreach (DataRow item in dtNew.Rows)
+            {
+                int ele = 0;
+                try
+                {
+                    ele = int.Parse(Convert.ToString(item["ele"]), System.Globalization.CultureInfo.InvariantCulture);
+                }
+                catch
+                {
 
-            return result;
+                }
+                item["ele"] = ele;
+            }
+
+            DataTable result = objStudent.CheckGPXFileTable(dtNew, ClassId, UserId);
+            if (result != null)
+            {
+                DataView dv = result.DefaultView;
+                dv.Sort = "time asc";
+                _dt = dv.ToTable();
+            }
+            return _dt;
         }
 
         public DataTable CheckPreviousGPX(int UserId, int SchoolId, 

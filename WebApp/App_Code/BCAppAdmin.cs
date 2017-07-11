@@ -234,8 +234,7 @@ public class BCAppAdmin
         }
         return _dt;
     }
-
-
+    
     public DataTable ClassBlog()
     {
         try

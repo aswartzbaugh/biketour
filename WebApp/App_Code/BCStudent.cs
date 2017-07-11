@@ -258,11 +258,12 @@ public class BCStudent
             selQry += " Where SU.StudentUploadId=" + StudentUploadId + " ";
             DataTable _dt = DataAccessLayer.ReturnDataTable(selQry);
 
-            double ExistingDistance = double.Parse((_dt.Rows[0]["Kilometer"].ToString()).Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-            double DistanceCovered = double.Parse((_dt.Rows[0]["Distance_Covered"].ToString()).Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
             double TotalDistance = 0;
             if (_dt.Rows.Count > 0)
             {
+                double ExistingDistance = double.Parse((_dt.Rows[0]["Kilometer"].ToString()).Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
+                double DistanceCovered = double.Parse((_dt.Rows[0]["Distance_Covered"].ToString()).Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
+
                 int CurrentStageId = 0;
                 double CurrentStageDistance = 0;
                 double CurrentStageCovered = 0;
@@ -464,9 +465,15 @@ public class BCStudent
             }
         }
     }
-    public DataTable GetScoreBoard(int classId)
+    public DataTable GetScoreBoard(int classId, string Action, int UserId, int UserRoleId)
     {
-        return DataAccessLayer.ExecuteStoredProcedureToRetDataTable(new SqlParameter[] { new SqlParameter("@ClassId", classId) }, "SP_GET_SCOREBOARD");
+        return DataAccessLayer.ExecuteStoredProcedureToRetDataTable(new SqlParameter[] { 
+            new SqlParameter("@ClassId", classId),                    
+            new SqlParameter("@Action",Action),
+            new SqlParameter("@UserId",UserId),
+            new SqlParameter("@UserRoleId",UserRoleId)
+        
+        }, "SP_GET_SCOREBOARD");
     }
 
     public DataTable GetVisitedCity(string classId)

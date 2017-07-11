@@ -1,6 +1,5 @@
 ﻿using BikeTourCore.Definition;
 using System;
-using System.Collections.Generic;
 using BikeTourCore.ServiceMessage;
 using Common;
 using BikeTourDataAccessLayer.UploadFileDataProvider;
@@ -29,7 +28,7 @@ namespace BikeTourBusinessAccessLayer
             }            
             catch(Exception ex)
             {
-                ErrorLogManager.WriteLog(response,"TestFile", "999", ex.Message, ex: ex);
+                ErrorLogManager.WriteLog(response,"TestFile", "999", ex.Message,true, ex: ex);
             }
             return response;
         }

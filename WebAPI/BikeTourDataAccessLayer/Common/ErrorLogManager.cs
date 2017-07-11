@@ -53,6 +53,8 @@ namespace Common
                 WriteLogToFile(ex, FilePath);
             }
         }
+
+
         private static void WriteLogToFile(Exception ex, string filepath)
         {
             var stream = File.Create(filepath + "APIError.txt", 32000, FileOptions.Asynchronous);

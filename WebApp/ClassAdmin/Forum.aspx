@@ -142,7 +142,8 @@
                     <div class="rankswrapper">
                 <asp:UpdatePanel ID="Up_dlScoreBoard" runat="server">
                     <ContentTemplate>
-                        <asp:DataList ID="dlScoreBoard" runat="server" Width="100%" DataSourceID="sdsScoreBoard">
+                        <asp:DataList ID="dlScoreBoard" runat="server" Width="100%" >
+                            <%--DataSourceID="sdsScoreBoard"--%>
                             <ItemTemplate>
                                 <div class="rankss">
                                     <asp:Label ID="lblHighScoreText" runat="server" meta:ResourceKey="lblHighScoreText" CssClass="color size"></asp:Label>
@@ -180,7 +181,7 @@
                                 </div>
                             </ItemTemplate>
                         </asp:DataList>
-                        <asp:SqlDataSource ID="sdsScoreBoard" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
+                        <%--<asp:SqlDataSource ID="sdsScoreBoard" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
                             SelectCommand="SP_GET_SCOREBOARD" SelectCommandType="StoredProcedure">
                             <SelectParameters>
                                 <asp:Parameter DefaultValue="all" Name="Action" Type="String" />
@@ -189,7 +190,7 @@
                                 <asp:ControlParameter ControlID="ddlClass" Name="ClassId" PropertyName="SelectedValue"
                                     Type="Int32" />
                             </SelectParameters>
-                        </asp:SqlDataSource>
+                        </asp:SqlDataSource>--%>
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <div class="btndiv">

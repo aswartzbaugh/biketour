@@ -212,17 +212,17 @@ public partial class Student_UploadGpx : System.Web.UI.Page
                                 int highSpeedLimit = 0;
 
                                 string avgMsg = IsAvgSpeedExceed(avgSpeed, out avgSpeedLimit);
-                                if (!string.IsNullOrEmpty(avgMsg))
-                                {
-                                    ClientScript.RegisterStartupScript(Page.GetType(), "script", avgMsg, true);
-                                    return;
-                                }
+                                //if (!string.IsNullOrEmpty(avgMsg))
+                                //{
+                                //    ClientScript.RegisterStartupScript(Page.GetType(), "script", avgMsg, true);
+                                //    return;
+                                //}
                                 string highMsg = IsHighSpeedExceed(highestSpeed, out highSpeedLimit);
-                                if (!string.IsNullOrEmpty(highMsg))
-                                {
-                                    ClientScript.RegisterStartupScript(Page.GetType(), "script", highMsg, true);
-                                    return;
-                                }
+                                //if (!string.IsNullOrEmpty(highMsg))
+                                //{
+                                //    ClientScript.RegisterStartupScript(Page.GetType(), "script", highMsg, true);
+                                //    return;
+                                //}
                                 #region Check ongoing stage information
                                 int stagePlanId = 0;
                                 double stageDistance = 0;

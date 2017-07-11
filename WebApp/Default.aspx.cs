@@ -13,7 +13,7 @@ public partial class Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         { 
-        GetData("12");
+        GetData("0");
         }
     }
 

@@ -35,7 +35,7 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
                     ddlClass.DataValueField = "ClassId";
                     ddlClass.DataBind();
                     ddlClass_SelectedIndexChanged(sender, e);
-                    //ddlClass.DataBind();
+                    //ddlClass.DataBind();                    
                 }
                 else
                 {
@@ -43,12 +43,34 @@ public partial class ClassAdmin_Forum : System.Web.UI.Page
                 }
                 // ddlSchool.DataBind();
             }
+            else
+            {
+                if (Session["SchoolId"] != null && Session["ClassId"] != null) 
+                {
+                    GetData(Convert.ToInt32(Session["ClassId"]), "all", Convert.ToInt32(Session["UserId"]), Convert.ToInt32(Session["UserRoleId"]));
+                }
+            }
             //  this.MaintainScrollPositionOnPostBack = true;
         }
         catch (Exception)
         { }
     }
-
+    public void GetData(int classId, string Action, Int32 userId, Int32 userRoleId)
+    {
+        DataTable dt = new DataTable();
+        BCStudent student = new BCStudent();
+        dt = student.GetScoreBoard(classId, Action, userId, userRoleId);
+        if (dt.Rows.Count > 0)
+        {
+            dlScoreBoard.DataSource = dt;
+            dlScoreBoard.DataBind();
+        }
+        else
+        {
+            dlScoreBoard.DataSource = null;
+            dlScoreBoard.DataBind();
+        }
+    }
     protected void BlogRefreshTimer_Tick(object sender, EventArgs e)
     {
         try
