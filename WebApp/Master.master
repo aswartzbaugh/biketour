@@ -64,7 +64,8 @@
     	<div class="wrapper">
         	<div class="logo">
             	<%--<a href="Default.aspx"><img src="_images/logo.jpg" alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>--%>
-                <a href="Default.aspx"><img src="_images/weiß-orange - Hintergrund blau.jpg"  alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>
+                <%--<a href="Default.aspx"><img src="_images/weiß-orange - Hintergrund blau.jpg"  alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>--%>
+                <a href="Default.aspx"><img height="54" width="140" style="background-color: white" src="_images/newlogo.png"  alt="Stadt Land Rad - Eine Initiative des adfc Rhein-Neckar/Heidelberg" /></a>
             </div>
             <div class="navi">
             	<ul>
@@ -123,11 +124,12 @@
         	<div class="col col-31 contact-1">
                 <div class="pad">
                     <h5>Kontakt zu Stadt-Lad-Rad</h5>
-                    <p>adfc Baden Württemberg<br />
-                    Rheinsbergstr. 97 <br />
-                    70197 Stuttgart</p>
+                    <p>ADFC Rhein-Neckar/Heidelberg e.V.<br />
+                    Abt. Verkehrspädagogik <br />
+                    Kurfürsten-Anlage 62 <br />
+                    69115 Heidelberg</p>
                     <p>              
-                    Telefon: 	0711 – 628999<br />
+                    Telefon: 	06221 – 6554101<br />
                     E-Mail: 	<a href="mailto:stadt-land-rad@adfc-bw.de">stadt-land-rad@adfc-bw.de</a></p>
                 </div>
             </div>
@@ -165,7 +167,8 @@
             	<p>© 2016 adfc Rhein-Neckar/Heidelberg | Alle Rechte vorbehalten</p>
             </div>
         	<div class="col col-30" style="text-align:right;">
-            	<p><a href="ContactUs.aspx">Impressum</a></p>
+            	<p><a href="ContactUs.aspx">Impressum</a>
+                    <span style="margin-left:20px;"><a href="DataProtection.aspx">Datenschutz</a></span></p>
             </div>
             <div class="clear"></div>
         </div>

@@ -43,7 +43,7 @@ Registernummer: VR 4963</p>
 
 <p><strong>Spendenkonto:</strong><br />
 ADFC Rhein-Neckar/Heidelberg<br />
-Volksbank Kurpfalz H+G Bank<br /></p>
+H+G Bank<br /></p>
 
 <p>IBAN: DE78 6729 0100 0062 4325 00<br />
 BIC: GENODE61HD3</p>

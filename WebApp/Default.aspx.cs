@@ -12,8 +12,16 @@ public partial class Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
-        { 
-        GetData("0");
+        {
+
+            if (Request.Cookies["selectedCity"] != null)
+            {
+                ddlCity.SelectedValue = Request.Cookies["selectedCity"].Value;
+                GetData(Request.Cookies["selectedCity"].Value.ToString());
+            } else
+            {
+                GetData("0");
+            }
         }
     }
 
@@ -40,4 +48,11 @@ public partial class Default : System.Web.UI.Page
 
 
     }
-}
+
+    protected void ddlCity_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Response.Cookies["selectedCity"].Value = ddlCity.SelectedValue;
+        this.GetData(ddlCity.SelectedValue);
+    }
+
+  }

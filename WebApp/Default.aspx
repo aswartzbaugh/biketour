@@ -46,6 +46,27 @@
         <div class="wrapper">
             <div class="col col-45 main-left">
                 <div class="pad">
+                    <asp:UpdatePanel ID="upCity" runat="server">
+                        <ContentTemplate>
+                            <div class="frmBox"><table>
+                                                <tr>
+                        <td>
+                            <asp:Label ID="lblCity" runat="server" style="padding: 2px; margin: 0px;color: #666666;font-weight: 600; font-size: 12px;    text-decoration: none;    display: inline-block;">Stadt auswählen :</asp:Label>
+                        </td>
+                        <td>
+
+                            <asp:DropDownList ID="ddlCity" runat="server" DataSourceID="sdsCity" DataTextField="CityName"
+                                DataValueField="CityId" AutoPostBack="true" style="display: inline-block;width: 192px; padding: 2px 5px 2px 5px;    margin: 2px 0px 2px 2px;    border: 1px solid #C2C5CD;    line-height: 36px;    height: 28px;"
+                                OnSelectedIndexChanged="ddlCity_SelectedIndexChanged">
+                            </asp:DropDownList>
+                            <asp:SqlDataSource ID="sdsCity" runat="server" ConnectionString="<%$ ConnectionStrings:BikeTourConnectionString %>"
+                                SelectCommand="SELECT '0' as [CityId], ' Stadt' as [CityName] union all SELECT [CityId], [CityName] FROM [CityMaster] 
+                                            WHERE [IsActive] = 1 order by CityName"></asp:SqlDataSource>
+                            </td>
+                                                    </tr>
+                                                    </table>
+                                </div>
+                      
                     <asp:DataList ID="dlsore" runat="server" Width="341px">
                         <ItemTemplate>
                             <div data-rownumber='<%# Container.ItemIndex+1%>' id="divrow" class="row">
@@ -80,7 +101,8 @@
                                 </div>
                         </ItemTemplate>
                     </asp:DataList>
-
+                      </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
             <div class="col col-50 main-right">
